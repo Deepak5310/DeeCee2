@@ -73,7 +73,7 @@ pip install -r requirements.txt
 Check if it runs locally:
 
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 Visit `http://your-external-ip:8000`
@@ -93,7 +93,7 @@ pip install gunicorn uvicorn
 Test run:
 
 ```bash
-gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
 ```
 
 * `-w 4` means 4 worker processes (tune based on CPU cores).
