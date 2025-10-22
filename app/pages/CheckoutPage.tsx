@@ -81,15 +81,7 @@ export default function CheckoutPage({
         paymentStatus: paymentMethod === 'COD' ? 'Pending' as const : 'Pending' as const,
       };
 
-      // For Razorpay, we'll implement later
-      if (paymentMethod === 'Razorpay') {
-        // TODO: Integrate Razorpay
-        alert('Razorpay integration coming soon! Please use COD for now.');
-        setIsProcessing(false);
-        return;
-      }
-
-      // Create order in Firestore
+      // Create order in Firestore first
       const response = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,8 +90,53 @@ export default function CheckoutPage({
 
       const result = await response.json();
 
+      if (!result.success) {
+        alert('Failed to place order. Please try again.');
+        setIsProcessing(false);
+        return;
+      }
+
+      const orderId = result.orderId;
+
+      // Handle UPI/PhonePe payment
+      if (paymentMethod === 'UPI') {
+        // Initiate PhonePe payment
+        const paymentResponse = await fetch('/api/payment/phonepe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: orderId,
+            amount: total,
+            userPhone: user.phone,
+            userName: user.name,
+            userEmail: user.email,
+            callbackUrl: `${window.location.origin}/profile`,
+          }),
+        });
+
+        const paymentResult = await paymentResponse.json();
+
+        if (paymentResult.success) {
+          // Redirect to PhonePe payment page
+          window.location.href = paymentResult.data.redirectUrl;
+          return;
+        } else {
+          alert(`Payment initiation failed: ${paymentResult.error || 'Please try again'}`);
+          setIsProcessing(false);
+          return;
+        }
+      }
+
+      // For Razorpay, we'll implement later
+      if (paymentMethod === 'Razorpay') {
+        alert('Razorpay integration coming soon! Please use UPI or COD.');
+        setIsProcessing(false);
+        return;
+      }
+
+      // COD - Order placed successfully
       if (result.success) {
-        alert(`Order placed successfully! Order ID: ${result.orderId}`);
+        alert(`Order placed successfully! Order ID: ${orderId}`);
         onOrderSuccess();
       } else {
         alert('Failed to place order. Please try again.');
@@ -230,23 +267,22 @@ export default function CheckoutPage({
               </div>
 
               <div
-                onClick={() => setPaymentMethod('Razorpay')}
-                className={`border-2 rounded-lg p-4 cursor-pointer transition opacity-50 ${
-                  paymentMethod === 'Razorpay'
+                onClick={() => setPaymentMethod('UPI')}
+                className={`border-2 rounded-lg p-4 cursor-pointer transition ${
+                  paymentMethod === 'UPI'
                     ? 'border-rose-600 bg-rose-50'
-                    : 'border-gray-200'
+                    : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-gray-900">Online Payment</p>
-                    <p className="text-sm text-gray-600">UPI, Cards, Net Banking (Coming Soon)</p>
+                    <p className="font-semibold text-gray-900">UPI Payment (PhonePe)</p>
+                    <p className="text-sm text-gray-600">Pay via UPI, Cards, Net Banking</p>
                   </div>
                   <input
                     type="radio"
-                    checked={paymentMethod === 'Razorpay'}
-                    onChange={() => setPaymentMethod('Razorpay')}
-                    disabled
+                    checked={paymentMethod === 'UPI'}
+                    onChange={() => setPaymentMethod('UPI')}
                   />
                 </div>
               </div>
