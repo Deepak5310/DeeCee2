@@ -65,11 +65,20 @@ export default function CheckoutPage({
     setIsProcessing(true);
 
     try {
+      // Use phone from address if user phone is not available
+      const phoneNumber = user.phone || selectedAddress.phone;
+
+      if (!phoneNumber) {
+        alert('Phone number is required. Please update your profile or address.');
+        setIsProcessing(false);
+        return;
+      }
+
       const orderData = {
         userId: user.id,
         userEmail: user.email,
         userName: user.name,
-        userPhone: user.phone,
+        userPhone: phoneNumber,
         items: cart,
         shippingAddress: selectedAddress,
         subtotal,
@@ -107,7 +116,7 @@ export default function CheckoutPage({
           body: JSON.stringify({
             orderId: orderId,
             amount: total,
-            userPhone: user.phone,
+            userPhone: phoneNumber,
             userName: user.name,
             userEmail: user.email,
             callbackUrl: `${window.location.origin}/profile`,

@@ -1,7 +1,9 @@
-# PhonePe Payment Gateway Integration Guide
+# PhonePe Payment Gateway Integration Guide (OAuth 2.0)
 
 ## Overview
-This guide explains how to set up and test PhonePe UPI payment integration in your DeeCee Hair e-commerce application.
+This guide explains how to set up and test PhonePe UPI payment integration using the latest **OAuth 2.0 API** in your DeeCee Hair e-commerce application.
+
+> **⚠️ API Version:** This integration uses PhonePe's new OAuth 2.0 API (v2). The old Salt Key based API is deprecated.
 
 ---
 
@@ -10,59 +12,79 @@ This guide explains how to set up and test PhonePe UPI payment integration in yo
 1. **PhonePe Merchant Account**
    - Sign up at: https://business.phonepe.com/
    - Complete KYC verification
-   - Get your Merchant ID, Salt Key, and Salt Index
+   - Get your Client ID, Client Secret, and Client Version from Dashboard → Developer Settings
 
-2. **Node.js Crypto Module** (Built-in)
-   - Used for SHA256 checksum generation
+2. **Official Documentation**
+   - API Docs: https://developer.phonepe.com/payment-gateway
+   - Business Dashboard: https://business.phonepe.com/dashboard
 
 ---
 
 ## 🔧 Setup Instructions
 
-### Step 1: Add PhonePe Credentials to `.env.local`
+### Step 1: Get Your API Credentials
+
+1. Login to [PhonePe Business Dashboard](https://business.phonepe.com/dashboard)
+2. Navigate to **Developer Settings** → **API Credentials**
+3. Copy the following:
+   - **Client ID** (e.g., `SU2510141550286609332406`)
+   - **Client Secret** (e.g., `46d5c450-da73-496d-887d-ef34991804a2`)
+   - **Client Version** (usually `v1`)
+   - **Merchant ID** (e.g., `M23RI5GTEKXVN`)
+
+### Step 2: Add PhonePe Credentials to `.env.local`
 
 Create or update your `.env.local` file with PhonePe credentials:
 
 ```bash
 # ========================================
-# PHONEPE PAYMENT GATEWAY
+# PHONEPE PAYMENT GATEWAY (OAuth 2.0 API)
 # ========================================
-# Get these from PhonePe Merchant Dashboard
+# Get your credentials from: https://business.phonepe.com/dashboard
 
-# For Testing (UAT/Sandbox)
-NEXT_PUBLIC_PHONEPE_MERCHANT_ID=PGTESTPAYUAT
-PHONEPE_SALT_KEY=099eb0cd-02cf-4e2a-8aca-3e6c6aff0399
-PHONEPE_SALT_INDEX=1
-NEXT_PUBLIC_PHONEPE_ENV=sandbox
+# Merchant ID (Your business merchant ID)
+NEXT_PUBLIC_PHONEPE_MERCHANT_ID=M23RI5GTEKXVN
 
-# For Production (Replace with your actual credentials)
-# NEXT_PUBLIC_PHONEPE_MERCHANT_ID=your_production_merchant_id
-# PHONEPE_SALT_KEY=your_production_salt_key
-# PHONEPE_SALT_INDEX=1
-# NEXT_PUBLIC_PHONEPE_ENV=production
+# Client ID (from PhonePe dashboard)
+NEXT_PUBLIC_PHONEPE_CLIENT_ID=your_client_id_here
+
+# Client Secret - KEEP SECRET (Server-side only, never expose to client)
+PHONEPE_CLIENT_SECRET=your_client_secret_here
+
+# Client Version (usually provided by PhonePe, default is v1)
+PHONEPE_CLIENT_VERSION=v1
+
+# Environment: 'sandbox' for testing, 'production' for live
+NEXT_PUBLIC_PHONEPE_ENV=production
 ```
 
-### Step 2: Understanding the Environment Variables
+### Step 3: Understanding the Environment Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_PHONEPE_MERCHANT_ID` | Your merchant ID from PhonePe | `PGTESTPAYUAT` (sandbox) |
-| `PHONEPE_SALT_KEY` | Salt key for checksum generation | `099eb0cd-02cf-4e2a-8aca-3e6c6aff0399` |
-| `PHONEPE_SALT_INDEX` | Salt index (usually `1`) | `1` |
-| `NEXT_PUBLIC_PHONEPE_ENV` | Environment: `sandbox` or `production` | `sandbox` |
+| Variable | Description | Example | Visibility |
+|----------|-------------|---------|------------|
+| `NEXT_PUBLIC_PHONEPE_MERCHANT_ID` | Your merchant ID from PhonePe | `M23RI5GTEKXVN` | Public |
+| `NEXT_PUBLIC_PHONEPE_CLIENT_ID` | Client ID for OAuth | `SU2510141550...` | Public |
+| `PHONEPE_CLIENT_SECRET` | Secret for OAuth token generation | `46d5c450-da73...` | **Server-only** |
+| `PHONEPE_CLIENT_VERSION` | API version (usually `v1`) | `v1` | Server-only |
+| `NEXT_PUBLIC_PHONEPE_ENV` | Environment: `sandbox` or `production` | `production` | Public |
+
 
 ---
 
 ## 🧪 Testing with PhonePe Sandbox
 
-### Test Credentials (UAT Environment)
+### Sandbox Environment
 
-PhonePe provides these test credentials for sandbox testing:
+PhonePe provides a sandbox environment for testing:
 
-```
-Merchant ID: PGTESTPAYUAT
-Salt Key: 099eb0cd-02cf-4e2a-8aca-3e6c6aff0399
-Salt Index: 1
+**Sandbox URLs:**
+- Auth: `https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token`
+- Payment: `https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay`
+- Status: `https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/status`
+
+**To use sandbox:**
+```bash
+NEXT_PUBLIC_PHONEPE_ENV=sandbox
 ```
 
 ### Test UPI IDs for Sandbox
@@ -75,16 +97,9 @@ Use these test UPI IDs to simulate different payment scenarios:
 | `failure@ybl` | Failure | Payment fails |
 | `pending@ybl` | Pending | Payment stays pending |
 
-### Test Cards (If using card payment)
-
-| Card Type | Card Number | CVV | Expiry | Result |
-|-----------|-------------|-----|--------|--------|
-| Success | 4111 1111 1111 1111 | 123 | Any future date | Success |
-| Failure | 4000 0000 0000 0002 | 123 | Any future date | Failure |
-
 ---
 
-## 📱 Payment Flow
+## 📱 Payment Flow (OAuth 2.0)
 
 ### User Journey:
 
@@ -94,37 +109,42 @@ Use these test UPI IDs to simulate different payment scenarios:
 4. **User selects "UPI Payment (PhonePe)"**
 5. **User clicks "Place Order"**
 6. **System creates order in Firestore** (status: Pending)
-7. **System initiates PhonePe payment**
-8. **User is redirected to PhonePe payment page**
-9. **User completes payment** (UPI/Cards/Net Banking)
-10. **PhonePe redirects back to your app** (Profile page)
-11. **PhonePe sends callback to your server**
-12. **System updates order payment status** (Paid/Failed)
-13. **User sees order in profile with updated status**
+7. **Server gets OAuth access token from PhonePe** (valid for ~7 days)
+8. **Server initiates payment with OAuth token**
+9. **User is redirected to PhonePe payment page**
+10. **User completes payment** (UPI/Cards/Net Banking)
+11. **PhonePe redirects back to your app** (Callback URL)
+12. **User sees order in profile**
+13. **Check payment status via API if needed**
 
-### Technical Flow:
+### Technical Flow (OAuth 2.0):
 
 ```
 Checkout Page
     ↓
 Create Order (POST /api/orders)
     ↓
+Get OAuth Token (POST /oauth/token) ← New Step
+    ↓
 Initiate Payment (POST /api/payment/phonepe)
+    with Authorization: O-Bearer <token>
     ↓
 Redirect to PhonePe
     ↓
 User Completes Payment
     ↓
-PhonePe Callback (POST /api/payment/phonepe/callback)
+PhonePe Redirects to Your App
+    ↓
+Check Status (GET /api/payment/phonepe?orderId=xxx)
     ↓
 Update Order Payment Status
     ↓
-Redirect User to Profile
+User Sees Updated Order
 ```
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Endpoints (OAuth 2.0)
 
 ### 1. Initiate Payment
 **Endpoint:** `POST /api/payment/phonepe`
@@ -147,166 +167,259 @@ Redirect User to Profile
   "success": true,
   "message": "Payment initiated successfully",
   "data": {
-    "merchantTransactionId": "TXN_ORD1234567890_1234567890123",
-    "redirectUrl": "https://api-preprod.phonepe.com/..."
+    "orderId": "OMO123456789",
+    "merchantOrderId": "ORD_ORD1234567890_1234567890123",
+    "state": "PENDING",
+    "redirectUrl": "https://mercury-uat.phonepe.com/transact/...",
+    "expiryAt": 1703756259307
   }
 }
 ```
 
 ### 2. Check Payment Status
-**Endpoint:** `GET /api/payment/phonepe?merchantTransactionId=TXN_xxx`
+**Endpoint:** `GET /api/payment/phonepe?orderId=OMO123456789`
 
 **Response:**
 ```json
 {
   "success": true,
   "data": {
-    "merchantId": "PGTESTPAYUAT",
-    "merchantTransactionId": "TXN_ORD1234567890_1234567890123",
-    "transactionId": "T2312131234567890",
+    "orderId": "OMO123456789",
+    "merchantOrderId": "ORD_ORD1234567890_1234567890123",
+    "state": "SUCCESS",
     "amount": 707882,
-    "state": "COMPLETED",
-    "responseCode": "SUCCESS"
+    "paymentInstrument": {
+      "type": "UPI",
+      "utr": "123456789012"
+    },
+    "createdAt": 1703756259307,
+    "updatedAt": 1703756320000
   }
 }
 ```
 
-### 3. Payment Callback (PhonePe → Server)
-**Endpoint:** `POST /api/payment/phonepe/callback`
-
-**Handled automatically by PhonePe**
+**Payment States:**
+- `PENDING` - Payment initiated, waiting for user action
+- `SUCCESS` - Payment completed successfully
+- `FAILED` - Payment failed
+- `EXPIRED` - Payment link expired
 
 ---
 
-## 🔒 Security Features
+## 🔒 Security Features (OAuth 2.0)
 
-### 1. Checksum Verification
-- Every request to PhonePe includes SHA256 checksum
-- Format: `base64_payload + endpoint + salt_key`
-- Prevents tampering and ensures authenticity
+### 1. OAuth 2.0 Token-Based Authentication
+- Uses industry-standard OAuth 2.0 flow
+- Access token valid for ~7 days (check `expires_at` in response)
+- Token automatically refreshed when expired
+- No need to manage checksums manually
 
-### 2. Callback Verification
-- PhonePe callbacks include `X-VERIFY` header
-- Server verifies checksum before updating order
-- Prevents fake payment confirmations
+### 2. Server-Side Secret Management
+- `PHONEPE_CLIENT_SECRET` is server-side only
+- Never exposed to client-side code
+- Used only for OAuth token generation
 
-### 3. Server-Side Salt Key
-- `PHONEPE_SALT_KEY` is server-side only
-- Never exposed to client
-- Used for checksum generation
+### 3. Token Security
+- Authorization header: `O-Bearer <access_token>`
+- Token type: `O-Bearer` (PhonePe specific)
+- Secure HTTPS communication only
 
 ---
 
 ## 🚀 Going to Production
 
-### 1. Get Production Credentials
-- Login to PhonePe Merchant Dashboard
-- Complete KYC and business verification
-- Get production Merchant ID and Salt Key
+### 1. Verify Credentials
+- Ensure you have **production** Client ID and Client Secret
+- Merchant ID should be your verified business ID
+- Test all flows in sandbox first
 
 ### 2. Update Environment Variables
 ```bash
 NEXT_PUBLIC_PHONEPE_MERCHANT_ID=your_production_merchant_id
-PHONEPE_SALT_KEY=your_production_salt_key
-PHONEPE_SALT_INDEX=1
+NEXT_PUBLIC_PHONEPE_CLIENT_ID=your_production_client_id
+PHONEPE_CLIENT_SECRET=your_production_client_secret
+PHONEPE_CLIENT_VERSION=v1
 NEXT_PUBLIC_PHONEPE_ENV=production
 ```
 
-### 3. Update Callback URL
-- Register your production callback URL in PhonePe dashboard
-- Format: `https://yourdomain.com/api/payment/phonepe/callback`
+### 3. Update Redirect URL
+- Set your production redirect URL
+- Format: `https://yourdomain.com/profile` (or your success page)
+- Update in checkout payment initiation
 
-### 4. Enable Webhook
-- Configure webhook in PhonePe dashboard
-- Receive real-time payment notifications
+### 4. Production Testing
+- Test with real UPI ID
+- Test with real debit/credit card
+- Verify payment appears in PhonePe merchant dashboard
+- Check order status updates correctly
 
 ---
 
 ## 🧪 Testing Checklist
 
 ### Sandbox Testing:
-- [ ] Order creation works
-- [ ] Payment initiation redirects to PhonePe
-- [ ] Test with `success@ybl` - payment succeeds
-- [ ] Test with `failure@ybl` - payment fails
-- [ ] Order status updates correctly after payment
-- [ ] User redirects to profile after payment
-- [ ] Payment ID saved in order
+- [ ] Credentials configured in `.env.local`
+- [ ] OAuth token generation successful
+- [ ] Payment initiation returns `redirectUrl`
+- [ ] Redirects to PhonePe payment page
+- [ ] Test with `success@ybl` UPI - payment succeeds
+- [ ] Test with `failure@ybl` UPI - payment fails
+- [ ] Payment status check API works
+- [ ] Order status updates correctly
+- [ ] User redirected to correct URL after payment
 
 ### Production Testing:
+- [ ] Production credentials verified
 - [ ] Test with real UPI ID
 - [ ] Test with real debit/credit card
-- [ ] Verify payment appears in PhonePe dashboard
+- [ ] Verify payment appears in PhonePe merchant dashboard
 - [ ] Check order status updates
-- [ ] Verify callback URL is working
-- [ ] Test refund process
+- [ ] Test refund process (if implemented)
 
 ---
 
 ## 🐛 Troubleshooting
 
 ### Issue: "PhonePe payment gateway not configured"
-**Solution:** Add `NEXT_PUBLIC_PHONEPE_MERCHANT_ID` and `PHONEPE_SALT_KEY` to `.env.local`
+**Solution:** Ensure these environment variables are set in `.env.local`:
+- `NEXT_PUBLIC_PHONEPE_CLIENT_ID`
+- `PHONEPE_CLIENT_SECRET`
+
+### Issue: "Failed to authenticate with PhonePe"
+**Solution:**
+- Verify `CLIENT_ID` and `CLIENT_SECRET` are correct
+- Check credentials from PhonePe Dashboard → Developer Settings
+- Ensure `PHONEPE_CLIENT_VERSION` is set (usually `v1`)
+- No extra spaces in environment variables
+- Restart dev server after changing env vars
+
+### Issue: OAuth token not generating
+**Solution:**
+- Check API response in terminal logs
+- Verify you're using correct environment (sandbox vs production)
+- Ensure Client Secret is valid and not expired
+- Check PhonePe dashboard for API access status
 
 ### Issue: Payment redirects but order not updating
 **Solution:**
-- Check if callback URL is accessible
-- Verify checksum in callback handler
-- Check Firestore rules allow order updates
+- Check payment status using GET endpoint
+- PhonePe redirects user but doesn't send automatic callbacks in OAuth flow
+- Manually check status or poll after redirect
+- Update order based on status check response
 
-### Issue: "Invalid checksum" error
+### Issue: "BAD_REQUEST" or "Invalid order ID"
 **Solution:**
-- Verify `PHONEPE_SALT_KEY` is correct
-- Check `PHONEPE_SALT_INDEX` matches dashboard
-- Ensure no extra spaces in environment variables
-
-### Issue: Payment stuck in "Pending"
-**Solution:**
-- Check PhonePe dashboard for transaction status
-- Use status check API: `GET /api/payment/phonepe?merchantTransactionId=xxx`
-- Manually update order if needed
+- Verify `merchantOrderId` format (alphanumeric, _, -)
+- Max length: 63 characters
+- Ensure order ID is unique
+- Check amount is in paise (multiply by 100)
 
 ---
 
 ## 📞 Support
 
 ### PhonePe Support:
-- Merchant Support: https://business.phonepe.com/support
-- API Documentation: https://developer.phonepe.com/v1/docs
-- Email: merchant.support@phonepe.com
+- Business Dashboard: https://business.phonepe.com/dashboard
+- API Documentation: https://developer.phonepe.com/payment-gateway
+- Developer Support: Check dashboard for support options
+- Email: Support available through merchant dashboard
 
 ### DeeCee Hair Support:
-- Check logs in browser console
-- Check server logs: `npm run dev`
+- Check logs in browser console (Network tab)
+- Check server logs in terminal: `npm run dev`
 - Review Firestore order documents
-- Check PhonePe merchant dashboard
+- Check PhonePe merchant dashboard for transaction status
 
 ---
 
 ## 📚 Additional Resources
 
-1. **PhonePe API Documentation:**
-   - https://developer.phonepe.com/v1/docs/pg-setup
+1. **PhonePe Official Documentation:**
+   - Main Docs: https://developer.phonepe.com/payment-gateway
+   - Authorization (OAuth): https://developer.phonepe.com/payment-gateway/website-integration/standard-checkout/api-integration/api-reference/authorization
+   - Create Payment: https://developer.phonepe.com/payment-gateway/website-integration/standard-checkout/api-integration/api-reference/create-payment
+   - Order Status: https://developer.phonepe.com/payment-gateway/website-integration/standard-checkout/api-integration/api-reference/order-status
 
 2. **PhonePe Merchant Dashboard:**
-   - UAT: https://mercury-uat.phonepe.com/
-   - Production: https://www.phonepe.com/business/
+   - Production: https://business.phonepe.com/dashboard
+   - Access API credentials, transaction reports, settlements
 
-3. **Payment Gateway Integration:**
-   - Standard checkout flow
-   - Custom checkout (advanced)
-   - Subscription payments
+3. **Integration Guides:**
+   - Website Integration (Standard Checkout)
+   - Backend SDKs (Java, Python, Node.js, PHP, .NET)
+   - Mobile SDKs (Android, iOS, Flutter, React Native)
+
+---
+
+## 🔄 Migration from Old API
+
+If you previously used the Salt Key based API, here are the key changes:
+
+### Old API (Deprecated):
+- Used `PHONEPE_SALT_KEY` and `PHONEPE_SALT_INDEX`
+- Manual SHA256 checksum generation
+- Base64 encoded payload with `X-VERIFY` header
+- Endpoint: `/apis/hermes/pg/v1/pay`
+
+### New OAuth 2.0 API (Current):
+- Uses `CLIENT_ID` and `CLIENT_SECRET`
+- OAuth 2.0 token-based authentication
+- `Authorization: O-Bearer <token>` header
+- Endpoint: `/apis/pg/checkout/v2/pay`
+
+**Migration Steps:**
+1. Get new credentials from PhonePe Dashboard → Developer Settings
+2. Update `.env.local` with Client ID and Client Secret
+3. Remove old Salt Key variables (optional, for backward compatibility)
+4. Test with sandbox environment first
+5. Deploy to production
 
 ---
 
 ## ✅ Quick Start Summary
 
-1. Add PhonePe credentials to `.env.local`
-2. Restart dev server: `npm run dev`
-3. Go to checkout page
-4. Select "UPI Payment (PhonePe)"
-5. Click "Place Order"
-6. Complete payment on PhonePe page
-7. Check order status in profile
+1. **Get Credentials**
+   - Login to https://business.phonepe.com/dashboard
+   - Go to Developer Settings → API Credentials
+   - Copy Client ID, Client Secret, Client Version
 
-**That's it! Your PhonePe UPI payment is ready to use! 🎉**
+2. **Configure Environment**
+   ```bash
+   NEXT_PUBLIC_PHONEPE_CLIENT_ID=your_client_id
+   PHONEPE_CLIENT_SECRET=your_client_secret
+   PHONEPE_CLIENT_VERSION=v1
+   NEXT_PUBLIC_PHONEPE_ENV=production
+   ```
+
+3. **Test Payment Flow**
+   - Restart dev server: `npm run dev`
+   - Go to checkout page
+   - Select "UPI Payment (PhonePe)"
+   - Click "Place Order"
+   - Complete payment on PhonePe page
+   - Check order status in profile
+
+**That's it! Your PhonePe OAuth 2.0 payment is ready to use! 🎉**
+
+---
+
+## 💡 Pro Tips
+
+1. **Token Caching:** OAuth tokens are valid for ~7 days. Consider caching tokens to reduce API calls.
+
+2. **Error Handling:** Always handle OAuth errors gracefully and show user-friendly messages.
+
+3. **Logging:** Keep detailed logs of payment initiation and status checks for debugging.
+
+4. **Testing:** Use sandbox thoroughly before going live. Test all payment scenarios (success, failure, timeout).
+
+5. **Security:** Never expose `PHONEPE_CLIENT_SECRET` to client-side code. Always use server-side API routes.
+
+6. **Monitoring:** Regularly check PhonePe merchant dashboard for failed transactions and reconciliation.
+
+7. **Customer Support:** Keep transaction IDs accessible for customer support queries.
+
+---
+
+**Last Updated:** October 23, 2025 | **API Version:** OAuth 2.0 (v2)
+````

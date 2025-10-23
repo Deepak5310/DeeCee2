@@ -1,124 +1,255 @@
 /**
- * PhonePe Payment Callback Handler
- * Handles payment status callbacks from PhonePe
+ * PhonePe Payment Gateway Integration (OAuth 2.0 API)
+ * Official Docs: https://developer.phonepe.com/payment-gateway
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
 
-// Initialize Firebase Admin (only once)
-if (!getApps().length) {
-  try {
-    initializeApp({
-      credential: cert({
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      }),
-    });
-  } catch (error) {
-    console.error('Firebase Admin initialization error:', error);
-  }
-}
+// PhonePe API URLs based on environment
+const PHONEPE_AUTH_URL =
+  process.env.NEXT_PUBLIC_PHONEPE_ENV === 'production'
+    ? 'https://api.phonepe.com/apis/identity-manager/v1/oauth/token'
+    : 'https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token';
 
-const SALT_KEY = process.env.PHONEPE_SALT_KEY || '';
-const SALT_INDEX = process.env.PHONEPE_SALT_INDEX || '1';
+const PHONEPE_PAY_URL =
+  process.env.NEXT_PUBLIC_PHONEPE_ENV === 'production'
+    ? 'https://api.phonepe.com/apis/pg/checkout/v2/pay'
+    : 'https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay';
+
+const PHONEPE_STATUS_URL =
+  process.env.NEXT_PUBLIC_PHONEPE_ENV === 'production'
+    ? 'https://api.phonepe.com/apis/pg/checkout/v2/status'
+    : 'https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/status';
+
+// OAuth credentials
+const CLIENT_ID = process.env.NEXT_PUBLIC_PHONEPE_CLIENT_ID || '';
+const CLIENT_SECRET = process.env.PHONEPE_CLIENT_SECRET || '';
+const CLIENT_VERSION = process.env.PHONEPE_CLIENT_VERSION || 'v1';
 
 /**
- * POST /api/payment/phonepe/callback
- * Handle PhonePe payment callback
+ * Get OAuth access token from PhonePe
+ * Token is valid for ~7 days (expires_at timestamp returned)
+ */
+async function getAccessToken(): Promise<string> {
+  const params = new URLSearchParams({
+    client_id: CLIENT_ID,
+    client_version: CLIENT_VERSION,
+    client_secret: CLIENT_SECRET,
+    grant_type: 'client_credentials',
+  });
+
+  const response = await fetch(PHONEPE_AUTH_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: params.toString(),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok || !result.access_token) {
+    throw new Error(result.message || 'Failed to get access token');
+  }
+
+  return result.access_token;
+}
+
+
+/**
+ * POST /api/payment/phonepe
+ * Initiate PhonePe payment using OAuth 2.0 API
  */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { response } = body;
+    const { orderId, amount, userPhone, userName, userEmail, callbackUrl } = body;
 
-    if (!response) {
+    // Validate required fields
+    if (!orderId || !amount || !userPhone) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Invalid callback data',
+          error: 'Missing required fields: orderId, amount, userPhone',
         },
         { status: 400 }
       );
     }
 
-    // Decode base64 response
-    const decodedResponse = JSON.parse(Buffer.from(response, 'base64').toString('utf-8'));
-
-    console.log('PhonePe Callback - Decoded Response:', decodedResponse);
-
-    // Verify checksum
-    const xVerifyHeader = request.headers.get('X-VERIFY');
-    if (xVerifyHeader) {
-      const [receivedChecksum] = xVerifyHeader.split('###');
-      const expectedChecksum = crypto
-        .createHash('sha256')
-        .update(response + SALT_KEY)
-        .digest('hex');
-
-      if (receivedChecksum !== expectedChecksum) {
-        console.error('Checksum verification failed');
-        return NextResponse.json(
-          {
-            success: false,
-            error: 'Invalid checksum',
-          },
-          { status: 400 }
-        );
-      }
+    // Validate PhonePe OAuth configuration
+    if (!CLIENT_ID || !CLIENT_SECRET) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'PhonePe payment gateway not configured. Please add credentials to .env.local',
+        },
+        { status: 500 }
+      );
     }
 
-    // Extract order ID from merchantTransactionId (format: TXN_ORDxxxxx_timestamp)
-    const merchantTransactionId = decodedResponse.data.merchantTransactionId;
-    const orderId = merchantTransactionId.split('_')[1]; // Extract ORDxxxxx
+    // Step 1: Get OAuth access token
+    let accessToken: string;
+    try {
+      accessToken = await getAccessToken();
+    } catch (tokenError: any) {
+      console.error('PhonePe OAuth error:', tokenError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Failed to authenticate with PhonePe. Please check your credentials.',
+          details: tokenError.message,
+        },
+        { status: 500 }
+      );
+    }
 
-    // Update order in Firestore based on payment status
-    if (decodedResponse.success && decodedResponse.code === 'PAYMENT_SUCCESS') {
-      const db = getFirestore();
+    // Step 2: Create payment request
+    const merchantOrderId = `ORD_${orderId}_${Date.now()}`;
+    const redirectUrl = callbackUrl || `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment/success`;
 
-      await db.collection('orders').doc(orderId).update({
-        paymentStatus: 'Paid',
-        paymentId: decodedResponse.data.transactionId,
-        updatedAt: new Date().toISOString(),
-      });
+    const paymentPayload = {
+      merchantOrderId: merchantOrderId,
+      amount: Math.round(amount * 100), // Convert to paise
+      paymentFlow: {
+        type: 'PG_CHECKOUT',
+        merchantUrls: {
+          redirectUrl: redirectUrl,
+        },
+      },
+    };
 
-      console.log(`✅ Payment successful for order ${orderId}`);
+    // Make payment request with OAuth token
+    const response = await fetch(PHONEPE_PAY_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `O-Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(paymentPayload),
+    });
 
+    const result = await response.json();
+
+    if (response.ok && result.orderId) {
       return NextResponse.json(
         {
           success: true,
-          message: 'Payment verified and order updated',
+          message: 'Payment initiated successfully',
+          data: {
+            orderId: result.orderId,
+            merchantOrderId: merchantOrderId,
+            state: result.state,
+            redirectUrl: result.redirectUrl,
+            expiryAt: result.expireAt,
+          },
         },
         { status: 200 }
       );
     } else {
-      // Payment failed
-      const db = getFirestore();
-
-      await db.collection('orders').doc(orderId).update({
-        paymentStatus: 'Failed',
-        updatedAt: new Date().toISOString(),
-      });
-
-      console.log(`❌ Payment failed for order ${orderId}`);
-
+      console.error('PhonePe payment failed:', result);
       return NextResponse.json(
         {
           success: false,
-          message: 'Payment failed',
+          error: result.message || 'Failed to initiate payment',
+          code: result.code,
         },
-        { status: 200 }
+        { status: 400 }
       );
     }
-  } catch (error) {
-    console.error('PhonePe callback handling error:', error);
+  } catch (error: any) {
+    console.error('PhonePe payment initiation error:', error);
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to process callback',
+        error: 'Failed to initiate payment. Please try again.',
+        details: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+
+/**
+ * GET /api/payment/phonepe?orderId=xxx
+ * Check payment status using OAuth 2.0 API
+ */
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const orderId = searchParams.get('orderId');
+
+    if (!orderId) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'orderId is required',
+        },
+        { status: 400 }
+      );
+    }
+
+    // Get OAuth access token
+    let accessToken: string;
+    try {
+      accessToken = await getAccessToken();
+    } catch (tokenError: any) {
+      console.error('PhonePe OAuth error:', tokenError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Failed to authenticate with PhonePe',
+        },
+        { status: 500 }
+      );
+    }
+
+    // Check payment status
+    const response = await fetch(`${PHONEPE_STATUS_URL}/${orderId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `O-Bearer ${accessToken}`,
+      },
+    });
+
+    const result = await response.json();
+
+    console.log('PhonePe Status Check Response:', result);
+
+    if (response.ok && result.orderId) {
+      return NextResponse.json(
+        {
+          success: true,
+          data: {
+            orderId: result.orderId,
+            merchantOrderId: result.merchantOrderId,
+            state: result.state,
+            amount: result.amount,
+            paymentInstrument: result.paymentInstrument,
+            createdAt: result.createdAt,
+            updatedAt: result.updatedAt,
+          },
+        },
+        { status: 200 }
+      );
+    } else {
+      return NextResponse.json(
+        {
+          success: false,
+          error: result.message || 'Failed to check payment status',
+          code: result.code,
+        },
+        { status: 400 }
+      );
+    }
+  } catch (error: any) {
+    console.error('PhonePe status check error:', error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to check payment status',
+        details: error.message,
       },
       { status: 500 }
     );
