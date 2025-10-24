@@ -33,8 +33,11 @@ export const metadata: Metadata = {
     "hair extension consultation",
     "hair extensions online india"
   ],
-  authors: [{ name: "DEECEE HAIR" }],
-  creator: "DEECEE HAIR",
+  authors: [
+    { name: "DEECEE HAIR" },
+    { name: "Deepak", url: "https://github.com/Deepak5310" }
+  ],
+  creator: "Deepak",
   publisher: "DEECEE HAIR",
   formatDetection: {
     email: false,
