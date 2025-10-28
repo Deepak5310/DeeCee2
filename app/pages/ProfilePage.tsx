@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { User, Mail, Phone, MapPin, Package, Heart, Lock, Edit2, Save, X, ShoppingBag, Calendar, CheckCircle2, Truck, CreditCard, LogOut, Clock } from "lucide-react";
 import { useAuth } from '@/app/contexts/AuthContext';
 import { Order, Address, ProfileTab, WishlistItem } from "@/app/types";
-import { FormInput } from "@/app/components/common";
+import { FormInput, AddressForm } from "@/app/components/common";
 import { useFormValidation } from "@/app/hooks/use-form-validation";
 import { DISCOUNT_PERCENTAGE, getDiscountMultiplier } from "@/app/constants/products";
 import {
@@ -265,52 +265,28 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
     }
   }, [activeTab, user?.email]);
 
-  const addNewAddress = async () => {
-    if (!newAddress.addressLine1 || !newAddress.city || !newAddress.state || !newAddress.pincode) {
-      alert('Please fill all required fields');
-      return;
-    }
+  // Handle address added from AddressForm component
+  const handleAddressAdded = async (newAddressData: Address) => {
+    if (!user?.email) return;
 
-    if (!user?.email) {
-      alert('User not authenticated');
-      return;
-    }
+    // Reload addresses from Firestore
+    const updatedAddresses = await getUserAddresses(user.email);
+    setAddresses(updatedAddresses);
 
-    const address: Omit<Address, 'id'> = {
-      name: newAddress.name || user.name || '',
-      phone: newAddress.phone || user.phone || '',
-      addressLine1: newAddress.addressLine1,
-      addressLine2: newAddress.addressLine2,
-      city: newAddress.city,
-      state: newAddress.state,
-      pincode: newAddress.pincode,
-      isDefault: addresses.length === 0 ? true : (newAddress.isDefault || false)
-    };
-
-    const addressId = await addAddressToFirestore(user.email, address);
-
-    if (addressId) {
-      // Reload addresses from Firestore
-      const updatedAddresses = await getUserAddresses(user.email);
-      setAddresses(updatedAddresses);
-
-      // Reset form
-      setNewAddress({
-        name: user.name || '',
-        phone: user.phone || '',
-        addressLine1: '',
-        addressLine2: '',
-        city: '',
-        state: '',
-        pincode: '',
-        isDefault: false
-      });
-      setShowAddressForm(false);
-      setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 3000);
-    } else {
-      alert('Failed to add address. Please try again.');
-    }
+    // Reset form
+    setNewAddress({
+      name: user.name || '',
+      phone: user.phone || '',
+      addressLine1: '',
+      addressLine2: '',
+      city: '',
+      state: '',
+      pincode: '',
+      isDefault: false
+    });
+    setShowAddressForm(false);
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   const handleLogout = () => {
@@ -548,75 +524,13 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                   </div>
 
                   {/* Add Address Form */}
-                  {showAddressForm && (
-                    <div className="bg-gray-50 rounded-xl p-6 mb-6 border-2 border-rose-200">
-                      <h3 className="font-semibold text-gray-900 mb-4">New Address</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <FormInput
-                          label="Full Name"
-                          value={newAddress.name || ''}
-                          onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })}
-                          placeholder="Enter full name"
-                        />
-                        <FormInput
-                          label="Phone Number"
-                          value={newAddress.phone || ''}
-                          onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })}
-                          placeholder="Enter phone number"
-                        />
-                        <div className="md:col-span-2">
-                          <FormInput
-                            label="Address Line 1 *"
-                            value={newAddress.addressLine1 || ''}
-                            onChange={(e) => setNewAddress({ ...newAddress, addressLine1: e.target.value })}
-                            placeholder="House no., Building, Street"
-                          />
-                        </div>
-                        <div className="md:col-span-2">
-                          <FormInput
-                            label="Address Line 2"
-                            value={newAddress.addressLine2 || ''}
-                            onChange={(e) => setNewAddress({ ...newAddress, addressLine2: e.target.value })}
-                            placeholder="Landmark, Area (Optional)"
-                          />
-                        </div>
-                        <FormInput
-                          label="City *"
-                          value={newAddress.city || ''}
-                          onChange={(e) => setNewAddress({ ...newAddress, city: e.target.value })}
-                          placeholder="Enter city"
-                        />
-                        <FormInput
-                          label="State *"
-                          value={newAddress.state || ''}
-                          onChange={(e) => setNewAddress({ ...newAddress, state: e.target.value })}
-                          placeholder="Enter state"
-                        />
-                        <FormInput
-                          label="Pincode *"
-                          value={newAddress.pincode || ''}
-                          onChange={(e) => setNewAddress({ ...newAddress, pincode: e.target.value })}
-                          placeholder="Enter pincode"
-                        />
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            id="defaultAddress"
-                            checked={newAddress.isDefault || false}
-                            onChange={(e) => setNewAddress({ ...newAddress, isDefault: e.target.checked })}
-                            className="w-4 h-4 text-rose-600 border-gray-300 rounded focus:ring-rose-500"
-                          />
-                          <label htmlFor="defaultAddress" className="text-sm text-gray-700">
-                            Set as default address
-                          </label>
-                        </div>
-                      </div>
-                      <button
-                        onClick={addNewAddress}
-                        className="mt-4 bg-rose-600 text-white px-6 py-2 rounded-xl hover:bg-rose-700 transition font-medium"
-                      >
-                        Save Address
-                      </button>
+                  {showAddressForm && user?.email && (
+                    <div className="mb-6">
+                      <AddressForm
+                        userEmail={user.email}
+                        onAddressAdded={handleAddressAdded}
+                        onCancel={() => setShowAddressForm(false)}
+                      />
                     </div>
                   )}
 

@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { CartItem, Address } from '@/app/types';
 import { useAuth } from '@/app/contexts/AuthContext';
 import { getUserAddresses } from '@/app/services/addressService';
-import { Package, MapPin, CreditCard, Truck, ChevronLeft, Plus, Edit2 } from 'lucide-react';
+import { AddressForm } from '@/app/components/common';
+import { Package, MapPin, CreditCard, Truck, ChevronLeft, Plus } from 'lucide-react';
 
 type CheckoutPageProps = {
   cart: CartItem[];
@@ -44,6 +45,20 @@ export default function CheckoutPage({
     };
     loadAddresses();
   }, [user]);
+
+  // Handle address added from form
+  const handleAddressAdded = async (newAddress: Address) => {
+    if (!user?.email) return;
+
+    // Reload addresses to get updated list
+    const updatedAddresses = await getUserAddresses(user.email);
+    setAddresses(updatedAddresses);
+
+    // Select the newly added address
+    setSelectedAddress(newAddress);
+    setShowAddressForm(false);
+    alert('Address added successfully!');
+  };
 
   // Calculate prices (all in USD)
   const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -138,13 +153,33 @@ export default function CheckoutPage({
                 Delivery Address
               </h2>
               <button
-                onClick={() => setShowAddressForm(true)}
+                onClick={() => setShowAddressForm(!showAddressForm)}
                 className="text-rose-600 hover:text-rose-700 flex items-center text-sm font-medium"
               >
-                <Plus className="w-4 h-4 mr-1" />
-                Add New
+                {showAddressForm ? (
+                  <>
+                    <span className="mr-1">✕</span>
+                    Cancel
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-4 h-4 mr-1" />
+                    Add New
+                  </>
+                )}
               </button>
             </div>
+
+            {/* Add Address Form */}
+            {showAddressForm && user?.email && (
+              <div className="mb-4">
+                <AddressForm
+                  userEmail={user.email}
+                  onAddressAdded={handleAddressAdded}
+                  onCancel={() => setShowAddressForm(false)}
+                />
+              </div>
+            )}
 
             {addresses.length === 0 ? (
               <div className="text-center py-8 text-gray-500">
