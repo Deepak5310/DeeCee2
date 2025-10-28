@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Product } from "@/app/types";
 import { X, ZoomIn, ZoomOut, RotateCcw, ChevronLeft, ChevronRight, Heart } from "lucide-react";
+import { DISCOUNT_PERCENTAGE, getDiscountMultiplier } from "@/app/constants/products";
 
 type ProductPageProps = {
   product: Product;
@@ -176,8 +177,8 @@ export default function ProductPage({
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 truncate">{product.name}</h1>
           <div className="flex items-center gap-3 mb-8 flex-wrap">
             <p className="text-rose-600 text-3xl font-extrabold">{convertPrice(product.price)}</p>
-            <p className="text-gray-400 line-through text-xl">{convertPrice(product.price * 1.5)}</p>
-            <span className="text-sm font-semibold bg-green-500 text-white px-3 py-1.5 rounded-lg">50% OFF</span>
+            <p className="text-gray-400 line-through text-xl">{convertPrice(product.price * getDiscountMultiplier())}</p>
+            <span className="text-sm font-semibold bg-green-500 text-white px-3 py-1.5 rounded-lg">{DISCOUNT_PERCENTAGE}% OFF</span>
           </div>
 
           {/* Product Description */}

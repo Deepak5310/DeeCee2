@@ -6,6 +6,7 @@ import { useAuth } from '@/app/contexts/AuthContext';
 import { Order, Address, ProfileTab, WishlistItem } from "@/app/types";
 import { FormInput } from "@/app/components/common";
 import { useFormValidation } from "@/app/hooks/use-form-validation";
+import { DISCOUNT_PERCENTAGE, getDiscountMultiplier } from "@/app/constants/products";
 import {
   getUserAddresses,
   addAddress as addAddressToFirestore,
@@ -748,8 +749,8 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                             <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">{item.name}</h3>
                             <div className="flex items-center gap-2 mb-3 flex-wrap">
                               <p className="text-rose-600 font-bold text-lg">₹{item.price.toLocaleString()}</p>
-                              <p className="text-gray-400 line-through text-sm">₹{Math.round(item.price * 1.5).toLocaleString()}</p>
-                              <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">50% OFF</span>
+                              <p className="text-gray-400 line-through text-sm">₹{Math.round(item.price * getDiscountMultiplier()).toLocaleString()}</p>
+                              <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                             </div>
                             <div className="flex gap-2">
                               <button

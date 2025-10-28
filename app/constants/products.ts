@@ -1,6 +1,9 @@
 import { Product } from "@/app/types";
 import { Gift, Package, Truck, Sparkles } from "lucide-react";
 
+// Discount Configuration
+export const DISCOUNT_PERCENTAGE = 50; // Change this value to update discount across the site
+
 export const products: Product[] = [
   {
     id: 1,
@@ -140,3 +143,13 @@ export const reelsVideos = [
   { id: 3, src: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/videos/reel3.mp4", description: "Curly Hair Care Routine" },
   { id: 4, src: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/videos/reel5.mp4", description: "Deep Wave Extensions Look" },
 ];
+
+// Helper functions for pricing with discount
+export const getOriginalPrice = (currentPrice: number): number => {
+  return currentPrice / (1 - DISCOUNT_PERCENTAGE / 100);
+};
+
+export const getDiscountMultiplier = (): number => {
+  return 1 / (1 - DISCOUNT_PERCENTAGE / 100);
+};
+

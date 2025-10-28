@@ -3,6 +3,7 @@
 import React from "react";
 import { Product } from "@/app/types";
 import { Star } from "lucide-react";
+import { DISCOUNT_PERCENTAGE, getDiscountMultiplier } from "@/app/constants/products";
 
 type BestsellersPageProps = {
   products: Product[];
@@ -68,9 +69,9 @@ export default function BestsellersPage({
                       {convertPrice(product.price)}
                     </p>
                     <p className="text-white/70 line-through text-sm">
-                      {convertPrice(product.price * 1.5)}
+                      {convertPrice(product.price * getDiscountMultiplier())}
                     </p>
-                    <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">50% OFF</span>
+                    <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                   </div>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {product.colors.slice(0, 3).map((color, idx) => (

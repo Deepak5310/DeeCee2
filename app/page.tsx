@@ -25,7 +25,7 @@ import { AdminAuthProvider, useAdminAuth } from './contexts/AdminAuthContext';
 import { Product, CartItem, Appointment, Page, ReelVideo } from './types';
 import { IconButton, PromoSlider } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
-import { products, promoMessages, reelsVideos } from './constants/products';
+import { products, promoMessages, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
 
 const VideoReelCard = ({ video }: { video: ReelVideo }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -612,8 +612,8 @@ function DeeceeHairApp(): React.ReactElement {
                     <h3 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-1.5 md:mb-2 truncate">{product.name}</h3>
                     <div className="flex items-center gap-2 mb-1.5 md:mb-2 flex-wrap">
                       <p className="text-white text-base md:text-lg font-semibold">{convertPrice(product.price)}</p>
-                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * 1.5)}</p>
-                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">50% OFF</span>
+                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * getDiscountMultiplier())}</p>
+                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                     </div>
                     <button className="text-white underline hover:no-underline text-xs sm:text-sm md:text-base">Shop Now →</button>
                   </div>
@@ -651,8 +651,8 @@ function DeeceeHairApp(): React.ReactElement {
                     <h3 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-1.5 md:mb-2 truncate">{product.name}</h3>
                     <div className="flex items-center gap-2 mb-1.5 md:mb-2 flex-wrap">
                       <p className="text-white text-base md:text-lg font-semibold">{convertPrice(product.price)}</p>
-                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * 1.5)}</p>
-                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">50% OFF</span>
+                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * getDiscountMultiplier())}</p>
+                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                     </div>
                     <button className="text-white underline hover:no-underline text-xs sm:text-sm md:text-base">Shop Now →</button>
                   </div>
@@ -704,8 +704,8 @@ function DeeceeHairApp(): React.ReactElement {
                     <h3 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-1.5 md:mb-2 truncate">{product.name}</h3>
                     <div className="flex items-center gap-2 mb-1.5 md:mb-2 flex-wrap">
                       <p className="text-white text-base md:text-lg font-semibold">{convertPrice(product.price)}</p>
-                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * 1.5)}</p>
-                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">50% OFF</span>
+                      <p className="text-white/70 line-through text-sm">{convertPrice(product.price * getDiscountMultiplier())}</p>
+                      <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                     </div>
                     <button className="text-white underline hover:no-underline text-xs sm:text-sm md:text-base">Shop Now →</button>
                   </div>
