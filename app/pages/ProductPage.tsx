@@ -193,12 +193,31 @@ export default function ProductPage({
           <div className="mb-6">
             <h3 className="font-semibold text-gray-700 mb-3">Select Color</h3>
             <div className="flex flex-wrap gap-3">
-              {product.colors.map((color) => (
-                <button key={color} onClick={() => setSelectedColor(color)} className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${selectedColor === color ? "bg-rose-600 text-white border-rose-600 shadow-lg" : "border-gray-300 text-gray-700 hover:bg-rose-100"}`}>
-                  {color}
-                </button>
-              ))}
+              {product.colors.map((color) => {
+                const isNaturalBlack = color.toLowerCase().includes('black') || color === 'Black';
+                const isAvailable = isNaturalBlack;
+
+                return (
+                  <button
+                    key={color}
+                    onClick={() => isAvailable && setSelectedColor(color)}
+                    disabled={!isAvailable}
+                    className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${
+                      selectedColor === color
+                        ? "bg-rose-600 text-white border-rose-600 shadow-lg"
+                        : isAvailable
+                        ? "border-gray-300 text-gray-700 hover:bg-rose-100"
+                        : "border-gray-200 text-gray-400 cursor-not-allowed opacity-60"
+                    }`}
+                  >
+                    <span className={!isAvailable ? 'line-through' : ''}>
+                      {color}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
+            <p className="text-xs text-gray-500 mt-2">* Only Natural Black color is currently available</p>
           </div>
           <div className="mb-8">
             <h3 className="font-semibold text-gray-700 mb-3">Select Size</h3>

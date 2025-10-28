@@ -291,7 +291,9 @@ function DeeceeHairApp(): React.ReactElement {
 
   const handleProductClick = useCallback((product: Product) => {
     setSelectedProduct(product);
-    setSelectedColor("");
+    // Auto-select Black color if available
+    const blackColor = product.colors.find(color => color.toLowerCase().includes('black') || color === 'Black');
+    setSelectedColor(blackColor || "");
     setSelectedSize("");
     setCurrentPage("product");
     if (typeof window !== 'undefined') {
