@@ -67,7 +67,7 @@ export type Order = {
   total: number;
   status: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
   paymentStatus: "Pending" | "Paid" | "Failed" | "Refunded";
-  paymentMethod: "COD" | "Razorpay" | "UPI";
+  paymentMethod: "Razorpay" | "UPI";
   paymentId?: string;
   trackingId?: string;
   createdAt: string;

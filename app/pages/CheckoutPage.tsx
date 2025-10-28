@@ -22,7 +22,7 @@ export default function CheckoutPage({
   const { user } = useAuth();
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<'COD' | 'Razorpay' | 'UPI'>('COD');
+  const [paymentMethod, setPaymentMethod] = useState<'Razorpay' | 'UPI'>('Razorpay');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
 
@@ -78,13 +78,13 @@ export default function CheckoutPage({
         total,
         paymentMethod,
         status: 'Pending' as const,
-        paymentStatus: paymentMethod === 'COD' ? 'Pending' as const : 'Pending' as const,
+        paymentStatus: 'Pending' as const,
       };
 
       // For Razorpay, we'll implement later
       if (paymentMethod === 'Razorpay') {
         // TODO: Integrate Razorpay
-        alert('Razorpay integration coming soon! Please use COD for now.');
+        alert('Razorpay integration coming soon!');
         setIsProcessing(false);
         return;
       }
@@ -209,44 +209,43 @@ export default function CheckoutPage({
 
             <div className="space-y-3">
               <div
-                onClick={() => setPaymentMethod('COD')}
+                onClick={() => setPaymentMethod('Razorpay')}
                 className={`border-2 rounded-lg p-4 cursor-pointer transition ${
-                  paymentMethod === 'COD'
+                  paymentMethod === 'Razorpay'
                     ? 'border-rose-600 bg-rose-50'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-gray-900">Cash on Delivery</p>
-                    <p className="text-sm text-gray-600">Pay when you receive</p>
-                  </div>
-                  <input
-                    type="radio"
-                    checked={paymentMethod === 'COD'}
-                    onChange={() => setPaymentMethod('COD')}
-                  />
-                </div>
-              </div>
-
-              <div
-                onClick={() => setPaymentMethod('Razorpay')}
-                className={`border-2 rounded-lg p-4 cursor-pointer transition opacity-50 ${
-                  paymentMethod === 'Razorpay'
-                    ? 'border-rose-600 bg-rose-50'
-                    : 'border-gray-200'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
                     <p className="font-semibold text-gray-900">Online Payment</p>
-                    <p className="text-sm text-gray-600">UPI, Cards, Net Banking (Coming Soon)</p>
+                    <p className="text-sm text-gray-600">UPI, Cards, Net Banking</p>
                   </div>
                   <input
                     type="radio"
                     checked={paymentMethod === 'Razorpay'}
                     onChange={() => setPaymentMethod('Razorpay')}
-                    disabled
+                  />
+                </div>
+              </div>
+
+              <div
+                onClick={() => setPaymentMethod('UPI')}
+                className={`border-2 rounded-lg p-4 cursor-pointer transition ${
+                  paymentMethod === 'UPI'
+                    ? 'border-rose-600 bg-rose-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-gray-900">UPI Payment</p>
+                    <p className="text-sm text-gray-600">Google Pay, PhonePe, Paytm</p>
+                  </div>
+                  <input
+                    type="radio"
+                    checked={paymentMethod === 'UPI'}
+                    onChange={() => setPaymentMethod('UPI')}
                   />
                 </div>
               </div>
