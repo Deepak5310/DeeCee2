@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { AdminUser } from '@/app/types';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // Initialize Firebase Admin (only once)
 if (!getApps().length) {
@@ -41,25 +42,35 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10');
 
     const auth = getAuth();
+    const db = getFirestore();
+
+    // Fetch all admin/superadmin user IDs from Firestore
+    const adminsSnapshot = await db.collection('admins').get();
+    const adminIds = new Set<string>();
+    adminsSnapshot.forEach((doc) => {
+      adminIds.add(doc.id);
+    });
 
     // Fetch users from Firebase Auth
     const listUsersResult = await auth.listUsers(1000); // Fetch up to 1000 users
 
-    // Convert Firebase users to AdminUser format
-    let allUsers: AdminUser[] = listUsersResult.users.map((userRecord) => ({
-      id: userRecord.uid,
-      email: userRecord.email || '',
-      displayName: userRecord.displayName || null,
-      phoneNumber: userRecord.phoneNumber || null,
-      photoURL: userRecord.photoURL || null,
-      emailVerified: userRecord.emailVerified,
-      disabled: userRecord.disabled,
-      createdAt: userRecord.metadata.creationTime,
-      lastSignInTime: userRecord.metadata.lastSignInTime || null,
-      // TODO: Fetch from Firestore orders collection
-      totalOrders: 0,
-      totalSpent: 0,
-    }));
+    // Convert Firebase users to AdminUser format and filter out admins
+    let allUsers: AdminUser[] = listUsersResult.users
+      .filter((userRecord) => !adminIds.has(userRecord.uid)) // Exclude admins
+      .map((userRecord) => ({
+        id: userRecord.uid,
+        email: userRecord.email || '',
+        displayName: userRecord.displayName || null,
+        phoneNumber: userRecord.phoneNumber || null,
+        photoURL: userRecord.photoURL || null,
+        emailVerified: userRecord.emailVerified,
+        disabled: userRecord.disabled,
+        createdAt: userRecord.metadata.creationTime,
+        lastSignInTime: userRecord.metadata.lastSignInTime || null,
+        // TODO: Fetch from Firestore orders collection
+        totalOrders: 0,
+        totalSpent: 0,
+      }));
 
     // Filter by search query
     if (search) {

@@ -2,7 +2,7 @@ import { Product } from "@/app/types";
 import { Gift, Package, Truck, Sparkles } from "lucide-react";
 
 // Discount Configuration
-export const DISCOUNT_PERCENTAGE = 50; // Change this value to update discount across the site
+export const DISCOUNT_PERCENTAGE = 20; // Change this value to update discount across the site
 
 export const products: Product[] = [
   {
