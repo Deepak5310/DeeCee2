@@ -111,26 +111,27 @@ function DeeceeHairApp(): React.ReactElement {
   const [showVerification, setShowVerification] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showPromo, setShowPromo] = useState(true);
-  const [selectedCurrency, setSelectedCurrency] = useState<string>("INR");
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
 
-  // Currency data with exchange rates (relative to INR)
+  // Currency data with exchange rates (1 USD = 86.50 INR)
+  // All prices stored in USD, converted to local currency
   const currencies = {
-    INR: { symbol: "₹", rate: 1, name: "India (INR)" },
-    USD: { symbol: "$", rate: 0.012, name: "USA (USD)" },
-    EUR: { symbol: "€", rate: 0.011, name: "Europe (EUR)" },
-    GBP: { symbol: "£", rate: 0.0095, name: "UK (GBP)" },
-    AED: { symbol: "د.إ", rate: 0.044, name: "UAE (AED)" },
-    AUD: { symbol: "A$", rate: 0.018, name: "Australia (AUD)" },
-    CAD: { symbol: "C$", rate: 0.016, name: "Canada (CAD)" },
-    SGD: { symbol: "S$", rate: 0.016, name: "Singapore (SGD)" },
+    USD: { symbol: "$", rate: 1, name: "USA (USD)" },
+    INR: { symbol: "₹", rate: 86.50, name: "India (INR)" },
+    EUR: { symbol: "€", rate: 0.92, name: "Europe (EUR)" },
+    GBP: { symbol: "£", rate: 0.79, name: "UK (GBP)" },
+    AED: { symbol: "د.إ", rate: 3.67, name: "UAE (AED)" },
+    AUD: { symbol: "A$", rate: 1.52, name: "Australia (AUD)" },
+    CAD: { symbol: "C$", rate: 1.38, name: "Canada (CAD)" },
+    SGD: { symbol: "S$", rate: 1.34, name: "Singapore (SGD)" },
   };
 
-  // Function to convert price
-  const convertPrice = useCallback((priceInINR: number): string => {
-    const converted = priceInINR * currencies[selectedCurrency as keyof typeof currencies].rate;
+  // Function to convert price from USD to selected currency
+  const convertPrice = useCallback((priceInUSD: number): string => {
+    const converted = priceInUSD * currencies[selectedCurrency as keyof typeof currencies].rate;
     return `${currencies[selectedCurrency as keyof typeof currencies].symbol}${Math.round(converted).toLocaleString()}`;
   }, [selectedCurrency]);
 

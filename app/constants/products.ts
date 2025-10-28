@@ -5,7 +5,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Bulk Hair Bundle",
-    price: 13310,
+    price: 154, // $154 (was ₹13,310)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/bulk-hair-bundle1.jpeg",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/bulk-hair-bundle1.jpeg",
@@ -20,7 +20,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Machine Weft Bundle",
-    price: 12070,
+    price: 140, // $140 (was ₹12,070)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/machine-weft-bundle1.png",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/machine-weft-bundle1.png",
@@ -35,7 +35,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Lace Closer",
-    price: 7630,
+    price: 88, // $88 (was ₹7,630)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-closer1.png",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-closer1.png",
@@ -50,7 +50,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Lace Frontal",
-    price: 12510,
+    price: 145, // $145 (was ₹12,510)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-frontal1.jpg",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-frontal1.jpg",
@@ -65,7 +65,7 @@ export const products: Product[] = [
   {
     id: 5,
     name: "Full Lace Wig",
-    price: 35499,
+    price: 410, // $410 (was ₹35,499)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/full-lace-wig.jpg",
     colors: ["Black", "Brown", "Ombre"],
     sizes: ['16"', '20"', '24"'],
@@ -75,7 +75,7 @@ export const products: Product[] = [
   {
     id: 6,
     name: "Lace Frontel Wig",
-    price: 43899,
+    price: 507, // $507 (was ₹43,899)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/alopecia-wig.jpg",
     colors: ["Black", "Dark Brown"],
     sizes: ['14"', '18"', '22"'],
@@ -85,7 +85,7 @@ export const products: Product[] = [
   {
     id: 7,
     name: "Mens Premium Hair Toppers",
-    price: 4999,
+    price: 58, // $58 (was ₹4,999)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/men-patch1.png",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/men-patch1.png",
@@ -101,7 +101,7 @@ export const products: Product[] = [
   {
     id: 8,
     name: "Gents Patch",
-    price: 5999,
+    price: 69, // $69 (was ₹5,999)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/old-men-patch1.png",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/old-men-patch1.png",

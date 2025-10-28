@@ -45,9 +45,9 @@ export default function CheckoutPage({
     loadAddresses();
   }, [user]);
 
-  // Calculate prices
+  // Calculate prices (all in USD)
   const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const shippingCharges = subtotal > 5000 ? 0 : 100; // Free shipping above ₹5000
+  const shippingCharges = subtotal > 58 ? 0 : 5; // Free shipping above $58 (₹5000)
   const tax = subtotal * 0.18; // 18% GST
   const total = subtotal + shippingCharges + tax;
 
@@ -305,10 +305,10 @@ export default function CheckoutPage({
                 <span className="text-gray-600">Tax (GST 18%)</span>
                 <span className="text-gray-900">{convertPrice(tax)}</span>
               </div>
-              {subtotal < 5000 && (
+              {subtotal < 58 && (
                 <div className="flex items-center gap-1 text-xs text-gray-500 pt-2">
                   <Truck className="w-3 h-3" />
-                  <span>Add {convertPrice(5000 - subtotal)} more for FREE shipping</span>
+                  <span>Add {convertPrice(58 - subtotal)} more for FREE shipping</span>
                 </div>
               )}
             </div>
