@@ -93,6 +93,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Maintenance mode toggle
+  // Set `NEXT_PUBLIC_MAINTENANCE_MODE=true` (or `MAINTENANCE_MODE=true`) in the environment to enable.
+  const MAINTENANCE =
+    process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true' ||
+    process.env.MAINTENANCE_MODE === 'true';
+
+  if (MAINTENANCE) {
+    // Return a minimal, SEO-friendly maintenance page for all visitors.
+    return (
+      <html lang="en">
+        <head>
+          <meta name="robots" content="noindex" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>Website temporarily offline — DEECEE HAIR</title>
+        </head>
+        <body className="min-h-screen bg-white text-gray-900 flex items-center justify-center p-6">
+          <div className="max-w-xl text-center">
+            <h1 className="text-3xl sm:text-4xl font-bold text-rose-600 mb-4">We'll be back soon</h1>
+            <p className="text-gray-700 mb-6">Our website is temporarily offline for maintenance. We're working to bring it back online — thank you for your patience.</p>
+            <p className="text-sm text-gray-500 mb-4">If you need immediate help, email us at <a href="mailto:deeceehair0@gmail.com" className="underline text-rose-600">deeceehair0@gmail.com</a> or message on WhatsApp.</p>
+            <p className="text-xs text-gray-400">© {new Date().getFullYear()} DEECEE HAIR. All rights reserved.</p>
+          </div>
+        </body>
+      </html>
+    );
+  }
   // Structured Data for SEO (JSON-LD)
   const structuredData = {
     '@context': 'https://schema.org',
