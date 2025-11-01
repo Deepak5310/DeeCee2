@@ -5,7 +5,7 @@ import { CartItem, Address } from '@/app/types';
 import { useAuth } from '@/app/contexts/AuthContext';
 import { getUserAddresses } from '@/app/services/addressService';
 import { AddressForm } from '@/app/components/common';
-import { Package, MapPin, CreditCard, Truck, ChevronLeft, Plus } from 'lucide-react';
+import { Package, MapPin, CreditCard, Truck, ChevronLeft, Plus, Check } from 'lucide-react';
 
 type CheckoutPageProps = {
   cart: CartItem[];
@@ -26,6 +26,15 @@ export default function CheckoutPage({
   const [paymentMethod, setPaymentMethod] = useState<'Razorpay' | 'UPI'>('Razorpay');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
+  const [promoCode, setPromoCode] = useState('');
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [promoError, setPromoError] = useState('');
+
+  // Promo codes configuration
+  const promoCodes: Record<string, { discount: number; description: string }> = {
+    'PRABH10': { discount: 10, description: '10% off on your order' },
+  };
 
   // Load user addresses
   useEffect(() => {
@@ -60,11 +69,43 @@ export default function CheckoutPage({
     alert('Address added successfully!');
   };
 
+  // Handle promo code application
+  const handleApplyPromo = () => {
+    const upperPromo = promoCode.toUpperCase().trim();
+
+    if (!upperPromo) {
+      setPromoError('Please enter a promo code');
+      return;
+    }
+
+    const promo = promoCodes[upperPromo];
+
+    if (promo) {
+      setPromoApplied(true);
+      setPromoDiscount(promo.discount);
+      setPromoError('');
+      alert(`✅ Promo code applied! You get ${promo.discount}% off`);
+    } else {
+      setPromoError('Invalid promo code');
+      setPromoApplied(false);
+      setPromoDiscount(0);
+    }
+  };
+
+  // Handle promo code removal
+  const handleRemovePromo = () => {
+    setPromoCode('');
+    setPromoApplied(false);
+    setPromoDiscount(0);
+    setPromoError('');
+  };
+
   // Calculate prices (all in USD)
   const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const shippingCharges = subtotal > 58 ? 0 : 5; // Free shipping above $58 (₹5000)
   const tax = subtotal * 0.18; // 18% GST
-  const total = subtotal + shippingCharges + tax;
+  const promoDiscountAmount = promoApplied ? (subtotal * promoDiscount) / 100 : 0;
+  const total = subtotal + shippingCharges + tax - promoDiscountAmount;
 
   const handlePlaceOrder = async () => {
     if (!selectedAddress) {
@@ -90,6 +131,9 @@ export default function CheckoutPage({
         subtotal,
         shippingCharges,
         tax,
+        promoCode: promoApplied ? promoCode.toUpperCase().trim() : undefined,
+        promoDiscount: promoApplied ? promoDiscount : undefined,
+        promoDiscountAmount: promoApplied ? promoDiscountAmount : undefined,
         total,
         paymentMethod,
         status: 'Pending' as const,
@@ -320,6 +364,46 @@ export default function CheckoutPage({
               ))}
             </div>
 
+            {/* Promo Code Section */}
+            <div className="py-4 border-t border-gray-200">
+              {!promoApplied ? (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Have a promo code?</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                      placeholder="Enter promo code"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    />
+                    <button
+                      onClick={handleApplyPromo}
+                      className="px-4 py-2 bg-rose-600 text-white text-sm font-medium rounded-lg hover:bg-rose-700 transition"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                  {promoError && (
+                    <p className="text-xs text-red-600">{promoError}</p>
+                  )}
+                </div>
+              ) : (
+                <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium text-green-700">{promoCode} Applied!</span>
+                  </div>
+                  <button
+                    onClick={handleRemovePromo}
+                    className="text-xs text-red-600 hover:text-red-700 font-medium"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Price Breakdown */}
             <div className="space-y-2 py-4 border-t border-gray-200">
               <div className="flex justify-between text-sm">
@@ -340,6 +424,12 @@ export default function CheckoutPage({
                 <span className="text-gray-600">Tax (GST 18%)</span>
                 <span className="text-gray-900">{convertPrice(tax)}</span>
               </div>
+              {promoApplied && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-green-600 font-medium">Promo Discount ({promoCode} - {promoDiscount}%)</span>
+                  <span className="text-green-600 font-medium">-{convertPrice(promoDiscountAmount)}</span>
+                </div>
+              )}
               {subtotal < 58 && (
                 <div className="flex items-center gap-1 text-xs text-gray-500 pt-2">
                   <Truck className="w-3 h-3" />
