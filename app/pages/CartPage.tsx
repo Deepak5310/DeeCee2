@@ -34,6 +34,7 @@ export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onC
                 <h3 className="text-lg font-semibold text-gray-900 truncate">{item.product.name}</h3>
                 <p className="text-gray-700 text-sm">Color: {item.color}</p>
                 <p className="text-gray-700 text-sm">Size: {item.size}</p>
+                {item.texture && <p className="text-gray-700 text-sm">Texture: {item.texture}</p>}
                 <p className="text-rose-600 font-semibold text-lg">{convertPrice(item.product.price)}</p>
               </div>
               <div className="flex items-center justify-between w-full sm:w-auto mt-6 sm:mt-0">

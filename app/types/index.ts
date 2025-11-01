@@ -13,6 +13,8 @@ export type Product = {
   isBestseller?: boolean;
   isNew?: boolean;
   isMans?: boolean;
+  sizePricing?: Record<string, number>; // Dynamic pricing per size
+  textures?: string[]; // Available textures (Straight, Wavy, Curly, etc.)
 };
 
 export type CartItem = {
@@ -20,6 +22,7 @@ export type CartItem = {
   color: string;
   size: string;
   quantity: number;
+  texture?: string; // Selected texture
 };
 
 export type Appointment = {

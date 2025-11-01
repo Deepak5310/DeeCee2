@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Product } from "@/app/types";
 import { X, ZoomIn, ZoomOut, RotateCcw, ChevronLeft, ChevronRight, Heart } from "lucide-react";
-import { DISCOUNT_PERCENTAGE, getDiscountMultiplier } from "@/app/constants/products";
+import { DISCOUNT_PERCENTAGE, getDiscountMultiplier, getProductPrice } from "@/app/constants/products";
 
 type ProductPageProps = {
   product: Product;
@@ -11,6 +11,8 @@ type ProductPageProps = {
   setSelectedColor: (color: string) => void;
   selectedSize: string;
   setSelectedSize: (size: string) => void;
+  selectedTexture: string;
+  setSelectedTexture: (texture: string) => void;
   onAddToCart: () => void;
   onBackToShop: () => void;
   convertPrice: (price: number) => string;
@@ -24,6 +26,8 @@ export default function ProductPage({
   setSelectedColor,
   selectedSize,
   setSelectedSize,
+  selectedTexture,
+  setSelectedTexture,
   onAddToCart,
   onBackToShop,
   convertPrice,
@@ -37,6 +41,9 @@ export default function ProductPage({
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
+
+  // Get current price based on selected size
+  const currentPrice = getProductPrice(product, selectedSize);
 
   // Create array of images - if product has images array, use it, otherwise use main image twice
   const productImages = product.images && product.images.length > 0
@@ -176,8 +183,8 @@ export default function ProductPage({
         <div className="flex flex-col flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 truncate">{product.name}</h1>
           <div className="flex items-center gap-3 mb-8 flex-wrap">
-            <p className="text-rose-600 text-3xl font-extrabold">{convertPrice(product.price)}</p>
-            <p className="text-gray-400 line-through text-xl">{convertPrice(product.price * getDiscountMultiplier())}</p>
+            <p className="text-rose-600 text-3xl font-extrabold">{convertPrice(currentPrice)}</p>
+            <p className="text-gray-400 line-through text-xl">{convertPrice(currentPrice * getDiscountMultiplier())}</p>
             <span className="text-sm font-semibold bg-green-500 text-white px-3 py-1.5 rounded-lg">{DISCOUNT_PERCENTAGE}% OFF</span>
           </div>
 
@@ -220,6 +227,29 @@ export default function ProductPage({
             </div>
             <p className="text-xs text-gray-500 mt-2">* Only Natural Black color is currently available</p>
           </div>
+
+          {/* Texture Selection - Only show if product has textures */}
+          {product.textures && product.textures.length > 0 && (
+            <div className="mb-8">
+              <h3 className="font-semibold text-gray-700 mb-3">Select Texture</h3>
+              <div className="flex flex-wrap gap-3">
+                {product.textures.map((texture) => (
+                  <button
+                    key={texture}
+                    onClick={() => setSelectedTexture(texture)}
+                    className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${
+                      selectedTexture === texture
+                        ? "bg-rose-600 text-white border-rose-600 shadow-lg"
+                        : "border-gray-300 text-gray-700 hover:bg-rose-100"
+                    }`}
+                  >
+                    {texture}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="mb-8">
             <h3 className="font-semibold text-gray-700 mb-3">Select Size</h3>
             <div className="flex flex-wrap gap-3">

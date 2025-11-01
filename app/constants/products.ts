@@ -8,17 +8,34 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Bulk Hair Bundle",
-    price: 154, // $154 (was ₹13,310)
+    price: 150, // Base price (6 inch)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/bulk-hair-bundle1.jpeg",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/bulk-hair-bundle1.jpeg",
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/bulk-hair-bundle2.jpeg"
     ],
     colors: ["Black", "Brown", "Blonde", "Auburn"],
-    sizes: ['14"', '18"', '22"', '26"'],
+    sizes: ['6"', '8"', '10"', '12"', '14"', '16"', '18"', '20"', '22"', '24"', '26"', '28"', '30"', '32"'],
+    textures: ["Straight", "Wavy", "Curly", "Deep Wave"],
+    sizePricing: {
+      '6"': 150,
+      '8"': 210,
+      '10"': 270,
+      '12"': 330,
+      '14"': 390,
+      '16"': 510,
+      '18"': 620,
+      '20"': 690,
+      '22"': 760,
+      '24"': 860,
+      '26"': 980,
+      '28"': 1120,
+      '30"': 1220,
+      '32"': 1300,
+    },
     category: "straight",
     isBestseller: true,
-    description: "Premium quality bulk hair bundles perfect for professional styling. Made from 100% human hair with natural texture and shine. Ideal for creating custom wigs, extensions, and various hairstyles. Can be colored, styled, and heat-treated just like your natural hair."
+    description: "Premium quality bulk hair bundles perfect for professional styling. Made from 100% human hair with natural texture and shine. Ideal for creating custom wigs, extensions, and various hairstyles. Can be colored, styled, and heat-treated just like your natural hair. Available in sizes from 6 to 32 inches with pricing based on length. Choose from Straight, Wavy, Curly, or Deep Wave textures."
   },
   {
     id: 2,
@@ -151,5 +168,15 @@ export const getOriginalPrice = (currentPrice: number): number => {
 
 export const getDiscountMultiplier = (): number => {
   return 1 / (1 - DISCOUNT_PERCENTAGE / 100);
+};
+
+// Get price for a product based on selected size
+export const getProductPrice = (product: Product, selectedSize: string): number => {
+  // If product has size-based pricing and a size is selected
+  if (product.sizePricing && selectedSize && product.sizePricing[selectedSize]) {
+    return product.sizePricing[selectedSize];
+  }
+  // Return default price
+  return product.price;
 };
 

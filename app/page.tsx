@@ -101,6 +101,7 @@ function DeeceeHairApp(): React.ReactElement {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedTexture, setSelectedTexture] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -294,7 +295,21 @@ function DeeceeHairApp(): React.ReactElement {
     // Auto-select Black color if available
     const blackColor = product.colors.find(color => color.toLowerCase().includes('black') || color === 'Black');
     setSelectedColor(blackColor || "");
-    setSelectedSize("");
+
+    // Auto-select 6" size for Bulk Hair Bundle
+    if (product.id === 1 && product.sizes.includes('6"')) {
+      setSelectedSize('6"');
+    } else {
+      setSelectedSize("");
+    }
+
+    // Auto-select first texture if available
+    if (product.textures && product.textures.length > 0) {
+      setSelectedTexture(product.textures[0]);
+    } else {
+      setSelectedTexture("");
+    }
+
     setCurrentPage("product");
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', `/product/${product.id}`);
@@ -309,21 +324,40 @@ function DeeceeHairApp(): React.ReactElement {
       return;
     }
 
+    // Check if texture is required but not selected
+    if (selectedProduct.textures && selectedProduct.textures.length > 0 && !selectedTexture) {
+      if (typeof window !== 'undefined') {
+        alert("Please select texture");
+      }
+      return;
+    }
+
     setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex((item) => item.product.id === selectedProduct.id && item.color === selectedColor && item.size === selectedSize);
+      const existingItemIndex = prevCart.findIndex((item) =>
+        item.product.id === selectedProduct.id &&
+        item.color === selectedColor &&
+        item.size === selectedSize &&
+        item.texture === selectedTexture
+      );
       if (existingItemIndex !== -1) {
         const newCart = [...prevCart];
         newCart[existingItemIndex] = { ...newCart[existingItemIndex], quantity: newCart[existingItemIndex].quantity + 1 };
         return newCart;
       } else {
-        return [...prevCart, { product: selectedProduct, color: selectedColor, size: selectedSize, quantity: 1 }];
+        return [...prevCart, {
+          product: selectedProduct,
+          color: selectedColor,
+          size: selectedSize,
+          texture: selectedTexture,
+          quantity: 1
+        }];
       }
     });
 
     if (typeof window !== 'undefined') {
       alert("Added to cart!");
     }
-  }, [selectedProduct, selectedColor, selectedSize]);
+  }, [selectedProduct, selectedColor, selectedSize, selectedTexture]);
 
   const updateQuantity = useCallback((index: number, delta: number) => {
     setCart((prevCart) => prevCart.map((item, i) => (i === index ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item)));
@@ -805,6 +839,8 @@ function DeeceeHairApp(): React.ReactElement {
             setSelectedColor={setSelectedColor}
             selectedSize={selectedSize}
             setSelectedSize={setSelectedSize}
+            selectedTexture={selectedTexture}
+            setSelectedTexture={setSelectedTexture}
             onAddToCart={addToCart}
             onBackToShop={() => navigateTo("shop")}
             convertPrice={convertPrice}
