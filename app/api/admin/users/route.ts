@@ -64,10 +64,13 @@ export async function GET(request: NextRequest) {
 
       if (userEmail) {
         const currentStats = userOrderStats.get(userEmail) || { totalOrders: 0, totalSpent: 0, phone: null };
+        // Get phone from userPhone field or shippingAddress.phone
+        const phone = orderData.userPhone || orderData.shippingAddress?.phone || null;
+
         userOrderStats.set(userEmail, {
           totalOrders: currentStats.totalOrders + 1,
           totalSpent: currentStats.totalSpent + (orderData.total || 0),
-          phone: currentStats.phone || orderData.userPhone || null,
+          phone: currentStats.phone || phone,
         });
       }
     });
