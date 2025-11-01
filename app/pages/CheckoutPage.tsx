@@ -31,10 +31,25 @@ export default function CheckoutPage({
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [promoError, setPromoError] = useState('');
 
-  // Promo codes configuration
-  const promoCodes: Record<string, { discount: number; description: string }> = {
-    'PRABH10': { discount: 10, description: '10% off on your order' },
-  };
+  // Promo codes configuration from environment variables
+  const promoCodes: Record<string, { discount: number; description: string }> = {};
+
+  // Add promo codes from env if configured
+  if (process.env.NEXT_PUBLIC_PROMO_CODE && process.env.NEXT_PUBLIC_PROMO_DISCOUNT) {
+    const codes = process.env.NEXT_PUBLIC_PROMO_CODE.split(',');
+    const discounts = process.env.NEXT_PUBLIC_PROMO_DISCOUNT.split(',');
+    const descriptions = process.env.NEXT_PUBLIC_PROMO_DESCRIPTION?.split('|') || [];
+
+    codes.forEach((code, index) => {
+      const trimmedCode = code.trim().toUpperCase();
+      const discount = parseInt(discounts[index]?.trim() || '0', 10);
+      const description = descriptions[index]?.trim() || `${discount}% off on your order`;
+
+      if (trimmedCode && discount > 0) {
+        promoCodes[trimmedCode] = { discount, description };
+      }
+    });
+  }
 
   // Load user addresses
   useEffect(() => {
