@@ -54,23 +54,46 @@ export async function GET(request: NextRequest) {
     // Fetch users from Firebase Auth
     const listUsersResult = await auth.listUsers(1000); // Fetch up to 1000 users
 
+    // Fetch all orders to calculate user statistics
+    const ordersSnapshot = await db.collection('orders').get();
+    const userOrderStats = new Map<string, { totalOrders: number; totalSpent: number; phone: string | null }>();
+
+    ordersSnapshot.forEach((doc) => {
+      const orderData = doc.data();
+      const userEmail = orderData.userEmail;
+
+      if (userEmail) {
+        const currentStats = userOrderStats.get(userEmail) || { totalOrders: 0, totalSpent: 0, phone: null };
+        userOrderStats.set(userEmail, {
+          totalOrders: currentStats.totalOrders + 1,
+          totalSpent: currentStats.totalSpent + (orderData.total || 0),
+          phone: currentStats.phone || orderData.userPhone || null,
+        });
+      }
+    });
+
     // Convert Firebase users to AdminUser format and filter out admins
     let allUsers: AdminUser[] = listUsersResult.users
       .filter((userRecord) => !adminIds.has(userRecord.uid)) // Exclude admins
-      .map((userRecord) => ({
-        id: userRecord.uid,
-        email: userRecord.email || '',
-        displayName: userRecord.displayName || null,
-        phoneNumber: userRecord.phoneNumber || null,
-        photoURL: userRecord.photoURL || null,
-        emailVerified: userRecord.emailVerified,
-        disabled: userRecord.disabled,
-        createdAt: userRecord.metadata.creationTime,
-        lastSignInTime: userRecord.metadata.lastSignInTime || null,
-        // TODO: Fetch from Firestore orders collection
-        totalOrders: 0,
-        totalSpent: 0,
-      }));
+      .map((userRecord) => {
+        const email = userRecord.email || '';
+        const orderStats = userOrderStats.get(email) || { totalOrders: 0, totalSpent: 0, phone: null };
+
+        return {
+          id: userRecord.uid,
+          email: email,
+          displayName: userRecord.displayName || null,
+          // Use phone from orders if available, otherwise from Firebase Auth
+          phoneNumber: orderStats.phone || userRecord.phoneNumber || null,
+          photoURL: userRecord.photoURL || null,
+          emailVerified: userRecord.emailVerified,
+          disabled: userRecord.disabled,
+          createdAt: userRecord.metadata.creationTime,
+          lastSignInTime: userRecord.metadata.lastSignInTime || null,
+          totalOrders: orderStats.totalOrders,
+          totalSpent: orderStats.totalSpent,
+        };
+      });
 
     // Filter by search query
     if (search) {
