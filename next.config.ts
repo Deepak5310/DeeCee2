@@ -13,9 +13,6 @@ const nextConfig: NextConfig = {
   // Enable React strict mode for better error detection
   reactStrictMode: true,
 
-  // Performance optimizations
-  swcMinify: true,
-
   async rewrites() {
     // SPA-style client routes handled in app/page.tsx via History API
     // Ensure direct refreshes on these paths serve the root page
