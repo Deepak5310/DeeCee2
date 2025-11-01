@@ -40,17 +40,85 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Machine Weft Bundle",
-    price: 140, // $140 (was ₹12,070)
+    price: 24, // Base price (8" Straight)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/machine-weft-bundle1.png",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/machine-weft-bundle1.png",
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/machine-weft-bundle2.png"
     ],
     colors: ["Black", "Brown", "Honey Blonde"],
-    sizes: ['16"', '20"', '24"'],
+    sizes: ['8"', '10"', '12"', '14"', '16"', '18"', '20"', '22"', '24"', '26"', '28"', '30"', '32"'],
+    textures: ["Straight", "Wavy", "Curly", "Deep Wave (DW)", "Loose Wave (LW)", "Body Wave (BW)", "Water Wave (WW)", "Kinky Curly (KC)", "Kinky Straight (KST)", "Body Straight (BST)"],
+    sizeTexturePricing: {
+      '8"': {
+        'Straight': 24, 'Wavy': 24,
+        'Curly': 27, 'Deep Wave (DW)': 27, 'Loose Wave (LW)': 27, 'Body Wave (BW)': 27, 'Water Wave (WW)': 27,
+        'Kinky Curly (KC)': 28, 'Kinky Straight (KST)': 28, 'Body Straight (BST)': 28
+      },
+      '10"': {
+        'Straight': 28, 'Wavy': 28,
+        'Curly': 31, 'Deep Wave (DW)': 31, 'Loose Wave (LW)': 31, 'Body Wave (BW)': 31, 'Water Wave (WW)': 31,
+        'Kinky Curly (KC)': 32, 'Kinky Straight (KST)': 32, 'Body Straight (BST)': 32
+      },
+      '12"': {
+        'Straight': 32, 'Wavy': 32,
+        'Curly': 35, 'Deep Wave (DW)': 35, 'Loose Wave (LW)': 35, 'Body Wave (BW)': 35, 'Water Wave (WW)': 35,
+        'Kinky Curly (KC)': 36, 'Kinky Straight (KST)': 36, 'Body Straight (BST)': 36
+      },
+      '14"': {
+        'Straight': 38, 'Wavy': 38,
+        'Curly': 41, 'Deep Wave (DW)': 41, 'Loose Wave (LW)': 41, 'Body Wave (BW)': 41, 'Water Wave (WW)': 41,
+        'Kinky Curly (KC)': 42, 'Kinky Straight (KST)': 42, 'Body Straight (BST)': 42
+      },
+      '16"': {
+        'Straight': 48, 'Wavy': 48,
+        'Curly': 51, 'Deep Wave (DW)': 51, 'Loose Wave (LW)': 51, 'Body Wave (BW)': 51, 'Water Wave (WW)': 51,
+        'Kinky Curly (KC)': 52, 'Kinky Straight (KST)': 52, 'Body Straight (BST)': 52
+      },
+      '18"': {
+        'Straight': 65, 'Wavy': 65,
+        'Curly': 68, 'Deep Wave (DW)': 68, 'Loose Wave (LW)': 68, 'Body Wave (BW)': 68, 'Water Wave (WW)': 68,
+        'Kinky Curly (KC)': 69, 'Kinky Straight (KST)': 69, 'Body Straight (BST)': 69
+      },
+      '20"': {
+        'Straight': 74, 'Wavy': 74,
+        'Curly': 77, 'Deep Wave (DW)': 77, 'Loose Wave (LW)': 77, 'Body Wave (BW)': 77, 'Water Wave (WW)': 77,
+        'Kinky Curly (KC)': 78, 'Kinky Straight (KST)': 78, 'Body Straight (BST)': 78
+      },
+      '22"': {
+        'Straight': 84, 'Wavy': 84,
+        'Curly': 87, 'Deep Wave (DW)': 87, 'Loose Wave (LW)': 87, 'Body Wave (BW)': 87, 'Water Wave (WW)': 87,
+        'Kinky Curly (KC)': 88, 'Kinky Straight (KST)': 88, 'Body Straight (BST)': 88
+      },
+      '24"': {
+        'Straight': 90, 'Wavy': 90,
+        'Curly': 93, 'Deep Wave (DW)': 93, 'Loose Wave (LW)': 93, 'Body Wave (BW)': 93, 'Water Wave (WW)': 93,
+        'Kinky Curly (KC)': 94, 'Kinky Straight (KST)': 94, 'Body Straight (BST)': 94
+      },
+      '26"': {
+        'Straight': 102, 'Wavy': 102,
+        'Curly': 105, 'Deep Wave (DW)': 105, 'Loose Wave (LW)': 105, 'Body Wave (BW)': 105, 'Water Wave (WW)': 105,
+        'Kinky Curly (KC)': 106, 'Kinky Straight (KST)': 106, 'Body Straight (BST)': 106
+      },
+      '28"': {
+        'Straight': 114, 'Wavy': 114,
+        'Curly': 117, 'Deep Wave (DW)': 117, 'Loose Wave (LW)': 117, 'Body Wave (BW)': 117, 'Water Wave (WW)': 117,
+        'Kinky Curly (KC)': 118, 'Kinky Straight (KST)': 118, 'Body Straight (BST)': 118
+      },
+      '30"': {
+        'Straight': 120, 'Wavy': 120,
+        'Curly': 123, 'Deep Wave (DW)': 123, 'Loose Wave (LW)': 123, 'Body Wave (BW)': 123, 'Water Wave (WW)': 123,
+        'Kinky Curly (KC)': 124, 'Kinky Straight (KST)': 124, 'Body Straight (BST)': 124
+      },
+      '32"': {
+        'Straight': 132, 'Wavy': 132,
+        'Curly': 135, 'Deep Wave (DW)': 135, 'Loose Wave (LW)': 135, 'Body Wave (BW)': 135, 'Water Wave (WW)': 135,
+        'Kinky Curly (KC)': 136, 'Kinky Straight (KST)': 136, 'Body Straight (BST)': 136
+      }
+    },
     category: "wavy",
     isNew: true,
-    description: "Luxurious machine weft hair bundles featuring soft, wavy texture. Double-stitched wefts ensure durability and minimal shedding. Easy to install and blend seamlessly with natural hair. Perfect for adding volume and length with a natural-looking finish."
+    description: "Luxurious machine weft hair bundles featuring premium quality textures. Double-stitched wefts ensure durability and minimal shedding. Easy to install and blend seamlessly with natural hair. Perfect for adding volume and length with a natural-looking finish. Available in 13 sizes (8-32 inches) and 10 different textures with pricing based on size and texture combination."
   },
   {
     id: 3,
@@ -170,12 +238,21 @@ export const getDiscountMultiplier = (): number => {
   return 1 / (1 - DISCOUNT_PERCENTAGE / 100);
 };
 
-// Get price for a product based on selected size
-export const getProductPrice = (product: Product, selectedSize: string): number => {
-  // If product has size-based pricing and a size is selected
+// Get price for a product based on selected size and texture
+export const getProductPrice = (product: Product, selectedSize: string, selectedTexture?: string): number => {
+  // If product has size-texture-based pricing (e.g., Machine Weft Bundle)
+  if (product.sizeTexturePricing && selectedSize && selectedTexture) {
+    const sizePrice = product.sizeTexturePricing[selectedSize];
+    if (sizePrice && sizePrice[selectedTexture] !== undefined) {
+      return sizePrice[selectedTexture];
+    }
+  }
+
+  // If product has size-based pricing only (e.g., Bulk Hair Bundle)
   if (product.sizePricing && selectedSize && product.sizePricing[selectedSize]) {
     return product.sizePricing[selectedSize];
   }
+
   // Return default price
   return product.price;
 };

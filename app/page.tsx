@@ -296,9 +296,13 @@ function DeeceeHairApp(): React.ReactElement {
     const blackColor = product.colors.find(color => color.toLowerCase().includes('black') || color === 'Black');
     setSelectedColor(blackColor || "");
 
-    // Auto-select 6" size for Bulk Hair Bundle
+    // Auto-select size based on product
     if (product.id === 1 && product.sizes.includes('6"')) {
+      // Bulk Hair Bundle - default to 6"
       setSelectedSize('6"');
+    } else if (product.id === 2 && product.sizes.includes('8"')) {
+      // Machine Weft Bundle - default to 8"
+      setSelectedSize('8"');
     } else {
       setSelectedSize("");
     }

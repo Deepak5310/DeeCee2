@@ -15,6 +15,7 @@ export type Product = {
   isMans?: boolean;
   sizePricing?: Record<string, number>; // Dynamic pricing per size
   textures?: string[]; // Available textures (Straight, Wavy, Curly, etc.)
+  sizeTexturePricing?: Record<string, Record<string, number>>; // Pricing per size-texture combination
 };
 
 export type CartItem = {

@@ -42,8 +42,8 @@ export default function ProductPage({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
 
-  // Get current price based on selected size
-  const currentPrice = getProductPrice(product, selectedSize);
+  // Get current price based on selected size and texture
+  const currentPrice = getProductPrice(product, selectedSize, selectedTexture);
 
   // Create array of images - if product has images array, use it, otherwise use main image twice
   const productImages = product.images && product.images.length > 0
