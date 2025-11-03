@@ -23,9 +23,9 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { AdminAuthProvider, useAdminAuth } from './contexts/AdminAuthContext';
 import { Product, CartItem, Appointment, Page, ReelVideo } from './types';
-import { IconButton, PromoSlider } from './components/common';
+import { IconButton } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
-import { products, promoMessages, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
+import { products, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
 
 const VideoReelCard = ({ video }: { video: ReelVideo }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -111,7 +111,6 @@ function DeeceeHairApp(): React.ReactElement {
   const [showSignup, setShowSignup] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [showPromo, setShowPromo] = useState(true);
   const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
@@ -143,20 +142,6 @@ function DeeceeHairApp(): React.ReactElement {
         console.log("Video autoplay prevented:", error);
       });
     }
-  }, []);
-
-  // Handle scroll to hide/show promo slider
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setShowPromo(false);
-      } else {
-        setShowPromo(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Route mapping constants
@@ -802,26 +787,15 @@ function DeeceeHairApp(): React.ReactElement {
       {/* Developer Console Message */}
       <DevConsoleMessage />
 
-      {/* Fixed Header Wrapper with PromoSlider - Hidden for admin pages */}
+      {/* Fixed Header Wrapper - Hidden for admin pages */}
       {!isAdminPage && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] w-full">
-          {/* PromoSlider with smooth transition */}
-          <div
-            className={`transition-all duration-300 ease-in-out overflow-hidden ${
-              showPromo ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
-            }`}
-          >
-            <PromoSlider messages={promoMessages} />
-          </div>
-          {/* Header always visible */}
-          <div className="bg-white shadow-sm">
-            <Header />
-          </div>
+        <div className="fixed top-0 left-0 right-0 z-[9999] w-full bg-white shadow-sm">
+          <Header />
         </div>
       )}
-      {/* Dynamic spacer - changes based on promo visibility - Hidden for admin pages */}
+      {/* Spacer - Hidden for admin pages */}
       {!isAdminPage && (
-        <div className={`transition-all duration-300 ${showPromo ? 'h-28' : 'h-16'}`}></div>
+        <div className="h-16"></div>
       )}
       <main className="w-full">
         {currentPage === "home" && <HomePage />}

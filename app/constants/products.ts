@@ -204,16 +204,6 @@ export const products: Product[] = [
   },
 ];
 
-export const promoMessages = [
-  { text: "100% Premium Human Hair Extensions - Authentic Quality", icon: Sparkles },
-  { text: "Trusted by Thousands of Happy Customers Across India", icon: Sparkles },
-  { text: "Expert Styling Consultation Available - Book Your Appointment", icon: Gift },
-  { text: "Can Be Colored, Styled & Heat-Treated Like Natural Hair", icon: Sparkles },
-  { text: "Fast & Secure Delivery - We Ship Pan India", icon: Truck },
-  { text: "All Products Come With Quality Assurance", icon: Package },
-  { text: "From Straight to Curly - Perfect Match for Every Style", icon: Sparkles },
-];
-
 export const heroSlides = [
   { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero1.jpg", title: "Luxurious Hair", subtitle: "Extensions", description: "Transform your look with our premium collection" },
   { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero2.jpg", title: "Natural Beauty", subtitle: "Redefined", description: "100% human hair for the perfect blend" },
