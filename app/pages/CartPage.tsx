@@ -15,7 +15,7 @@ type CartPageProps = {
 
 export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onContinueShopping, onProceedToCheckout, convertPrice }: CartPageProps): React.ReactElement {
   const getTotalPrice = () => cart.reduce((sum, item) => {
-    const itemPrice = getProductPrice(item.product, item.size, item.texture);
+    const itemPrice = getProductPrice(item.product, item.size, item.texture, item.baseSize);
     return sum + itemPrice * item.quantity;
   }, 0);
 
@@ -32,15 +32,16 @@ export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onC
       ) : (
         <div className="space-y-6 sm:space-y-8">
           {cart.map((item, index) => {
-            const itemPrice = getProductPrice(item.product, item.size, item.texture);
+            const itemPrice = getProductPrice(item.product, item.size, item.texture, item.baseSize);
             return (
               <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center border border-gray-200 rounded-2xl p-6 shadow-sm">
                 <img src={item.product.image} alt={item.product.name} className="w-full sm:w-28 h-36 sm:h-28 object-cover rounded-xl mb-4 sm:mb-0 sm:mr-6 shadow-md" />
                 <div className="flex-1 w-full">
                   <h3 className="text-lg font-semibold text-gray-900 truncate">{item.product.name}</h3>
                   <p className="text-gray-700 text-sm">Color: {item.color}</p>
-                  <p className="text-gray-700 text-sm">Size: {item.size}</p>
+                  {item.baseSize && <p className="text-gray-700 text-sm">Base Size: {item.baseSize}</p>}
                   {item.texture && <p className="text-gray-700 text-sm">Texture: {item.texture}</p>}
+                  <p className="text-gray-700 text-sm">Size: {item.size}</p>
                   <p className="text-rose-600 font-semibold text-lg">{convertPrice(itemPrice)}</p>
                 </div>
                 <div className="flex items-center justify-between w-full sm:w-auto mt-6 sm:mt-0">

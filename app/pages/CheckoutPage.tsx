@@ -6,6 +6,7 @@ import { useAuth } from '@/app/contexts/AuthContext';
 import { getUserAddresses } from '@/app/services/addressService';
 import { AddressForm } from '@/app/components/common';
 import { Package, MapPin, CreditCard, Truck, ChevronLeft, Plus, Check } from 'lucide-react';
+import { getProductPrice } from '@/app/constants/products';
 
 type CheckoutPageProps = {
   cart: CartItem[];
@@ -116,7 +117,10 @@ export default function CheckoutPage({
   };
 
   // Calculate prices (all in USD)
-  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const subtotal = cart.reduce((sum, item) => {
+    const itemPrice = getProductPrice(item.product, item.size, item.texture, item.baseSize);
+    return sum + itemPrice * item.quantity;
+  }, 0);
   const shippingCharges = subtotal > 58 ? 0 : 5; // Free shipping above $58 (₹5000)
   const tax = subtotal * 0.18; // 18% GST
   const promoDiscountAmount = promoApplied ? (subtotal * promoDiscount) / 100 : 0;
@@ -357,26 +361,29 @@ export default function CheckoutPage({
 
             {/* Cart Items */}
             <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
-              {cart.map((item, index) => (
-                <div key={index} className="flex items-start gap-3 pb-3 border-b border-gray-100">
-                  <img
-                    src={item.product.image}
-                    alt={item.product.name}
-                    className="w-16 h-16 object-cover rounded-lg"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
-                      {item.product.name}
-                    </p>
-                    <p className="text-xs text-gray-600">
-                      {item.color} | {item.size}
-                    </p>
-                    <p className="text-sm text-gray-900 mt-1">
-                      {convertPrice(item.product.price)} × {item.quantity}
-                    </p>
+              {cart.map((item, index) => {
+                const itemPrice = getProductPrice(item.product, item.size, item.texture, item.baseSize);
+                return (
+                  <div key={index} className="flex items-start gap-3 pb-3 border-b border-gray-100">
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="w-16 h-16 object-cover rounded-lg"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">
+                        {item.product.name}
+                      </p>
+                      <p className="text-xs text-gray-600">
+                        {item.color} {item.baseSize && `| ${item.baseSize}`} {item.texture && `| ${item.texture}`} | {item.size}
+                      </p>
+                      <p className="text-sm text-gray-900 mt-1">
+                        {convertPrice(itemPrice)} × {item.quantity}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Promo Code Section */}

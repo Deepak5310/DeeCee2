@@ -13,6 +13,8 @@ type ProductPageProps = {
   setSelectedSize: (size: string) => void;
   selectedTexture: string;
   setSelectedTexture: (texture: string) => void;
+  selectedBaseSize: string;
+  setSelectedBaseSize: (baseSize: string) => void;
   onAddToCart: () => void;
   onBackToShop: () => void;
   convertPrice: (price: number) => string;
@@ -28,6 +30,8 @@ export default function ProductPage({
   setSelectedSize,
   selectedTexture,
   setSelectedTexture,
+  selectedBaseSize,
+  setSelectedBaseSize,
   onAddToCart,
   onBackToShop,
   convertPrice,
@@ -42,8 +46,8 @@ export default function ProductPage({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
 
-  // Get current price based on selected size and texture
-  const currentPrice = getProductPrice(product, selectedSize, selectedTexture);
+  // Get current price based on selected size, texture, and base size
+  const currentPrice = getProductPrice(product, selectedSize, selectedTexture, selectedBaseSize);
 
   // Create array of images - if product has images array, use it, otherwise use main image twice
   const productImages = product.images && product.images.length > 0
@@ -228,10 +232,34 @@ export default function ProductPage({
             <p className="text-xs text-gray-500 mt-2">* Only Natural Black color is currently available</p>
           </div>
 
-          {/* Texture Selection - Only show if product has textures */}
+          {/* Base Size Selection - Only show if product has baseSizes (STEP 1) */}
+          {product.baseSizes && product.baseSizes.length > 0 && (
+            <div className="mb-8">
+              <h3 className="font-semibold text-gray-700 mb-3">Select Base Size</h3>
+              <div className="flex flex-wrap gap-3">
+                {product.baseSizes.map((baseSize) => (
+                  <button
+                    key={baseSize}
+                    onClick={() => setSelectedBaseSize(baseSize)}
+                    className={`px-6 py-3 border rounded-full text-sm font-semibold transition-all duration-300 ${
+                      selectedBaseSize === baseSize
+                        ? "bg-rose-600 text-white border-rose-600 shadow-lg"
+                        : "border-gray-300 text-gray-700 hover:bg-rose-100"
+                    }`}
+                  >
+                    {baseSize}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Texture Selection - Only show if product has textures (STEP 2 for base size products, or normal for others) */}
           {product.textures && product.textures.length > 0 && (
             <div className="mb-8">
-              <h3 className="font-semibold text-gray-700 mb-3">Select Texture</h3>
+              <h3 className="font-semibold text-gray-700 mb-3">
+                {product.baseSizes ? 'Select Texture' : 'Select Texture'}
+              </h3>
               <div className="flex flex-wrap gap-3">
                 {product.textures.map((texture) => (
                   <button
@@ -251,7 +279,9 @@ export default function ProductPage({
           )}
 
           <div className="mb-8">
-            <h3 className="font-semibold text-gray-700 mb-3">Select Size</h3>
+            <h3 className="font-semibold text-gray-700 mb-3">
+              {product.baseSizes ? 'Select Length' : 'Select Size'}
+            </h3>
             <div className="flex flex-wrap gap-3">
               {product.sizes.map((size) => (
                 <button key={size} onClick={() => setSelectedSize(size)} className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${selectedSize === size ? "bg-rose-600 text-white border-rose-600 shadow-lg" : "border-gray-300 text-gray-700 hover:bg-rose-100"}`}>

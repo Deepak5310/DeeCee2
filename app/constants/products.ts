@@ -138,17 +138,57 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Lace Frontal",
-    price: 145, // $145 (was ₹12,510)
+    price: 49, // Base price (8" 13x4 NS/NW/NC)
     image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-frontal1.jpg",
     images: [
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-frontal1.jpg",
       "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/lace-frontal2.jpg"
     ],
     colors: ["Black", "Brown", "Blonde", "Red"],
-    sizes: ['18"', '22"', '26"'],
+    sizes: ['8"', '10"', '12"', '14"', '16"', '18"', '20"', '22"', '24"', '26"'],
+    baseSizes: ["13x4", "13x5", "13x6"],
+    textures: ["Natural Straight (NS)", "Natural Wavy (NW)", "Natural Curly (NC)", "Deep Wave (DW)", "Loose Wave (LW)", "Body Wave (BW)", "Kinky Straight (KS)", "Kinky Curly (KC)", "Water Wave (WW)"],
+    baseSizeTexturePricing: {
+      "13x4": {
+        '8"': { 'Natural Straight (NS)': 49, 'Natural Wavy (NW)': 49, 'Natural Curly (NC)': 49, 'Deep Wave (DW)': 52, 'Loose Wave (LW)': 52, 'Body Wave (BW)': 52, 'Kinky Straight (KS)': 52, 'Kinky Curly (KC)': 52, 'Water Wave (WW)': 52 },
+        '10"': { 'Natural Straight (NS)': 54, 'Natural Wavy (NW)': 54, 'Natural Curly (NC)': 54, 'Deep Wave (DW)': 57, 'Loose Wave (LW)': 57, 'Body Wave (BW)': 57, 'Kinky Straight (KS)': 57, 'Kinky Curly (KC)': 57, 'Water Wave (WW)': 57 },
+        '12"': { 'Natural Straight (NS)': 59, 'Natural Wavy (NW)': 59, 'Natural Curly (NC)': 59, 'Deep Wave (DW)': 62, 'Loose Wave (LW)': 62, 'Body Wave (BW)': 62, 'Kinky Straight (KS)': 62, 'Kinky Curly (KC)': 62, 'Water Wave (WW)': 62 },
+        '14"': { 'Natural Straight (NS)': 67, 'Natural Wavy (NW)': 67, 'Natural Curly (NC)': 67, 'Deep Wave (DW)': 70, 'Loose Wave (LW)': 70, 'Body Wave (BW)': 70, 'Kinky Straight (KS)': 70, 'Kinky Curly (KC)': 70, 'Water Wave (WW)': 70 },
+        '16"': { 'Natural Straight (NS)': 73, 'Natural Wavy (NW)': 73, 'Natural Curly (NC)': 73, 'Deep Wave (DW)': 76, 'Loose Wave (LW)': 76, 'Body Wave (BW)': 76, 'Kinky Straight (KS)': 76, 'Kinky Curly (KC)': 76, 'Water Wave (WW)': 76 },
+        '18"': { 'Natural Straight (NS)': 86, 'Natural Wavy (NW)': 86, 'Natural Curly (NC)': 86, 'Deep Wave (DW)': 89, 'Loose Wave (LW)': 89, 'Body Wave (BW)': 89, 'Kinky Straight (KS)': 89, 'Kinky Curly (KC)': 89, 'Water Wave (WW)': 89 },
+        '20"': { 'Natural Straight (NS)': 92, 'Natural Wavy (NW)': 92, 'Natural Curly (NC)': 92, 'Deep Wave (DW)': 95, 'Loose Wave (LW)': 95, 'Body Wave (BW)': 95, 'Kinky Straight (KS)': 95, 'Kinky Curly (KC)': 95, 'Water Wave (WW)': 95 },
+        '22"': { 'Natural Straight (NS)': 97, 'Natural Wavy (NW)': 97, 'Natural Curly (NC)': 97, 'Deep Wave (DW)': 100, 'Loose Wave (LW)': 100, 'Body Wave (BW)': 100, 'Kinky Straight (KS)': 100, 'Kinky Curly (KC)': 100, 'Water Wave (WW)': 100 },
+        '24"': { 'Natural Straight (NS)': 103, 'Natural Wavy (NW)': 103, 'Natural Curly (NC)': 103, 'Deep Wave (DW)': 106, 'Loose Wave (LW)': 106, 'Body Wave (BW)': 106, 'Kinky Straight (KS)': 106, 'Kinky Curly (KC)': 106, 'Water Wave (WW)': 106 },
+        '26"': { 'Natural Straight (NS)': 109, 'Natural Wavy (NW)': 109, 'Natural Curly (NC)': 109, 'Deep Wave (DW)': 112, 'Loose Wave (LW)': 112, 'Body Wave (BW)': 112, 'Kinky Straight (KS)': 112, 'Kinky Curly (KC)': 112, 'Water Wave (WW)': 112 }
+      },
+      "13x5": {
+        '8"': { 'Natural Straight (NS)': 64, 'Natural Wavy (NW)': 64, 'Natural Curly (NC)': 64, 'Deep Wave (DW)': 67, 'Loose Wave (LW)': 67, 'Body Wave (BW)': 67, 'Kinky Straight (KS)': 67, 'Kinky Curly (KC)': 67, 'Water Wave (WW)': 67 },
+        '10"': { 'Natural Straight (NS)': 68, 'Natural Wavy (NW)': 68, 'Natural Curly (NC)': 68, 'Deep Wave (DW)': 71, 'Loose Wave (LW)': 71, 'Body Wave (BW)': 71, 'Kinky Straight (KS)': 71, 'Kinky Curly (KC)': 71, 'Water Wave (WW)': 71 },
+        '12"': { 'Natural Straight (NS)': 72, 'Natural Wavy (NW)': 72, 'Natural Curly (NC)': 72, 'Deep Wave (DW)': 75, 'Loose Wave (LW)': 75, 'Body Wave (BW)': 75, 'Kinky Straight (KS)': 75, 'Kinky Curly (KC)': 75, 'Water Wave (WW)': 75 },
+        '14"': { 'Natural Straight (NS)': 76, 'Natural Wavy (NW)': 76, 'Natural Curly (NC)': 76, 'Deep Wave (DW)': 79, 'Loose Wave (LW)': 79, 'Body Wave (BW)': 79, 'Kinky Straight (KS)': 79, 'Kinky Curly (KC)': 79, 'Water Wave (WW)': 79 },
+        '16"': { 'Natural Straight (NS)': 83, 'Natural Wavy (NW)': 83, 'Natural Curly (NC)': 83, 'Deep Wave (DW)': 86, 'Loose Wave (LW)': 86, 'Body Wave (BW)': 86, 'Kinky Straight (KS)': 86, 'Kinky Curly (KC)': 86, 'Water Wave (WW)': 86 },
+        '18"': { 'Natural Straight (NS)': 102, 'Natural Wavy (NW)': 102, 'Natural Curly (NC)': 102, 'Deep Wave (DW)': 105, 'Loose Wave (LW)': 105, 'Body Wave (BW)': 105, 'Kinky Straight (KS)': 105, 'Kinky Curly (KC)': 105, 'Water Wave (WW)': 105 },
+        '20"': { 'Natural Straight (NS)': 114, 'Natural Wavy (NW)': 114, 'Natural Curly (NC)': 114, 'Deep Wave (DW)': 117, 'Loose Wave (LW)': 117, 'Body Wave (BW)': 117, 'Kinky Straight (KS)': 117, 'Kinky Curly (KC)': 117, 'Water Wave (WW)': 117 },
+        '22"': { 'Natural Straight (NS)': 120, 'Natural Wavy (NW)': 120, 'Natural Curly (NC)': 120, 'Deep Wave (DW)': 123, 'Loose Wave (LW)': 123, 'Body Wave (BW)': 123, 'Kinky Straight (KS)': 123, 'Kinky Curly (KC)': 123, 'Water Wave (WW)': 123 },
+        '24"': { 'Natural Straight (NS)': 132, 'Natural Wavy (NW)': 132, 'Natural Curly (NC)': 132, 'Deep Wave (DW)': 135, 'Loose Wave (LW)': 135, 'Body Wave (BW)': 135, 'Kinky Straight (KS)': 135, 'Kinky Curly (KC)': 135, 'Water Wave (WW)': 135 },
+        '26"': { 'Natural Straight (NS)': 138, 'Natural Wavy (NW)': 138, 'Natural Curly (NC)': 138, 'Deep Wave (DW)': 141, 'Loose Wave (LW)': 141, 'Body Wave (BW)': 141, 'Kinky Straight (KS)': 141, 'Kinky Curly (KC)': 141, 'Water Wave (WW)': 141 }
+      },
+      "13x6": {
+        '8"': { 'Natural Straight (NS)': 65, 'Natural Wavy (NW)': 65, 'Natural Curly (NC)': 65, 'Deep Wave (DW)': 68, 'Loose Wave (LW)': 68, 'Body Wave (BW)': 68, 'Kinky Straight (KS)': 68, 'Kinky Curly (KC)': 68, 'Water Wave (WW)': 68 },
+        '10"': { 'Natural Straight (NS)': 71, 'Natural Wavy (NW)': 71, 'Natural Curly (NC)': 71, 'Deep Wave (DW)': 74, 'Loose Wave (LW)': 74, 'Body Wave (BW)': 74, 'Kinky Straight (KS)': 74, 'Kinky Curly (KC)': 74, 'Water Wave (WW)': 74 },
+        '12"': { 'Natural Straight (NS)': 77, 'Natural Wavy (NW)': 77, 'Natural Curly (NC)': 77, 'Deep Wave (DW)': 80, 'Loose Wave (LW)': 80, 'Body Wave (BW)': 80, 'Kinky Straight (KS)': 80, 'Kinky Curly (KC)': 80, 'Water Wave (WW)': 80 },
+        '14"': { 'Natural Straight (NS)': 83, 'Natural Wavy (NW)': 83, 'Natural Curly (NC)': 83, 'Deep Wave (DW)': 86, 'Loose Wave (LW)': 86, 'Body Wave (BW)': 86, 'Kinky Straight (KS)': 86, 'Kinky Curly (KC)': 86, 'Water Wave (WW)': 86 },
+        '16"': { 'Natural Straight (NS)': 89, 'Natural Wavy (NW)': 89, 'Natural Curly (NC)': 89, 'Deep Wave (DW)': 92, 'Loose Wave (LW)': 92, 'Body Wave (BW)': 92, 'Kinky Straight (KS)': 92, 'Kinky Curly (KC)': 92, 'Water Wave (WW)': 92 },
+        '18"': { 'Natural Straight (NS)': 110, 'Natural Wavy (NW)': 110, 'Natural Curly (NC)': 110, 'Deep Wave (DW)': 113, 'Loose Wave (LW)': 113, 'Body Wave (BW)': 113, 'Kinky Straight (KS)': 113, 'Kinky Curly (KC)': 113, 'Water Wave (WW)': 113 },
+        '20"': { 'Natural Straight (NS)': 120, 'Natural Wavy (NW)': 120, 'Natural Curly (NC)': 120, 'Deep Wave (DW)': 123, 'Loose Wave (LW)': 123, 'Body Wave (BW)': 123, 'Kinky Straight (KS)': 123, 'Kinky Curly (KC)': 123, 'Water Wave (WW)': 123 },
+        '22"': { 'Natural Straight (NS)': 128, 'Natural Wavy (NW)': 128, 'Natural Curly (NC)': 128, 'Deep Wave (DW)': 131, 'Loose Wave (LW)': 131, 'Body Wave (BW)': 131, 'Kinky Straight (KS)': 131, 'Kinky Curly (KC)': 131, 'Water Wave (WW)': 131 },
+        '24"': { 'Natural Straight (NS)': 138, 'Natural Wavy (NW)': 138, 'Natural Curly (NC)': 138, 'Deep Wave (DW)': 141, 'Loose Wave (LW)': 141, 'Body Wave (BW)': 141, 'Kinky Straight (KS)': 141, 'Kinky Curly (KC)': 141, 'Water Wave (WW)': 141 },
+        '26"': { 'Natural Straight (NS)': 150, 'Natural Wavy (NW)': 150, 'Natural Curly (NC)': 150, 'Deep Wave (DW)': 153, 'Loose Wave (LW)': 153, 'Body Wave (BW)': 153, 'Kinky Straight (KS)': 153, 'Kinky Curly (KC)': 153, 'Water Wave (WW)': 153 }
+      }
+    },
     category: "wavy",
     isNew: true,
-    description: "13x4 ear-to-ear lace frontal for versatile styling options. Create natural-looking hairlines and part your hair anywhere you desire. Made with transparent HD lace for seamless blending. Pre-plucked with baby hairs and bleached knots for an ultra-realistic appearance."
+    description: "Ear-to-ear lace frontal available in three base sizes (13x4, 13x5, 13x6) for versatile styling options. Create natural-looking hairlines and part your hair anywhere you desire. Made with transparent HD lace for seamless blending. Pre-plucked with baby hairs and bleached knots for an ultra-realistic appearance. Available in multiple textures from Natural Straight to Water Wave."
   },
   {
     id: 5,
@@ -228,8 +268,19 @@ export const getDiscountMultiplier = (): number => {
   return 1 / (1 - DISCOUNT_PERCENTAGE / 100);
 };
 
-// Get price for a product based on selected size and texture
-export const getProductPrice = (product: Product, selectedSize: string, selectedTexture?: string): number => {
+// Get price for a product based on selected size, texture, and base size
+export const getProductPrice = (product: Product, selectedSize: string, selectedTexture?: string, selectedBaseSize?: string): number => {
+  // If product has base size-texture-based pricing (e.g., Lace Frontal with 13x4, 13x5, 13x6)
+  if (product.baseSizeTexturePricing && selectedBaseSize && selectedSize && selectedTexture) {
+    const baseSizePrice = product.baseSizeTexturePricing[selectedBaseSize];
+    if (baseSizePrice && baseSizePrice[selectedSize]) {
+      const texturePrice = baseSizePrice[selectedSize][selectedTexture];
+      if (texturePrice !== undefined) {
+        return texturePrice;
+      }
+    }
+  }
+
   // If product has size-texture-based pricing (e.g., Machine Weft Bundle)
   if (product.sizeTexturePricing && selectedSize && selectedTexture) {
     const sizePrice = product.sizeTexturePricing[selectedSize];

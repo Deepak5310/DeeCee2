@@ -102,6 +102,7 @@ function DeeceeHairApp(): React.ReactElement {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedTexture, setSelectedTexture] = useState("");
+  const [selectedBaseSize, setSelectedBaseSize] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -281,15 +282,11 @@ function DeeceeHairApp(): React.ReactElement {
     const blackColor = product.colors.find(color => color.toLowerCase().includes('black') || color === 'Black');
     setSelectedColor(blackColor || "");
 
-    // Auto-select size based on product
-    if (product.id === 1 && product.sizes.includes('6"')) {
-      // Bulk Hair Bundle - default to 6"
-      setSelectedSize('6"');
-    } else if (product.id === 2 && product.sizes.includes('8"')) {
-      // Machine Weft Bundle - default to 8"
-      setSelectedSize('8"');
+    // Auto-select first base size if product has baseSizes
+    if (product.baseSizes && product.baseSizes.length > 0) {
+      setSelectedBaseSize(product.baseSizes[0]);
     } else {
-      setSelectedSize("");
+      setSelectedBaseSize("");
     }
 
     // Auto-select first texture if available
@@ -297,6 +294,20 @@ function DeeceeHairApp(): React.ReactElement {
       setSelectedTexture(product.textures[0]);
     } else {
       setSelectedTexture("");
+    }
+
+    // Auto-select size based on product
+    if (product.id === 1 && product.sizes.includes('6"')) {
+      // Bulk Hair Bundle - default to 6"
+      setSelectedSize('6"');
+    } else if (product.id === 2 && product.sizes.includes('8"')) {
+      // Machine Weft Bundle - default to 8"
+      setSelectedSize('8"');
+    } else if (product.baseSizes && product.sizes.includes('8"')) {
+      // Products with base sizes (like Lace Frontal) - default to 8"
+      setSelectedSize('8"');
+    } else {
+      setSelectedSize("");
     }
 
     setCurrentPage("product");
@@ -309,6 +320,14 @@ function DeeceeHairApp(): React.ReactElement {
     if (!selectedProduct || !selectedColor || !selectedSize) {
       if (typeof window !== 'undefined') {
         alert("Please select color and size");
+      }
+      return;
+    }
+
+    // Check if base size is required but not selected
+    if (selectedProduct.baseSizes && selectedProduct.baseSizes.length > 0 && !selectedBaseSize) {
+      if (typeof window !== 'undefined') {
+        alert("Please select base size");
       }
       return;
     }
@@ -326,7 +345,8 @@ function DeeceeHairApp(): React.ReactElement {
         item.product.id === selectedProduct.id &&
         item.color === selectedColor &&
         item.size === selectedSize &&
-        item.texture === selectedTexture
+        item.texture === selectedTexture &&
+        item.baseSize === selectedBaseSize
       );
       if (existingItemIndex !== -1) {
         const newCart = [...prevCart];
@@ -338,6 +358,7 @@ function DeeceeHairApp(): React.ReactElement {
           color: selectedColor,
           size: selectedSize,
           texture: selectedTexture,
+          baseSize: selectedBaseSize,
           quantity: 1
         }];
       }
@@ -346,7 +367,7 @@ function DeeceeHairApp(): React.ReactElement {
     if (typeof window !== 'undefined') {
       alert("Added to cart!");
     }
-  }, [selectedProduct, selectedColor, selectedSize, selectedTexture]);
+  }, [selectedProduct, selectedColor, selectedSize, selectedTexture, selectedBaseSize]);
 
   const updateQuantity = useCallback((index: number, delta: number) => {
     setCart((prevCart) => prevCart.map((item, i) => (i === index ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item)));
@@ -819,6 +840,8 @@ function DeeceeHairApp(): React.ReactElement {
             setSelectedSize={setSelectedSize}
             selectedTexture={selectedTexture}
             setSelectedTexture={setSelectedTexture}
+            selectedBaseSize={selectedBaseSize}
+            setSelectedBaseSize={setSelectedBaseSize}
             onAddToCart={addToCart}
             onBackToShop={() => navigateTo("shop")}
             convertPrice={convertPrice}

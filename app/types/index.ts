@@ -16,6 +16,8 @@ export type Product = {
   sizePricing?: Record<string, number>; // Dynamic pricing per size
   textures?: string[]; // Available textures (Straight, Wavy, Curly, etc.)
   sizeTexturePricing?: Record<string, Record<string, number>>; // Pricing per size-texture combination
+  baseSizes?: string[]; // Available base sizes (e.g., 13x4, 13x5, 13x6 for lace frontals)
+  baseSizeTexturePricing?: Record<string, Record<string, Record<string, number>>>; // Pricing per base size-length-texture combination
 };
 
 export type CartItem = {
@@ -24,6 +26,7 @@ export type CartItem = {
   size: string;
   quantity: number;
   texture?: string; // Selected texture
+  baseSize?: string; // Selected base size (for products with baseSizes option)
 };
 
 export type Appointment = {
