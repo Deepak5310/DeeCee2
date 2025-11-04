@@ -602,17 +602,17 @@ function DeeceeHairApp(): React.ReactElement {
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
         <div className="absolute inset-0 bg-gradient-to-br from-rose-600/40 via-transparent to-rose-600/40"></div>
-        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 text-center">
-          <div className="transform transition-all duration-700">
+        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
+          <div className="transform transition-all duration-700 max-w-3xl ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 tracking-tight">
               {heroSlides[currentSlide].title}
               <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light">{heroSlides[currentSlide].subtitle}</span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl">
               {heroSlides[currentSlide].description}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4 animate-fade-in-up animation-delay-600">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40 animate-fade-in-up animation-delay-600">
             <button onClick={() => navigateTo("shop")} className="bg-white text-rose-600 px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
               Shop Collection
             </button>
