@@ -121,7 +121,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-screen">
       <div className="flex items-center justify-center gap-3 mb-4">
-        <Calendar className="w-8 h-8 text-rose-600" />
+        <Calendar className="w-8 h-8 text-[#A88B6A]" />
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Book an Appointment</h2>
       </div>
       <p className="text-gray-700 mb-10 text-center max-w-2xl mx-auto text-sm sm:text-base px-4">
@@ -183,19 +183,19 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
             </p>
           </div>
           {calendarLink && (
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-4 mb-6">
-              <h4 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+            <div className="bg-gradient-to-r from-[#F3E4CF] to-blue-50 border border-[#D4B59E] rounded-xl p-4 mb-6">
+              <h4 className="font-semibold text-[#4A3B2E] mb-2 flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 Add to Calendar
               </h4>
-              <p className="text-sm text-purple-700 mb-3">
+              <p className="text-sm text-[#6B5744] mb-3">
                 Don't forget your appointment! Add it to your Google Calendar for a reminder.
               </p>
               <a
                 href={calendarLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition text-sm"
+                className="inline-block bg-[#A88B6A] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#6B5744] transition text-sm"
               >
                 📅 Add to Google Calendar
               </a>
@@ -204,7 +204,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={resetForm}
-              className="flex-1 bg-rose-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-rose-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="flex-1 bg-[#A88B6A] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#6B5744] transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Book Another Appointment
             </button>
@@ -220,7 +220,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
         <form onSubmit={handleConfirm} className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-gray-900 mb-6 flex items-center gap-2">
-              <span className="bg-rose-100 text-rose-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+              <span className="bg-[#D4B59E] text-[#A88B6A] w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
               Your Preferences
             </h3>
             <div className="mb-6">
@@ -228,7 +228,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
               <select
                 value={service}
                 onChange={(e) => setService(e.target.value)}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent transition-all"
               >
                 <option>Consultation</option>
                 <option>Installation</option>
@@ -244,7 +244,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
               <select
                 value={location}
                 onChange={(e) => { setLocation(e.target.value); setSelectedTime(""); }}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent transition-all"
               >
                 <option>Mumbai</option>
                 <option>Delhi</option>
@@ -263,15 +263,15 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
                 max={new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString().split("T")[0]}
                 value={date}
                 onChange={(e) => { setDate(e.target.value); setSelectedTime(""); }}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent transition-all"
               />
-              {formErrors.date && <p className="text-red-600 text-xs mt-2 flex items-center gap-1">⚠️ {formErrors.date}</p>}
+              {formErrors.date && <p className="text-red-500 text-xs mt-2 flex items-center gap-1">⚠️ {formErrors.date}</p>}
               <p className="text-xs text-gray-500 mt-2">Available up to 60 days ahead</p>
             </div>
           </div>
           <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-gray-900 mb-6 flex items-center gap-2">
-              <span className="bg-rose-100 text-rose-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+              <span className="bg-[#D4B59E] text-[#A88B6A] w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
               Available Time Slots
             </h3>
             <div className="grid grid-cols-2 gap-3 mb-4">
@@ -285,15 +285,15 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
                     slot.disabled
                       ? "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed line-through"
                       : selectedTime === slot.time
-                        ? "border-rose-600 bg-rose-600 text-white shadow-lg transform scale-105"
-                        : "border-gray-300 text-gray-700 hover:border-rose-400 hover:bg-rose-50 hover:shadow-md"
+                        ? "border-[#A88B6A] bg-[#A88B6A] text-white shadow-lg transform scale-105"
+                        : "border-gray-300 text-gray-700 hover:border-[#A88B6A] hover:bg-[#F3E4CF] hover:shadow-md"
                   }`}
                 >
                   {slot.time}
                 </button>
               ))}
             </div>
-            {formErrors.time && <p className="text-red-600 text-xs mt-3 flex items-center gap-1">⚠️ {formErrors.time}</p>}
+            {formErrors.time && <p className="text-red-500 text-xs mt-3 flex items-center gap-1">⚠️ {formErrors.time}</p>}
             {selectedTime && !formErrors.time && (
               <div className="mt-4 bg-green-50 border border-green-200 rounded-xl p-3 text-sm text-green-700">
                 ✓ Selected: <strong>{selectedTime}</strong> on <strong>{new Date(date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}</strong>
@@ -306,7 +306,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
           </div>
           <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-gray-900 mb-6 flex items-center gap-2">
-              <span className="bg-rose-100 text-rose-600 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+              <span className="bg-[#D4B59E] text-[#A88B6A] w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
               Your Contact Details
             </h3>
             <div className="space-y-5">
@@ -320,7 +320,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
                   value={notes}
                   onChange={(e) => setNotes(e.target.value.slice(0, 500))}
                   placeholder="Any specific requirements or questions..."
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all resize-none"
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent transition-all resize-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">{notes.length}/500 characters</p>
               </div>
@@ -330,7 +330,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
               className={`mt-6 w-full py-4 rounded-2xl font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2 ${
                 Object.keys(formErrors).length > 0 || isSubmitting
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-rose-600 to-rose-500 text-white hover:from-rose-700 hover:to-rose-600 hover:shadow-xl transform hover:-translate-y-0.5"
+                  : "bg-gradient-to-r from-[#A88B6A] to-[#F3E4CF]0 text-white hover:from-[#6B5744] hover:to-[#8B7355] hover:shadow-xl transform hover:-translate-y-0.5"
               }`}
               disabled={Object.keys(formErrors).length > 0 || isSubmitting}
             >
@@ -349,7 +349,7 @@ export default function AppointmentPage({ appointments, setAppointments, onNavig
               <p className="text-xs text-gray-500 text-center mt-2">Fill all required fields to continue</p>
             )}
             {isSubmitting && (
-              <p className="text-xs text-rose-600 text-center mt-2 animate-pulse">
+              <p className="text-xs text-[#A88B6A] text-center mt-2 animate-pulse">
                 ⏳ Please wait... Sending confirmation email
               </p>
             )}

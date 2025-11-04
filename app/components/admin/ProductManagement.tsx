@@ -239,7 +239,7 @@ export default function ProductManagement() {
           )}
           <button
             onClick={handleAddProduct}
-            className="px-6 py-2.5 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors flex items-center gap-2"
+            className="px-6 py-2.5 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
             Add Product
@@ -255,7 +255,7 @@ export default function ProductManagement() {
               <p className="text-sm text-gray-600">Total Products</p>
               <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
             </div>
-            <Package className="w-10 h-10 text-pink-600" />
+            <Package className="w-10 h-10 text-#A88B6A" />
           </div>
         </div>
         <div className="bg-yellow-50 rounded-lg shadow p-4">
@@ -293,7 +293,7 @@ export default function ProductManagement() {
           onClick={() => handleFilterChange('all')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             categoryFilter === 'all'
-              ? 'bg-pink-600 text-white'
+              ? 'bg-#A88B6A text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -303,7 +303,7 @@ export default function ProductManagement() {
           onClick={() => handleFilterChange('straight')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             categoryFilter === 'straight'
-              ? 'bg-pink-600 text-white'
+              ? 'bg-#A88B6A text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -313,7 +313,7 @@ export default function ProductManagement() {
           onClick={() => handleFilterChange('wavy')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             categoryFilter === 'wavy'
-              ? 'bg-pink-600 text-white'
+              ? 'bg-#A88B6A text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -323,7 +323,7 @@ export default function ProductManagement() {
           onClick={() => handleFilterChange('curly')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             categoryFilter === 'curly'
-              ? 'bg-pink-600 text-white'
+              ? 'bg-#A88B6A text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -340,12 +340,12 @@ export default function ProductManagement() {
             placeholder="Search products by name or description..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
           />
         </div>
         <button
           type="submit"
-          className="px-6 py-2.5 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+          className="px-6 py-2.5 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors"
         >
           Search
         </button>
@@ -354,7 +354,7 @@ export default function ProductManagement() {
       {/* Products Grid */}
       {loading ? (
         <div className="text-center py-12">
-          <div className="inline-block w-8 h-8 border-4 border-pink-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="inline-block w-8 h-8 border-4 border-#A88B6A border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-600 mt-4">Loading products...</p>
         </div>
       ) : products.length === 0 ? (
@@ -391,7 +391,7 @@ export default function ProductManagement() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-gray-900 mb-1 truncate">{product.name}</h3>
-                  <p className="text-pink-600 font-bold mb-2">{formatCurrency(product.price)}</p>
+                  <p className="text-#A88B6A font-bold mb-2">{formatCurrency(product.price)}</p>
                   <p className="text-sm text-gray-600 capitalize mb-3">{product.category}</p>
                   <div className="flex gap-2">
                     <button
@@ -410,7 +410,7 @@ export default function ProductManagement() {
                     </button>
                     <button
                       onClick={() => handleDeleteProduct(product.id)}
-                      className="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm"
+                      className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors text-sm"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -441,7 +441,7 @@ export default function ProductManagement() {
                       onClick={() => handlePageChange(page)}
                       className={`px-3 py-2 rounded-lg text-sm font-medium ${
                         page === currentPage
-                          ? 'bg-pink-600 text-white'
+                          ? 'bg-#A88B6A text-white'
                           : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
@@ -487,7 +487,7 @@ export default function ProductManagement() {
                 />
                 <div>
                   <h4 className="text-2xl font-bold text-gray-900 mb-2">{selectedProduct.name}</h4>
-                  <p className="text-3xl font-bold text-pink-600 mb-4">{formatCurrency(selectedProduct.price)}</p>
+                  <p className="text-3xl font-bold text-#A88B6A mb-4">{formatCurrency(selectedProduct.price)}</p>
                   <div className="flex gap-2 mb-4">
                     {selectedProduct.isBestseller && (
                       <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -560,7 +560,7 @@ export default function ProductManagement() {
                   required
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                 />
               </div>
 
@@ -572,7 +572,7 @@ export default function ProductManagement() {
                     required
                     value={formData.price || ''}
                     onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                   />
                 </div>
                 <div>
@@ -581,7 +581,7 @@ export default function ProductManagement() {
                     required
                     value={formData.category || ''}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                   >
                     <option value="">Select category</option>
                     <option value="straight">Straight</option>
@@ -598,7 +598,7 @@ export default function ProductManagement() {
                   required
                   value={formData.image || ''}
                   onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
@@ -609,7 +609,7 @@ export default function ProductManagement() {
                   value={formData.description || ''}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                 />
               </div>
 
@@ -619,7 +619,7 @@ export default function ProductManagement() {
                   type="text"
                   value={formData.colors?.join(', ') || ''}
                   onChange={(e) => setFormData({ ...formData, colors: e.target.value.split(',').map(c => c.trim()) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                   placeholder="Black, Brown, Blonde"
                 />
               </div>
@@ -630,7 +630,7 @@ export default function ProductManagement() {
                   type="text"
                   value={formData.sizes?.join(', ') || ''}
                   onChange={(e) => setFormData({ ...formData, sizes: e.target.value.split(',').map(s => s.trim()) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
                   placeholder='14", 18", 22"'
                 />
               </div>
@@ -641,7 +641,7 @@ export default function ProductManagement() {
                     type="checkbox"
                     checked={formData.isBestseller || false}
                     onChange={(e) => setFormData({ ...formData, isBestseller: e.target.checked })}
-                    className="w-4 h-4 text-pink-600 rounded focus:ring-pink-500"
+                    className="w-4 h-4 text-#A88B6A rounded focus:ring-#A88B6A"
                   />
                   <span className="text-sm text-gray-700">Bestseller</span>
                 </label>
@@ -650,7 +650,7 @@ export default function ProductManagement() {
                     type="checkbox"
                     checked={formData.isNew || false}
                     onChange={(e) => setFormData({ ...formData, isNew: e.target.checked })}
-                    className="w-4 h-4 text-pink-600 rounded focus:ring-pink-500"
+                    className="w-4 h-4 text-#A88B6A rounded focus:ring-#A88B6A"
                   />
                   <span className="text-sm text-gray-700">New Product</span>
                 </label>
@@ -667,7 +667,7 @@ export default function ProductManagement() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors disabled:opacity-50"
+                  className="flex-1 px-4 py-2 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors disabled:opacity-50"
                 >
                   {submitting ? 'Saving...' : isEditing ? 'Update Product' : 'Add Product'}
                 </button>

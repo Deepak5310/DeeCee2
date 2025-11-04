@@ -83,7 +83,7 @@ export default function OrderManagement() {
     const colors = {
       Pending: 'bg-yellow-100 text-yellow-800',
       Processing: 'bg-blue-100 text-blue-800',
-      Shipped: 'bg-purple-100 text-purple-800',
+      Shipped: 'bg-blue-100 text-blue-800',
       Delivered: 'bg-green-100 text-green-800',
       Cancelled: 'bg-red-100 text-red-800',
     };
@@ -232,7 +232,7 @@ export default function OrderManagement() {
                     <select
                       value={newStatus}
                       onChange={(e) => setNewStatus(e.target.value as Order['status'])}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent"
                     >
                       <option value="Pending">Pending</option>
                       <option value="Processing">Processing</option>
@@ -249,7 +249,7 @@ export default function OrderManagement() {
                       value={newTrackingId}
                       onChange={(e) => setNewTrackingId(e.target.value)}
                       placeholder="Enter tracking ID"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent"
                     />
                   </div>
 
@@ -376,7 +376,7 @@ export default function OrderManagement() {
         <h2 className="text-2xl font-bold text-gray-900">Orders Management</h2>
         <button
           onClick={fetchOrders}
-          className="px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition flex items-center gap-2"
+          className="px-4 py-2 bg-[#A88B6A] text-white rounded-lg hover:bg-[#6B5744] transition flex items-center gap-2"
         >
           <Package className="w-4 h-4" />
           Refresh Orders
@@ -394,7 +394,7 @@ export default function OrderManagement() {
               placeholder="Search by Order ID, Email, or Name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent"
             />
           </div>
 
@@ -404,7 +404,7 @@ export default function OrderManagement() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent appearance-none"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent appearance-none"
             >
               <option value="all">All Orders</option>
               <option value="Pending">Pending</option>
@@ -420,7 +420,7 @@ export default function OrderManagement() {
       {/* Orders Table */}
       {isLoading ? (
         <div className="bg-white rounded-xl shadow-md p-12 text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#A88B6A]"></div>
           <p className="mt-4 text-gray-600">Loading orders...</p>
         </div>
       ) : filteredOrders.length === 0 ? (
@@ -497,7 +497,7 @@ export default function OrderManagement() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => handleViewOrder(order)}
-                        className="flex items-center gap-2 px-3 py-2 text-sm text-rose-600 hover:bg-rose-50 rounded-lg transition"
+                        className="flex items-center gap-2 px-3 py-2 text-sm text-[#A88B6A] hover:bg-[#F3E4CF] rounded-lg transition"
                       >
                         <Eye className="w-4 h-4" />
                         View Details

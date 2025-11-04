@@ -75,7 +75,7 @@ export default function AddressForm({ userEmail, onAddressAdded, onCancel }: Add
   };
 
   return (
-    <div className="bg-rose-50 rounded-lg p-6 border-2 border-rose-200">
+    <div className="bg-[#F3E4CF] rounded-lg p-6 border-2 border-[#D4B59E]">
       <h3 className="font-semibold text-gray-900 mb-4">New Address</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormInput
@@ -130,7 +130,7 @@ export default function AddressForm({ userEmail, onAddressAdded, onCancel }: Add
             id="addressFormDefaultCheckbox"
             checked={formData.isDefault || false}
             onChange={(e) => setFormData({ ...formData, isDefault: e.target.checked })}
-            className="w-4 h-4 text-rose-600 border-gray-300 rounded focus:ring-rose-500"
+            className="w-4 h-4 text-[#A88B6A] border-gray-300 rounded focus:ring-[#A88B6A]"
           />
           <label htmlFor="addressFormDefaultCheckbox" className="text-sm text-gray-700">
             Set as default address
@@ -140,7 +140,7 @@ export default function AddressForm({ userEmail, onAddressAdded, onCancel }: Add
       <div className="flex gap-3 mt-4">
         <button
           onClick={handleSubmit}
-          className="bg-rose-600 text-white px-6 py-2 rounded-lg hover:bg-rose-700 transition font-medium"
+          className="bg-[#A88B6A] text-white px-6 py-2 rounded-lg hover:bg-[#6B5744] transition font-medium"
         >
           Save Address
         </button>

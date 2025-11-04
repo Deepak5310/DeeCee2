@@ -8,7 +8,7 @@ export default function TermsPage(): React.ReactElement {
     <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-5xl mx-auto">
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
         <div className="flex items-center gap-3 mb-6">
-          <FileText className="w-8 h-8 text-rose-600" />
+          <FileText className="w-8 h-8 text-[#A88B6A]" />
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Policies</h1>
         </div>
         <p className="text-gray-600 mb-8 text-sm sm:text-base">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -17,7 +17,7 @@ export default function TermsPage(): React.ReactElement {
           {/* Shipping Policy */}
           <section className="border-b border-gray-200 pb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Truck className="w-6 h-6 text-rose-600" />
+              <Truck className="w-6 h-6 text-[#A88B6A]" />
               SHIPPING POLICY
             </h2>
             <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
@@ -28,7 +28,7 @@ export default function TermsPage(): React.ReactElement {
           {/* Return and Refund Policy */}
           <section className="border-b border-gray-200 pb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Package className="w-6 h-6 text-rose-600" />
+              <Package className="w-6 h-6 text-[#A88B6A]" />
               RETURN AND REFUND POLICY
             </h2>
 
@@ -77,7 +77,7 @@ export default function TermsPage(): React.ReactElement {
           {/* Terms and Conditions */}
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <FileText className="w-6 h-6 text-rose-600" />
+              <FileText className="w-6 h-6 text-[#A88B6A]" />
               TERMS AND CONDITIONS
             </h2>
 

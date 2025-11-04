@@ -22,12 +22,12 @@ export const FormInput = ({
       onChange={onChange}
       placeholder={placeholder}
       disabled={disabled}
-      className={`w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all ${
+      className={`w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#A88B6A] focus:border-transparent transition-all ${
         disabled ? 'bg-gray-100 cursor-not-allowed' : ''
       }`}
     />
     {error && (
-      <p className="text-red-600 text-xs mt-2 flex items-center gap-1">
+      <p className="text-red-500 text-xs mt-2 flex items-center gap-1">
         <X className="w-3 h-3" />
         {error}
       </p>

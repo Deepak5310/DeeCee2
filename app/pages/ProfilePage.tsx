@@ -309,8 +309,8 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
       onClick={() => setActiveTab(tab)}
       className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 w-full text-left ${
         activeTab === tab
-          ? "bg-rose-600 text-white shadow-lg"
-          : "text-gray-700 hover:bg-rose-50"
+          ? "bg-[#A88B6A] text-white shadow-lg"
+          : "text-gray-700 hover:bg-[#F3E4CF]"
       }`}
     >
       <Icon className="w-5 h-5" />
@@ -339,8 +339,8 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl p-6 shadow-sm">
               <div className="text-center mb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-rose-100 to-rose-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <User className="w-10 h-10 text-rose-600" />
+                <div className="w-20 h-20 bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] rounded-full flex items-center justify-center mx-auto mb-3">
+                  <User className="w-10 h-10 text-[#A88B6A]" />
                 </div>
                 <h3 className="font-semibold text-gray-900">{user.name}</h3>
                 <p className="text-sm text-gray-600 truncate">{user.email}</p>
@@ -356,7 +356,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                 {/* Logout Button */}
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 w-full text-left text-red-600 hover:bg-red-50 mt-4 border-t border-gray-200 pt-4"
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 w-full text-left text-red-500 hover:bg-red-100 mt-4 border-t border-gray-200 pt-4"
                 >
                   <LogOut className="w-5 h-5" />
                   <span className="font-medium">Logout</span>
@@ -376,7 +376,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                     {!isEditing ? (
                       <button
                         onClick={() => setIsEditing(true)}
-                        className="flex items-center gap-2 text-rose-600 hover:text-rose-700 font-medium"
+                        className="flex items-center gap-2 text-[#A88B6A] hover:text-[#6B5744] font-medium"
                       >
                         <Edit2 className="w-4 h-4" />
                         Edit
@@ -385,7 +385,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                       <div className="flex gap-2">
                         <button
                           onClick={handleSaveProfile}
-                          className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-xl hover:bg-rose-700 transition"
+                          className="flex items-center gap-2 bg-[#A88B6A] text-white px-4 py-2 rounded-xl hover:bg-[#6B5744] transition"
                         >
                           <Save className="w-4 h-4" />
                           Save
@@ -446,7 +446,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                   <h2 className="text-xl font-bold text-gray-900 mb-6">Order History</h2>
                   {loadingOrders ? (
                     <div className="text-center py-12">
-                      <div className="w-16 h-16 border-4 border-rose-200 border-t-rose-600 rounded-full animate-spin mx-auto mb-4"></div>
+                      <div className="w-16 h-16 border-4 border-[#D4B59E] border-t-[#A88B6A] rounded-full animate-spin mx-auto mb-4"></div>
                       <p className="text-gray-600">Loading orders...</p>
                     </div>
                   ) : orders.length === 0 ? (
@@ -458,7 +458,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                       <p className="text-gray-600 mb-6">Start shopping to see your order history here</p>
                       <button
                         onClick={() => window.history.back()}
-                        className="bg-rose-600 text-white px-6 py-3 rounded-xl hover:bg-rose-700 transition font-medium"
+                        className="bg-[#A88B6A] text-white px-6 py-3 rounded-xl hover:bg-[#6B5744] transition font-medium"
                       >
                         Start Shopping
                       </button>
@@ -469,8 +469,8 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                         <div key={order.id} className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div className="flex items-start gap-4">
-                              <div className="p-3 bg-rose-50 rounded-xl">
-                                <ShoppingBag className="w-6 h-6 text-rose-600" />
+                              <div className="p-3 bg-[#F3E4CF] rounded-xl">
+                                <ShoppingBag className="w-6 h-6 text-[#A88B6A]" />
                               </div>
                               <div>
                                 <h3 className="font-semibold text-gray-900">Order #{order.id}</h3>
@@ -497,7 +497,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                                   setSelectedOrder(order);
                                   setShowOrderDetails(true);
                                 }}
-                                className="text-rose-600 text-sm font-medium hover:underline"
+                                className="text-[#A88B6A] text-sm font-medium hover:underline"
                               >
                                 View Details →
                               </button>
@@ -517,7 +517,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                     <h2 className="text-xl font-bold text-gray-900">Saved Addresses</h2>
                     <button
                       onClick={() => setShowAddressForm(!showAddressForm)}
-                      className="bg-rose-600 text-white px-4 py-2 rounded-xl hover:bg-rose-700 transition text-sm font-medium"
+                      className="bg-[#A88B6A] text-white px-4 py-2 rounded-xl hover:bg-[#6B5744] transition text-sm font-medium"
                     >
                       {showAddressForm ? '✕ Cancel' : '+ Add New Address'}
                     </button>
@@ -537,7 +537,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                   {/* Addresses List */}
                   {loadingAddresses ? (
                     <div className="text-center py-12">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600 mx-auto mb-4"></div>
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A88B6A] mx-auto mb-4"></div>
                       <p className="text-gray-600">Loading addresses...</p>
                     </div>
                   ) : addresses.length === 0 ? (
@@ -571,14 +571,14 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                             {!address.isDefault && (
                               <button
                                 onClick={() => setDefaultAddress(address.id)}
-                                className="text-xs text-rose-600 hover:underline font-medium"
+                                className="text-xs text-[#A88B6A] hover:underline font-medium"
                               >
                                 Set as Default
                               </button>
                             )}
                             <button
                               onClick={() => deleteAddress(address.id)}
-                              className="text-xs text-red-600 hover:underline font-medium"
+                              className="text-xs text-red-500 hover:underline font-medium"
                             >
                               Delete
                             </button>
@@ -621,7 +621,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                     />
                     <button
                       type="submit"
-                      className="w-full bg-rose-600 text-white py-3 rounded-xl font-semibold hover:bg-rose-700 transition shadow-lg"
+                      className="w-full bg-[#A88B6A] text-white py-3 rounded-xl font-semibold hover:bg-[#6B5744] transition shadow-lg"
                       disabled={Object.keys(passwordErrors).length > 0 || !passwordData.currentPassword || !passwordData.newPassword}
                     >
                       Update Password
@@ -637,7 +637,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
 
                   {wishlistLoading ? (
                     <div className="text-center py-12">
-                      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-rose-600"></div>
+                      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#A88B6A]"></div>
                       <p className="mt-4 text-gray-600">Loading wishlist...</p>
                     </div>
                   ) : wishlistItems.length === 0 ? (
@@ -647,7 +647,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                       <p className="text-gray-600 mb-6">Save your favorite products to buy them later!</p>
                       <button
                         onClick={() => window.location.href = '/shop'}
-                        className="bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition"
+                        className="bg-[#A88B6A] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6B5744] transition"
                       >
                         Start Shopping
                       </button>
@@ -662,7 +662,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                           <div className="p-4">
                             <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">{item.name}</h3>
                             <div className="flex items-center gap-2 mb-3 flex-wrap">
-                              <p className="text-rose-600 font-bold text-lg">₹{item.price.toLocaleString()}</p>
+                              <p className="text-[#A88B6A] font-bold text-lg">₹{item.price.toLocaleString()}</p>
                               <p className="text-gray-400 line-through text-sm">₹{Math.round(item.price * getDiscountMultiplier()).toLocaleString()}</p>
                               <span className="text-xs font-semibold bg-green-500 text-white px-2 py-0.5 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
                             </div>
@@ -672,7 +672,7 @@ export default function ProfilePage({ onNavigateToLogin, onNavigateHome, default
                                   // Will be connected to cart functionality
                                   alert('Add to cart functionality will be connected soon!');
                                 }}
-                                className="flex-1 bg-rose-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-rose-700 transition"
+                                className="flex-1 bg-[#A88B6A] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#6B5744] transition"
                               >
                                 Add to Cart
                               </button>

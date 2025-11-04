@@ -110,9 +110,9 @@ export default function RootLayout({
         </head>
         <body className="min-h-screen bg-white text-gray-900 flex items-center justify-center p-6">
           <div className="max-w-xl text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold text-rose-600 mb-4">We'll be back soon</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#A88B6A] mb-4">We'll be back soon</h1>
             <p className="text-gray-700 mb-6">Our website is temporarily offline for maintenance. We're working to bring it back online — thank you for your patience.</p>
-            <p className="text-sm text-gray-500 mb-4">If you need immediate help, email us at <a href="mailto:deeceehair0@gmail.com" className="underline text-rose-600">deeceehair0@gmail.com</a> or message on WhatsApp.</p>
+            <p className="text-sm text-gray-500 mb-4">If you need immediate help, email us at <a href="mailto:deeceehair0@gmail.com" className="underline text-[#A88B6A]">deeceehair0@gmail.com</a> or message on WhatsApp.</p>
             <p className="text-xs text-gray-400">© {new Date().getFullYear()} DEECEE HAIR. All rights reserved.</p>
           </div>
         </body>

@@ -328,51 +328,51 @@ function DeeceeHairApp(): React.ReactElement {
               onClick={() => navigateTo("home")}
               className="flex items-center space-x-2 focus:outline-none rounded px-2 py-1 transition-all duration-200 hover:scale-105 active:scale-95"
             >
-              <span className="text-xl sm:text-2xl font-bold text-rose-600 select-none">DEECEE</span>
+              <span className="text-xl sm:text-2xl font-bold text-[#A88B6A] select-none">DEECEE</span>
               <span className="text-xl sm:text-2xl font-light text-gray-800 select-none">HAIR</span>
             </button>
             <nav className="hidden lg:flex space-x-6 ml-8">
               <button
                 onClick={() => navigateTo("bestsellers")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 Bestsellers
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
               <button
                 onClick={() => navigateTo("shop")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 Shop for Women
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
               <button
                 onClick={() => navigateTo("shop", "mans")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 Shop for Men
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
               <button
                 onClick={() => navigateTo("appointment")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 Book Appointment
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
               <button
                 onClick={() => navigateTo("about")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 About Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
               <button
                 onClick={() => navigateTo("contact")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
               >
                 Contact Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#A88B6A] group-hover:w-full transition-all duration-300"></span>
               </button>
             </nav>
           </div>
@@ -381,7 +381,7 @@ function DeeceeHairApp(): React.ReactElement {
             <div className="relative">
               <button
                 onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-                className="flex items-center space-x-1 px-3 py-2 text-gray-700 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all duration-200 focus:outline-none group"
+                className="flex items-center space-x-1 px-3 py-2 text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] rounded-lg transition-all duration-200 focus:outline-none group"
               >
                 <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 <span className="text-sm font-medium hidden sm:inline">{selectedCurrency}</span>
@@ -396,8 +396,8 @@ function DeeceeHairApp(): React.ReactElement {
                         setSelectedCurrency(code);
                         setShowCurrencyDropdown(false);
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-rose-50 hover:text-rose-600 transition-colors ${
-                        selectedCurrency === code ? 'bg-rose-50 text-rose-600 font-medium' : 'text-gray-700'
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-[#F3E4CF] hover:text-[#A88B6A] transition-colors ${
+                        selectedCurrency === code ? 'bg-[#F3E4CF] text-[#A88B6A] font-medium' : 'text-gray-700'
                       }`}
                     >
                       <span className="font-medium">{data.symbol}</span> {data.name}
@@ -424,7 +424,7 @@ function DeeceeHairApp(): React.ReactElement {
             <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} />
             <button
               onClick={() => setMobileMenuOpen((v) => !v)}
-              className="lg:hidden p-2 text-gray-700 hover:text-rose-600 focus:outline-none rounded-lg hover:bg-rose-50 transition-all duration-200 active:scale-90"
+              className="lg:hidden p-2 text-gray-700 hover:text-[#A88B6A] focus:outline-none rounded-lg hover:bg-[#F3E4CF] transition-all duration-200 active:scale-90"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 transform rotate-0 transition-transform duration-200" /> : <Menu className="w-6 h-6 transform rotate-0 transition-transform duration-200" />}
             </button>
@@ -432,7 +432,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
         {searchOpen && (
           <div className="pb-4">
-            <input type="text" placeholder="Search for products..." className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all" />
+            <input type="text" placeholder="Search for products..." className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all" />
           </div>
         )}
       </div>
@@ -446,31 +446,31 @@ function DeeceeHairApp(): React.ReactElement {
                 setShowLogin(true);
               }
               setMobileMenuOpen(false);
-            }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               My Profile
             </button>
-            <button onClick={() => { navigateTo("bestsellers"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("bestsellers"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Bestsellers
             </button>
-            <button onClick={() => { navigateTo("shop"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("shop"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Shop for Women
             </button>
-            <button onClick={() => { navigateTo("shop", "mans"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("shop", "mans"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Shop for Men
             </button>
-            <button onClick={() => { navigateTo("appointment"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("appointment"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Book Appointment
             </button>
-            <button onClick={() => { navigateTo("about"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("about"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               About Us
             </button>
-            <button onClick={() => { navigateTo("contact"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("contact"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Contact Us
             </button>
-            <button onClick={() => { navigateTo("terms"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("terms"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Terms & Conditions
             </button>
-            <button onClick={() => { navigateTo("privacy"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
+            <button onClick={() => { navigateTo("privacy"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-[#A88B6A] hover:bg-[#F3E4CF] transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform">
               Privacy Policy
             </button>
           </nav>
@@ -529,7 +529,7 @@ function DeeceeHairApp(): React.ReactElement {
               <div key={product.id} className="group cursor-pointer rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-2xl transition-all duration-300" onClick={() => handleProductClick(product)}>
                 <div className="relative overflow-hidden aspect-video">
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-rose-600 text-white px-2.5 py-1 md:px-3 md:py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                  <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-[#A88B6A] text-white px-2.5 py-1 md:px-3 md:py-1 rounded-full text-xs font-semibold flex items-center gap-1">
                     <Star className="w-3 h-3 fill-current" /> Bestseller
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -549,7 +549,7 @@ function DeeceeHairApp(): React.ReactElement {
           <div className="text-center mt-8">
             <button
               onClick={() => navigateTo("bestsellers")}
-              className="bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition"
+              className="bg-[#A88B6A] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#6B5744] transition"
             >
               View All Bestsellers
             </button>
@@ -641,7 +641,7 @@ function DeeceeHairApp(): React.ReactElement {
           <div className="text-center mt-6 md:mt-8">
             <button
               onClick={() => { setFilterCategory("mans"); setCurrentPage("shop"); }}
-              className="bg-rose-600 text-white px-5 md:px-6 py-2.5 md:py-3 rounded-lg font-semibold hover:bg-rose-700 transition text-sm md:text-base"
+              className="bg-[#A88B6A] text-white px-5 md:px-6 py-2.5 md:py-3 rounded-lg font-semibold hover:bg-[#6B5744] transition text-sm md:text-base"
             >
               View All Mans Products
             </button>
@@ -660,7 +660,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-12 sm:py-20 bg-rose-50">
+      <section className="py-12 sm:py-20 bg-[#F3E4CF]">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">What Our Customers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -860,15 +860,15 @@ function DeeceeHairApp(): React.ReactElement {
       {!isAdminPage && (
         <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 sm:py-16 w-full relative overflow-hidden">
         {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A88B6A]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A88B6A]/5 rounded-full blur-3xl"></div>
 
         <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-12">
             {/* Brand Section */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
-                <span className="text-2xl sm:text-3xl font-bold text-rose-600 select-none">DEECEE</span>
+                <span className="text-2xl sm:text-3xl font-bold text-[#A88B6A] select-none">DEECEE</span>
                 <span className="text-2xl sm:text-3xl font-light text-white select-none ml-2">HAIR</span>
               </div>
               <p className="text-gray-300 text-sm sm:text-base mb-6 max-w-md leading-relaxed">
@@ -906,7 +906,7 @@ function DeeceeHairApp(): React.ReactElement {
                   </a>
                   <a
                     href="mailto:info@deeceehairs.com"
-                    className="w-10 h-10 bg-gray-800 hover:bg-rose-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                    className="w-10 h-10 bg-gray-800 hover:bg-[#A88B6A] rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
                     aria-label="Email"
                   >
                     <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform" />
@@ -919,46 +919,46 @@ function DeeceeHairApp(): React.ReactElement {
             <div>
               <h4 className="font-bold mb-6 text-base sm:text-lg text-white relative inline-block">
                 Quick Links
-                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-rose-600"></span>
+                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-[#A88B6A]"></span>
               </h4>
               <ul className="space-y-3 text-sm sm:text-base text-gray-300">
                 <li>
                   <button
                     onClick={() => navigateTo("about")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     About Us
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => navigateTo("shop")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Shop
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => navigateTo("bestsellers")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Bestsellers
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => navigateTo("contact")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Contact
                   </button>
                 </li>
@@ -969,36 +969,36 @@ function DeeceeHairApp(): React.ReactElement {
             <div>
               <h4 className="font-bold mb-6 text-base sm:text-lg text-white relative inline-block">
                 Legal
-                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-rose-600"></span>
+                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-[#A88B6A]"></span>
               </h4>
               <ul className="space-y-3 text-sm sm:text-base text-gray-300">
                 <li>
                   <button
                     onClick={() => navigateTo("terms")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Terms & Conditions
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => navigateTo("privacy")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Privacy Policy
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={() => navigateTo("appointment")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
+                    className="hover:text-[#8B7355] hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-[#A88B6A]"
                     type="button"
                   >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
+                    <span className="w-0 group-hover:w-2 h-0.5 bg-[#A88B6A] mr-0 group-hover:mr-2 transition-all duration-200"></span>
                     Book Appointment
                   </button>
                 </li>
@@ -1013,13 +1013,13 @@ function DeeceeHairApp(): React.ReactElement {
                 <p className="text-xs sm:text-sm text-gray-400 select-none">
                   &copy; {new Date().getFullYear()} DEECEE HAIR. All rights reserved. Made with ❤️ for beautiful hair.
                 </p>
-                <div className="flex items-center space-x-2 text-xs text-gray-500 hover:text-rose-400 transition-colors group">
+                <div className="flex items-center space-x-2 text-xs text-gray-500 hover:text-[#D4B59E] transition-colors group">
                   <span className="opacity-70">Crafted by</span>
                   <a
                     href="https://github.com/Deepak5310"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-rose-500 hover:text-rose-400 flex items-center space-x-1 transition-all"
+                    className="font-medium text-[#8B7355] hover:text-[#D4B59E] flex items-center space-x-1 transition-all"
                   >
                     <span>Deepak</span>
                     <svg
@@ -1035,11 +1035,11 @@ function DeeceeHairApp(): React.ReactElement {
               </div>
               <div className="flex items-center space-x-6 text-xs sm:text-sm text-gray-400">
                 <div className="flex items-center space-x-2">
-                  <Shield className="w-4 h-4 text-rose-600" />
+                  <Shield className="w-4 h-4 text-[#A88B6A]" />
                   <span>Secure Payment</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Truck className="w-4 h-4 text-rose-600" />
+                  <Truck className="w-4 h-4 text-[#A88B6A]" />
                   <span>Free Shipping</span>
                 </div>
               </div>

@@ -191,7 +191,7 @@ export default function AppointmentManagement() {
           onClick={() => handleFilterChange('all')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             statusFilter === 'all'
-              ? 'bg-pink-600 text-white'
+              ? 'bg-#A88B6A text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -231,7 +231,7 @@ export default function AppointmentManagement() {
           onClick={() => handleFilterChange('cancelled')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             statusFilter === 'cancelled'
-              ? 'bg-red-600 text-white'
+              ? 'bg-red-500 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -248,12 +248,12 @@ export default function AppointmentManagement() {
             placeholder="Search by name, email, phone, or service..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
           />
         </div>
         <button
           type="submit"
-          className="px-6 py-2.5 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+          className="px-6 py-2.5 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors"
         >
           Search
         </button>
@@ -262,7 +262,7 @@ export default function AppointmentManagement() {
       {/* Appointments Table */}
       {loading ? (
         <div className="text-center py-12">
-          <div className="inline-block w-8 h-8 border-4 border-pink-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="inline-block w-8 h-8 border-4 border-#A88B6A border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-600 mt-4">Loading appointments...</p>
         </div>
       ) : appointments.length === 0 ? (
@@ -341,7 +341,7 @@ export default function AppointmentManagement() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
                           onClick={() => setSelectedAppointment(appointment)}
-                          className="text-pink-600 hover:text-pink-900 flex items-center gap-1"
+                          className="text-#A88B6A hover:text-#4A3B2E flex items-center gap-1"
                         >
                           <Eye className="w-4 h-4" />
                           View
@@ -375,7 +375,7 @@ export default function AppointmentManagement() {
                       onClick={() => handlePageChange(page)}
                       className={`px-3 py-2 rounded-lg text-sm font-medium ${
                         page === currentPage
-                          ? 'bg-pink-600 text-white'
+                          ? 'bg-#A88B6A text-white'
                           : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
@@ -497,7 +497,7 @@ export default function AppointmentManagement() {
                     <button
                       onClick={() => updateAppointmentStatus(selectedAppointment.id, 'cancelled')}
                       disabled={updatingStatus}
-                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {updatingStatus ? <Loader className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
                       Cancel

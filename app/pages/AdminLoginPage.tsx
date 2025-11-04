@@ -48,14 +48,14 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rose-600 via-rose-700 to-rose-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#A88B6A] via-[#6B5744] to-[#4A3B2E] flex items-center justify-center">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-600 via-rose-700 to-rose-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#A88B6A] via-[#6B5744] to-[#4A3B2E] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back button */}
         <button
@@ -69,8 +69,8 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-rose-100 rounded-full mb-4">
-              <Shield className="w-8 h-8 text-rose-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#D4B59E] rounded-full mb-4">
+              <Shield className="w-8 h-8 text-[#A88B6A]" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Portal</h1>
             <p className="text-gray-600">Sign in to access the admin dashboard</p>
@@ -79,7 +79,7 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
           {/* Error message */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <p className="text-sm text-red-600 text-center">{error}</p>
+              <p className="text-sm text-red-500 text-center">{error}</p>
             </div>
           )}
 
@@ -97,11 +97,11 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
                 placeholder="admin@example.com"
                 className={`w-full px-4 py-3 border ${
                   errors.email ? 'border-red-300' : 'border-gray-300'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all`}
                 disabled={isSubmitting}
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
               )}
             </div>
 
@@ -117,18 +117,18 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
                 placeholder="••••••••"
                 className={`w-full px-4 py-3 border ${
                   errors.password ? 'border-red-300' : 'border-gray-300'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all`}
                 disabled={isSubmitting}
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-500">{errors.password}</p>
               )}
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-rose-600 text-white py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="w-full bg-[#A88B6A] text-white py-3 rounded-lg font-semibold hover:bg-[#6B5744] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {isSubmitting ? (
                 <span>Signing in...</span>

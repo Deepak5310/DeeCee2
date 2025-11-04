@@ -10,7 +10,7 @@ export const PromoSlider = ({ messages }: { messages: Array<{ text: string; icon
   }, [messages]);
 
   return (
-    <div className="bg-gradient-to-r from-rose-600 via-rose-500 to-rose-600 py-3 overflow-hidden relative w-full">
+    <div className="bg-gradient-to-r from-[#A88B6A] via-[#8B7355] to-[#A88B6A] py-3 overflow-hidden relative w-full">
       <div className="relative overflow-hidden w-full">
         <div className="flex animate-marquee whitespace-nowrap">
           {trackMessages.map((msg, idx) => {

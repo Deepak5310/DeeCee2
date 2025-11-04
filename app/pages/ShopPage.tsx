@@ -27,12 +27,12 @@ const ProductCard = ({
       </div>
       <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-1">{product.name}</h3>
       <div className="flex items-center gap-2 mb-1">
-        <p className="text-rose-600 font-bold text-lg">{convertPrice(product.price)}</p>
+        <p className="text-[#A88B6A] font-bold text-lg">{convertPrice(product.price)}</p>
         <p className="text-gray-400 line-through text-sm">{convertPrice(product.price * getDiscountMultiplier())}</p>
         <span className="text-green-600 text-xs font-semibold bg-green-50 px-2 py-1 rounded">{DISCOUNT_PERCENTAGE}% OFF</span>
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
-        {product.isBestseller && <span className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-rose-100 to-rose-50 text-rose-700 rounded-full">Bestseller</span>}
+        {product.isBestseller && <span className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-[#D4B59E] to-[#F3E4CF] text-[#6B5744] rounded-full">Bestseller</span>}
         {product.isNew && <span className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-green-100 to-green-50 text-green-700 rounded-full">New</span>}
         {product.isMans && <span className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 rounded-full">Mans</span>}
       </div>
@@ -47,7 +47,7 @@ const ProductCard = ({
         title={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
       >
         <Heart
-          className={`w-5 h-5 transition-colors ${isInWishlist ? 'fill-rose-600 text-rose-600' : 'text-gray-400 hover:text-rose-600'}`}
+          className={`w-5 h-5 transition-colors ${isInWishlist ? 'fill-[#A88B6A] text-[#A88B6A]' : 'text-gray-400 hover:text-[#A88B6A]'}`}
         />
       </button>
     )}

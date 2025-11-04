@@ -76,8 +76,8 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
         </button>
 
         <div className="text-center mb-5">
-          <div className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 rounded-full flex items-center justify-center mx-auto mb-3">
-            <UserPlus className="w-7 h-7 text-rose-600" />
+          <div className="w-14 h-14 bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] rounded-full flex items-center justify-center mx-auto mb-3">
+            <UserPlus className="w-7 h-7 text-[#A88B6A]" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900">Create Account</h2>
           <p className="text-sm text-gray-600 mt-1">Join DEECEE HAIR family today</p>
@@ -100,7 +100,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your full name"
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="your.email@example.com"
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Create a password"
-                className="w-full pl-10 pr-12 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all"
+                className="w-full pl-10 pr-12 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all"
               />
               <button
                 type="button"
@@ -152,7 +152,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm your password"
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all"
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-rose-600 text-white py-3 rounded-xl font-semibold hover:bg-rose-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            className="w-full bg-[#A88B6A] text-white py-3 rounded-xl font-semibold hover:bg-[#6B5744] transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
             {isLoading ? 'Creating Account...' : 'Sign Up & Verify'}
           </button>
@@ -168,7 +168,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
 
         <div className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{' '}
-          <button onClick={onSwitchToLogin} className="text-rose-600 hover:underline font-semibold">
+          <button onClick={onSwitchToLogin} className="text-[#A88B6A] hover:underline font-semibold">
             Login
           </button>
         </div>
@@ -182,7 +182,7 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
               href="https://github.com/Deepak5310"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-gray-400 hover:text-rose-600 transition flex items-center space-x-1"
+              className="text-xs text-gray-400 hover:text-[#A88B6A] transition flex items-center space-x-1"
             >
               <span>Built by Deepak</span>
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

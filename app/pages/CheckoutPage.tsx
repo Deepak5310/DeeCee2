@@ -196,7 +196,7 @@ export default function CheckoutPage({
       <div className="flex items-center mb-8">
         <button
           onClick={onBackToCart}
-          className="flex items-center text-gray-600 hover:text-rose-600 transition"
+          className="flex items-center text-gray-600 hover:text-[#A88B6A] transition"
         >
           <ChevronLeft className="w-5 h-5 mr-1" />
           Back to Cart
@@ -212,12 +212,12 @@ export default function CheckoutPage({
           <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <MapPin className="w-5 h-5 mr-2 text-rose-600" />
+                <MapPin className="w-5 h-5 mr-2 text-[#A88B6A]" />
                 Delivery Address
               </h2>
               <button
                 onClick={() => setShowAddressForm(!showAddressForm)}
-                className="text-rose-600 hover:text-rose-700 flex items-center text-sm font-medium"
+                className="text-[#A88B6A] hover:text-[#6B5744] flex items-center text-sm font-medium"
               >
                 {showAddressForm ? (
                   <>
@@ -249,7 +249,7 @@ export default function CheckoutPage({
                 <p>No saved addresses. Please add one to continue.</p>
                 <button
                   onClick={() => setShowAddressForm(true)}
-                  className="mt-4 bg-rose-600 text-white px-6 py-2 rounded-lg hover:bg-rose-700 transition"
+                  className="mt-4 bg-[#A88B6A] text-white px-6 py-2 rounded-lg hover:bg-[#6B5744] transition"
                 >
                   Add Address
                 </button>
@@ -262,7 +262,7 @@ export default function CheckoutPage({
                     onClick={() => setSelectedAddress(address)}
                     className={`border-2 rounded-lg p-4 cursor-pointer transition ${
                       selectedAddress?.id === address.id
-                        ? 'border-rose-600 bg-rose-50'
+                        ? 'border-[#A88B6A] bg-[#F3E4CF]'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -301,7 +301,7 @@ export default function CheckoutPage({
           {/* Payment Method */}
           <div className="bg-white rounded-xl shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 flex items-center mb-4">
-              <CreditCard className="w-5 h-5 mr-2 text-rose-600" />
+              <CreditCard className="w-5 h-5 mr-2 text-[#A88B6A]" />
               Payment Method
             </h2>
 
@@ -310,7 +310,7 @@ export default function CheckoutPage({
                 onClick={() => setPaymentMethod('Razorpay')}
                 className={`border-2 rounded-lg p-4 cursor-pointer transition ${
                   paymentMethod === 'Razorpay'
-                    ? 'border-rose-600 bg-rose-50'
+                    ? 'border-[#A88B6A] bg-[#F3E4CF]'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
@@ -331,7 +331,7 @@ export default function CheckoutPage({
                 onClick={() => setPaymentMethod('UPI')}
                 className={`border-2 rounded-lg p-4 cursor-pointer transition ${
                   paymentMethod === 'UPI'
-                    ? 'border-rose-600 bg-rose-50'
+                    ? 'border-[#A88B6A] bg-[#F3E4CF]'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
@@ -355,7 +355,7 @@ export default function CheckoutPage({
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
             <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-              <Package className="w-5 h-5 mr-2 text-rose-600" />
+              <Package className="w-5 h-5 mr-2 text-[#A88B6A]" />
               Order Summary
             </h2>
 
@@ -397,17 +397,17 @@ export default function CheckoutPage({
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                       placeholder="Enter promo code"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#A88B6A]"
                     />
                     <button
                       onClick={handleApplyPromo}
-                      className="px-4 py-2 bg-rose-600 text-white text-sm font-medium rounded-lg hover:bg-rose-700 transition"
+                      className="px-4 py-2 bg-[#A88B6A] text-white text-sm font-medium rounded-lg hover:bg-[#6B5744] transition"
                     >
                       Apply
                     </button>
                   </div>
                   {promoError && (
-                    <p className="text-xs text-red-600">{promoError}</p>
+                    <p className="text-xs text-red-500">{promoError}</p>
                   )}
                 </div>
               ) : (
@@ -418,7 +418,7 @@ export default function CheckoutPage({
                   </div>
                   <button
                     onClick={handleRemovePromo}
-                    className="text-xs text-red-600 hover:text-red-700 font-medium"
+                    className="text-xs text-red-500 hover:text-red-500 font-medium"
                   >
                     Remove
                   </button>
@@ -463,7 +463,7 @@ export default function CheckoutPage({
             {/* Total */}
             <div className="flex justify-between items-center py-4 border-t-2 border-gray-200">
               <span className="text-lg font-semibold text-gray-900">Total</span>
-              <span className="text-2xl font-bold text-rose-600">{convertPrice(total)}</span>
+              <span className="text-2xl font-bold text-[#A88B6A]">{convertPrice(total)}</span>
             </div>
 
             {/* Place Order Button */}
@@ -473,7 +473,7 @@ export default function CheckoutPage({
               className={`w-full py-3 rounded-lg font-semibold transition shadow-lg ${
                 isProcessing || !selectedAddress
                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-rose-600 text-white hover:bg-rose-700'
+                  : 'bg-[#A88B6A] text-white hover:bg-[#6B5744]'
               }`}
             >
               {isProcessing ? 'Processing...' : 'Place Order'}

@@ -66,8 +66,8 @@ export default function VerificationPage({ onClose, onVerificationSuccess }: Ver
         </button>
 
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-rose-100 to-rose-50 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-            <CheckCircle2 className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-rose-600" />
+          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <CheckCircle2 className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-[#A88B6A]" />
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Verify Your Email</h2>
           <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">We've sent a verification link to your email</p>
@@ -76,8 +76,8 @@ export default function VerificationPage({ onClose, onVerificationSuccess }: Ver
         {/* Email Verification */}
         <div className="mb-4 sm:mb-6">
           <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-            <div className={`p-2 sm:p-3 rounded-xl ${emailVerified ? 'bg-green-100' : 'bg-rose-50'}`}>
-              <Mail className={`w-4 h-4 sm:w-5 sm:h-5 ${emailVerified ? 'text-green-600' : 'text-rose-600'}`} />
+            <div className={`p-2 sm:p-3 rounded-xl ${emailVerified ? 'bg-green-100' : 'bg-[#F3E4CF]'}`}>
+              <Mail className={`w-4 h-4 sm:w-5 sm:h-5 ${emailVerified ? 'text-green-600' : 'text-[#A88B6A]'}`} />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-sm sm:text-base font-semibold text-gray-900">Email Verification</h3>
@@ -100,7 +100,7 @@ export default function VerificationPage({ onClose, onVerificationSuccess }: Ver
               <button
                 onClick={handleCheckVerification}
                 disabled={isChecking}
-                className="w-full bg-rose-600 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-rose-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mb-3"
+                className="w-full bg-[#A88B6A] text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-[#6B5744] transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mb-3"
               >
                 {isChecking ? 'Checking...' : 'I\'ve Verified My Email'}
               </button>
@@ -111,7 +111,7 @@ export default function VerificationPage({ onClose, onVerificationSuccess }: Ver
                 ) : (
                   <button
                     onClick={handleResendEmailOTP}
-                    className="text-xs sm:text-sm text-rose-600 hover:underline font-medium flex items-center gap-1 mx-auto"
+                    className="text-xs sm:text-sm text-[#A88B6A] hover:underline font-medium flex items-center gap-1 mx-auto"
                   >
                     <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4" />
                     Resend Verification Email
