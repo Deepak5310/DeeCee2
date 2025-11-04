@@ -858,13 +858,13 @@ function DeeceeHairApp(): React.ReactElement {
 
       {/* Footer - Hidden for admin pages */}
       {!isAdminPage && (
-        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 sm:py-16 w-full relative overflow-hidden">
+        <footer className="bg-gradient-to-br from-[#0a0a0a] via-[#1a1a1a] to-[#0a0a0a] text-white py-6 sm:py-8 w-full relative overflow-hidden">
         {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A88B6A]/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A88B6A]/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#A88B6A]/8 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#D4B59E]/8 rounded-full blur-3xl"></div>
 
         <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {/* Brand Section */}
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
