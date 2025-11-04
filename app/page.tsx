@@ -601,35 +601,35 @@ function DeeceeHairApp(): React.ReactElement {
         {heroSlides.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-br from-rose-600/40 via-transparent to-rose-600/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#D4B59E]/40 via-transparent to-[#A88B6A]/30"></div>
         <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
           <div className="transform transition-all duration-700 max-w-3xl ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#A88B6A] mb-4 md:mb-6 tracking-tight drop-shadow-lg">
               {heroSlides[currentSlide].title}
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light">{heroSlides[currentSlide].subtitle}</span>
+              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light text-[#6B5744]">{heroSlides[currentSlide].subtitle}</span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#4A3B2E] mb-6 md:mb-8 max-w-2xl drop-shadow-md">
               {heroSlides[currentSlide].description}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40 animate-fade-in-up animation-delay-600">
-            <button onClick={() => navigateTo("shop")} className="bg-white text-rose-600 px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
+            <button onClick={() => navigateTo("shop")} className="bg-[#A88B6A] text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#8B7355] transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
               Shop Collection
             </button>
-            <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-white text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-white hover:text-rose-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
+            <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-[#A88B6A] text-[#6B5744] px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#A88B6A] hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
               <Calendar className="w-4 h-4 md:w-5 md:h-5" /> Book Consultation
             </button>
           </div>
         </div>
-        <button onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30">
+        <button onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-[#A88B6A]/40 backdrop-blur-sm text-[#4A3B2E] p-2 sm:p-3 rounded-full hover:bg-[#A88B6A]/60 transition z-30">
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)} className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30">
+        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)} className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-[#A88B6A]/40 backdrop-blur-sm text-[#4A3B2E] p-2 sm:p-3 rounded-full hover:bg-[#A88B6A]/60 transition z-30">
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
           {heroSlides.map((_, index) => (
-            <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentSlide ? "bg-white w-6 sm:w-8" : "bg-white/50 hover:bg-white/70"}`} aria-label={`Slide ${index + 1}`} />
+            <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentSlide ? "bg-[#A88B6A] w-6 sm:w-8" : "bg-[#A88B6A]/60 hover:bg-[#A88B6A]/80"}`} aria-label={`Slide ${index + 1}`} />
           ))}
         </div>
       </section>
