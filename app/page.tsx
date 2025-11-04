@@ -120,12 +120,12 @@ function DeeceeHairApp(): React.ReactElement {
   // Hero slideshow images
   const heroSlides = [
     {
-      image: "/images/hero_banner1.svg",
+      image: "/images/temp1.webp",
       title: "Premium Hair Extensions",
       subtitle: "Transform Your Look"
     },
     {
-      image: "/images/hero_banner2.svg",
+      image: "/images/temp1.webp",
       title: "Luxury Collections",
       subtitle: "Elevate Your Beauty"
     }
@@ -156,7 +156,7 @@ function DeeceeHairApp(): React.ReactElement {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000); // Change slide every 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides.length]);
 
   // Route mapping constants
   const ROUTE_TO_PAGE: Record<string, Page> = {
@@ -614,7 +614,7 @@ function DeeceeHairApp(): React.ReactElement {
 
   const HomePage = useCallback(() => (
     <div className="w-full">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+      <section className="relative flex items-center justify-center overflow-hidden bg-gray-900" style={{ height: "auto" }}>
         {/* Hero Image Slideshow */}
         <div className="absolute inset-0 w-full h-full">
           {heroSlides.map((slide, index) => (
@@ -627,7 +627,7 @@ function DeeceeHairApp(): React.ReactElement {
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           ))}
@@ -675,7 +675,7 @@ function DeeceeHairApp(): React.ReactElement {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in-up animation-delay-600">
-              <button onClick={() => navigateTo("shop")} className="bg-rose-600 text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-rose-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
+              <button onClick={() => navigateTo("shop")} className="text-black px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base" style={{ backgroundColor: '#BF9B7A' }}>
                 Shop Collection
               </button>
               <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-gray-900 text-gray-900 px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
@@ -847,7 +847,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
     </div>
-  ), [navigateTo, convertPrice]);
+  ), [navigateTo, convertPrice, currentSlide, heroSlides]);
 
   // Check if current page is admin page
   const isAdminPage = currentPage === 'admin-login' || currentPage === 'admin-dashboard';
