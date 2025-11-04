@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
-// Router functionality handled with native History API
-import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Calendar, Pause, Play, VolumeX, Volume2, Sparkles, Instagram, Facebook, Youtube, Mail, Globe } from "lucide-react";
+import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Calendar, Instagram, Facebook, Youtube, Mail, Globe } from "lucide-react";
 import ShopPage from './pages/ShopPage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
@@ -22,77 +21,12 @@ import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
-import { Product, CartItem, Appointment, Page, ReelVideo } from './types';
-import { IconButton } from './components/common';
+import { Product, CartItem, Appointment, Page } from './types';
+import { IconButton, VideoReelCard } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
 import { products, heroSlides, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
-
-const VideoReelCard = ({ video }: { video: ReelVideo }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-
-  const togglePlay = useCallback(() => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  }, [isPlaying]);
-
-  const toggleMute = useCallback(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  }, [isMuted]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play();
-      setIsPlaying(true);
-      setIsMuted(true);
-    }
-  }, [video.src]);
-
-  return (
-    <div className="relative w-full h-[32rem] rounded-xl overflow-hidden shadow-lg bg-gray-100 group">
-      <video
-        ref={videoRef}
-        src={video.src}
-        loop
-        muted={isMuted}
-        autoPlay
-        playsInline
-        className="w-full h-full object-cover transition-opacity duration-700"
-        onClick={togglePlay}
-      />
-      <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <button
-          onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-          className="p-3 rounded-full bg-white/30 backdrop-blur-sm text-white hover:bg-white/50 transition mr-2"
-          aria-label={isPlaying ? "Pause video" : "Play video"}
-        >
-          {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-        </button>
-        <button
-          onClick={(e) => { e.stopPropagation(); toggleMute(); }}
-          className="p-3 rounded-full bg-white/30 backdrop-blur-sm text-white hover:bg-white/50 transition"
-          aria-label={isMuted ? "Unmute video" : "Mute video"}
-        >
-          {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
-        </button>
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent text-white text-sm font-medium">
-        {video.description}
-      </div>
-    </div>
-  );
-};
+import { ROUTE_TO_PAGE, PAGE_TO_ROUTE, isAdminPage as checkIsAdminPage } from './utils/routing';
+import { CURRENCIES, convertPrice as convertCurrency, SupportedCurrency } from './utils/currency';
 
 function DeeceeHairApp(): React.ReactElement {
   const { isAuthenticated, user } = useAuth();
@@ -112,70 +46,20 @@ function DeeceeHairApp(): React.ReactElement {
   const [showSignup, setShowSignup] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>("USD");
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
 
-  // Currency data with exchange rates (1 USD = 86.50 INR)
-  // All prices stored in USD, converted to local currency
-  const currencies = {
-    USD: { symbol: "$", rate: 1, name: "USA (USD)" },
-    INR: { symbol: "₹", rate: 86.50, name: "India (INR)" },
-    EUR: { symbol: "€", rate: 0.92, name: "Europe (EUR)" },
-    GBP: { symbol: "£", rate: 0.79, name: "UK (GBP)" },
-    AED: { symbol: "د.إ", rate: 3.67, name: "UAE (AED)" },
-    AUD: { symbol: "A$", rate: 1.52, name: "Australia (AUD)" },
-    CAD: { symbol: "C$", rate: 1.38, name: "Canada (CAD)" },
-    SGD: { symbol: "S$", rate: 1.34, name: "Singapore (SGD)" },
-  };
-
   // Function to convert price from USD to selected currency
   const convertPrice = useCallback((priceInUSD: number): string => {
-    const converted = priceInUSD * currencies[selectedCurrency as keyof typeof currencies].rate;
-    return `${currencies[selectedCurrency as keyof typeof currencies].symbol}${Math.round(converted).toLocaleString()}`;
+    return convertCurrency(priceInUSD, selectedCurrency);
   }, [selectedCurrency]);
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 5000);
     return () => clearInterval(interval);
   }, []);
-
-  // Route mapping constants
-  const ROUTE_TO_PAGE: Record<string, Page> = {
-    '/': 'home',
-    '/shop': 'shop',
-    '/cart': 'cart',
-    '/checkout': 'checkout',
-    '/contact': 'contact',
-    '/appointment': 'appointment',
-    '/product': 'product',
-    '/terms': 'terms',
-    '/privacy': 'privacy',
-    '/about': 'about',
-    '/profile': 'profile',
-    '/bestsellers': 'bestsellers',
-    '/admin': 'admin-login',
-    '/admin/login': 'admin-login',
-    '/admin/dashboard': 'admin-dashboard'
-  };
-
-  const PAGE_TO_ROUTE: Record<Page, string> = {
-    home: '/',
-    shop: '/shop',
-    cart: '/cart',
-    checkout: '/checkout',
-    contact: '/contact',
-    appointment: '/appointment',
-    product: '/product',
-    terms: '/terms',
-    privacy: '/privacy',
-    about: '/about',
-    profile: '/profile',
-    bestsellers: '/bestsellers',
-    'admin-login': '/admin/login',
-    'admin-dashboard': '/admin/dashboard'
-  };
 
   // Sync current page with URL pathname on mount
   useEffect(() => {
@@ -505,7 +389,7 @@ function DeeceeHairApp(): React.ReactElement {
 
               {showCurrencyDropdown && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 py-2 animate-slideDown">
-                  {Object.entries(currencies).map(([code, data]) => (
+                  {(Object.entries(CURRENCIES) as [SupportedCurrency, typeof CURRENCIES[SupportedCurrency]][]).map(([code, data]) => (
                     <button
                       key={code}
                       onClick={() => {
@@ -685,7 +569,7 @@ function DeeceeHairApp(): React.ReactElement {
                 <div className="relative overflow-hidden aspect-video">
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute top-3 right-3 md:top-4 md:right-4 bg-green-600 text-white px-2.5 py-1 md:px-3 md:py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 fill-current" /> New
+                    ✨ New
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6">
@@ -798,7 +682,7 @@ function DeeceeHairApp(): React.ReactElement {
   ), [currentSlide, navigateTo, convertPrice]);
 
   // Check if current page is admin page
-  const isAdminPage = currentPage === 'admin-login' || currentPage === 'admin-dashboard';
+  const isAdminPage = checkIsAdminPage(currentPage);
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
