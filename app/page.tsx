@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
 // Router functionality handled with native History API
-import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Calendar, Pause, Play, VolumeX, Volume2, Sparkles, Instagram, Facebook, Youtube, Mail, MessageCircle, Globe } from "lucide-react";
+import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Calendar, Pause, Play, VolumeX, Volume2, Sparkles, Instagram, Facebook, Youtube, Mail, Globe } from "lucide-react";
 import ShopPage from './pages/ShopPage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
@@ -21,7 +21,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { AdminAuthProvider, useAdminAuth } from './contexts/AdminAuthContext';
+import { AdminAuthProvider } from './contexts/AdminAuthContext';
 import { Product, CartItem, Appointment, Page, ReelVideo } from './types';
 import { IconButton } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
@@ -96,7 +96,6 @@ const VideoReelCard = ({ video }: { video: ReelVideo }) => {
 
 function DeeceeHairApp(): React.ReactElement {
   const { isAuthenticated, user } = useAuth();
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedColor, setSelectedColor] = useState("");
