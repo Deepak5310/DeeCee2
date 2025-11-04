@@ -96,7 +96,7 @@ const VideoReelCard = ({ video }: { video: ReelVideo }) => {
 
 function DeeceeHairApp(): React.ReactElement {
   const { isAuthenticated, user } = useAuth();
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedColor, setSelectedColor] = useState("");
@@ -117,6 +117,20 @@ function DeeceeHairApp(): React.ReactElement {
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
 
+  // Hero slideshow images
+  const heroSlides = [
+    {
+      image: "/images/hero_banner1.svg",
+      title: "Premium Hair Extensions",
+      subtitle: "Transform Your Look"
+    },
+    {
+      image: "/images/hero_banner2.svg",
+      title: "Luxury Collections",
+      subtitle: "Elevate Your Beauty"
+    }
+  ];
+
   // Currency data with exchange rates (1 USD = 86.50 INR)
   // All prices stored in USD, converted to local currency
   const currencies = {
@@ -136,13 +150,12 @@ function DeeceeHairApp(): React.ReactElement {
     return `${currencies[selectedCurrency as keyof typeof currencies].symbol}${Math.round(converted).toLocaleString()}`;
   }, [selectedCurrency]);
 
-  // Ensure hero video plays
+  // Auto-advance slideshow
   useEffect(() => {
-    if (heroVideoRef.current) {
-      heroVideoRef.current.play().catch(error => {
-        console.log("Video autoplay prevented:", error);
-      });
-    }
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(interval);
   }, []);
 
   // Route mapping constants
@@ -602,37 +615,73 @@ function DeeceeHairApp(): React.ReactElement {
   const HomePage = useCallback(() => (
     <div className="w-full">
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-        {/* Hero Video Background */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          style={{ objectFit: 'cover' }}
+        {/* Hero Image Slideshow */}
+        <div className="absolute inset-0 w-full h-full">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Slideshow Navigation */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300"
+          aria-label="Previous slide"
         >
-          <source src="https://raw.githubusercontent.com/prabhav0001/deecee-src/main/videos/hero_promo_1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-rose-600/40 via-transparent to-rose-600/40 z-10"></div>
-        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 text-center">
-          <div className="transform transition-all duration-700">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 tracking-tight animate-fade-in-up">
-              Premium Hair
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light animate-fade-in-up animation-delay-200">Extensions</span>
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto px-4 animate-fade-in-up animation-delay-400">
-              Transform your look with our luxurious collection
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4 animate-fade-in-up animation-delay-600">
-            <button onClick={() => navigateTo("shop")} className="bg-white text-rose-600 px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
-              Shop Collection
-            </button>
-            <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-white text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-white hover:text-rose-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
-              <Calendar className="w-4 h-4 md:w-5 md:h-5" /> Book Consultation
-            </button>
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="transform transition-all duration-700 text-left max-w-2xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight animate-fade-in-up">
+                Premium Hair
+                <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light animate-fade-in-up animation-delay-200">Extensions</span>
+              </h1>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 mb-6 md:mb-8 animate-fade-in-up animation-delay-400">
+                Transform your look with our luxurious collection
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in-up animation-delay-600">
+              <button onClick={() => navigateTo("shop")} className="bg-rose-600 text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-rose-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
+                Shop Collection
+              </button>
+              <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-gray-900 text-gray-900 px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
+                <Calendar className="w-4 h-4 md:w-5 md:h-5" /> Book Consultation
+              </button>
+            </div>
           </div>
         </div>
       </section>
