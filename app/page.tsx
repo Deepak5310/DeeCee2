@@ -604,19 +604,19 @@ function DeeceeHairApp(): React.ReactElement {
         <div className="absolute inset-0 bg-gradient-to-br from-[#D4B59E]/40 via-transparent to-[#A88B6A]/30"></div>
         <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8">
           <div className="transform transition-all duration-700 max-w-3xl ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#A88B6A] mb-4 md:mb-6 tracking-tight drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#2C2C2C] mb-4 md:mb-6 tracking-tight drop-shadow-lg">
               {heroSlides[currentSlide].title}
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light text-[#6B5744]">{heroSlides[currentSlide].subtitle}</span>
+              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 font-light text-[#3D3D3D]">{heroSlides[currentSlide].subtitle}</span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#4A3B2E] mb-6 md:mb-8 max-w-2xl drop-shadow-md">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#4A4A4A] mb-6 md:mb-8 max-w-2xl drop-shadow-md">
               {heroSlides[currentSlide].description}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 ml-0 sm:ml-12 md:ml-24 lg:ml-32 xl:ml-40 animate-fade-in-up animation-delay-600">
-            <button onClick={() => navigateTo("shop")} className="bg-[#A88B6A] text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#8B7355] transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
+            <button onClick={() => navigateTo("shop")} className="bg-[#2C2C2C] text-white px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#3D3D3D] transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg text-sm md:text-base">
               Shop Collection
             </button>
-            <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-[#A88B6A] text-[#6B5744] px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#A88B6A] hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
+            <button onClick={() => navigateTo("appointment")} className="bg-transparent border-2 border-[#2C2C2C] text-[#2C2C2C] px-6 sm:px-7 md:px-8 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-full font-semibold hover:bg-[#2C2C2C] hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-2 text-sm md:text-base">
               <Calendar className="w-4 h-4 md:w-5 md:h-5" /> Book Consultation
             </button>
           </div>
