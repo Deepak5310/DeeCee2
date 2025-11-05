@@ -1,6 +1,8 @@
 /**
  * Theme Configuration
  * Central color definitions for consistent styling across the app
+ * All colors are now defined in tailwind.config.ts
+ * This file provides helper utilities and Tailwind class mappings
  */
 
 export const THEME_COLORS = {
@@ -48,31 +50,82 @@ export const THEME_COLORS = {
 } as const;
 
 /**
- * Tailwind CSS class mapping for easy replacement
- * Old rose theme → New beige/cream theme
+ * Tailwind CSS class names for brand colors
+ * Use these instead of hardcoded hex values
  */
-export const COLOR_CLASSES = {
-  // Text colors
-  'text-rose-600': 'text-[#A88B6A]',
-  'text-rose-500': 'text-[#8B7355]',
+export const BRAND_CLASSES = {
+  // Primary brand color
+  primary: {
+    text: 'text-brand-500',
+    bg: 'bg-brand-500',
+    border: 'border-brand-500',
+    ring: 'ring-brand-500',
+    hover: {
+      text: 'hover:text-brand-500',
+      bg: 'hover:bg-brand-500',
+      border: 'hover:border-brand-500',
+    },
+  },
 
-  // Background colors
-  'bg-rose-600': 'bg-[#A88B6A]',
-  'bg-rose-500': 'bg-[#8B7355]',
-  'bg-rose-50': 'bg-[#F3E4CF]',
+  // Darker brand color (for hover states)
+  dark: {
+    text: 'text-brand-700',
+    bg: 'bg-brand-700',
+    border: 'border-brand-700',
+    hover: {
+      text: 'hover:text-brand-700',
+      bg: 'hover:bg-brand-700',
+      border: 'hover:border-brand-700',
+    },
+  },
 
-  // Border colors
-  'border-rose-600': 'border-[#A88B6A]',
-  'border-rose-500': 'border-[#8B7355]',
+  // Light brand color (for backgrounds)
+  light: {
+    text: 'text-brand-100',
+    bg: 'bg-brand-100',
+    border: 'border-brand-100',
+    hover: {
+      text: 'hover:text-brand-100',
+      bg: 'hover:bg-brand-100',
+      border: 'hover:border-brand-100',
+    },
+  },
 
-  // Hover states
-  'hover:text-rose-600': 'hover:text-[#A88B6A]',
-  'hover:bg-rose-600': 'hover:bg-[#A88B6A]',
-  'hover:bg-rose-50': 'hover:bg-[#F3E4CF]',
+  // Medium brand color (for borders)
+  medium: {
+    text: 'text-brand-300',
+    bg: 'bg-brand-300',
+    border: 'border-brand-300',
+    hover: {
+      text: 'hover:text-brand-300',
+      bg: 'hover:bg-brand-300',
+      border: 'hover:border-brand-300',
+    },
+  },
+} as const;
 
-  // Ring/focus states
-  'ring-rose-500': 'ring-[#A88B6A]',
-  'focus:ring-rose-500': 'focus:ring-[#A88B6A]',
+/**
+ * Common component class combinations
+ * Use these for consistent styling
+ */
+export const COMPONENT_CLASSES = {
+  button: {
+    primary: 'bg-brand-500 text-white hover:bg-brand-700 transition-colors',
+    secondary: 'bg-transparent border-2 border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white transition-colors',
+    outline: 'border border-brand-500 text-brand-500 hover:bg-brand-100 transition-colors',
+  },
+  input: {
+    base: 'border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500',
+    error: 'border-error focus:ring-error',
+  },
+  card: {
+    base: 'bg-white rounded-lg shadow-md',
+    hover: 'hover:shadow-lg transition-shadow',
+  },
+  link: {
+    nav: 'text-gray-700 hover:text-brand-500 transition-colors',
+    underline: 'text-brand-500 hover:text-brand-700 underline',
+  },
 } as const;
 
 /**
@@ -88,4 +141,14 @@ export const getThemeColor = (key: string): string => {
   }
 
   return value;
+};
+
+/**
+ * Utility to get Tailwind class for a color
+ * @param type - The type of style (text, bg, border, etc.)
+ * @param shade - The brand color shade (50-900)
+ * @returns Tailwind class string
+ */
+export const getBrandClass = (type: 'text' | 'bg' | 'border' | 'ring', shade: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900): string => {
+  return `${type}-brand-${shade}`;
 };

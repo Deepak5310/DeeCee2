@@ -11,7 +11,7 @@ export default function DevConsoleMessage() {
     // Only run in browser
     if (typeof window === 'undefined') return;
 
-    // Console styling
+    // Console styling - using color names and theme colors
     const styles = {
       title: 'color: #e11d48; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);',
       subtitle: 'color: #64748b; font-size: 14px; font-weight: normal;',

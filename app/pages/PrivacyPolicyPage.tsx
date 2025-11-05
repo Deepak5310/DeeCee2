@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage(): React.ReactElement {
     <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-5xl mx-auto">
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
         <div className="flex items-center gap-3 mb-6">
-          <Shield className="w-8 h-8 text-[#A88B6A]" />
+          <Shield className="w-8 h-8 text-brand-500" />
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Privacy Policy</h1>
         </div>
         <p className="text-gray-600 mb-8 text-sm sm:text-base">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>

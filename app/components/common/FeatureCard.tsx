@@ -12,8 +12,8 @@ export const FeatureCard = ({
   description: string;
 }) => (
   <div className="text-center px-4 group">
-    <div className="bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-md">
-      <Icon className="w-8 h-8 text-[#A88B6A]" />
+    <div className="bg-gradient-to-br from-brand-300 to-brand-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-md">
+      <Icon className="w-8 h-8 text-brand-500" />
     </div>
     <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">{title}</h3>
     <p className="text-xs sm:text-sm text-gray-600">{description}</p>

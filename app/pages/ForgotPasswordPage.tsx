@@ -55,8 +55,8 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
         {!success ? (
           <>
             <div className="text-center mb-4 sm:mb-6 md:mb-8">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Mail className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-[#A88B6A]" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-brand-300 to-brand-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Mail className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-brand-500" />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Reset Password</h2>
               <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">
@@ -82,7 +82,7 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your.email@example.com"
-                    className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all"
+                    className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
                     autoFocus
                   />
                 </div>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#A88B6A] text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-[#6B5744] transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-brand-500 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-brand-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Sending...' : 'Send Reset Link'}
               </button>
@@ -100,7 +100,7 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
             <div className="mt-4 sm:mt-6 text-center">
               <button
                 onClick={onBackToLogin}
-                className="text-xs sm:text-sm text-[#A88B6A] hover:underline font-medium inline-flex items-center gap-1"
+                className="text-xs sm:text-sm text-brand-500 hover:underline font-medium inline-flex items-center gap-1"
               >
                 <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
                 Back to Login
@@ -127,7 +127,7 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
               We've sent a password reset link to:
             </p>
 
-            <p className="text-sm sm:text-base font-semibold text-[#A88B6A] mb-6 sm:mb-8">
+            <p className="text-sm sm:text-base font-semibold text-brand-500 mb-6 sm:mb-8">
               {email}
             </p>
 
@@ -148,7 +148,7 @@ export default function ForgotPasswordPage({ onClose, onBackToLogin }: ForgotPas
 
             <button
               onClick={onBackToLogin}
-              className="w-full bg-[#A88B6A] text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-[#6B5744] transition shadow-lg"
+              className="w-full bg-brand-500 text-white py-2.5 sm:py-3 rounded-xl text-sm sm:text-base font-semibold hover:bg-brand-700 transition shadow-lg"
             >
               Back to Login
             </button>

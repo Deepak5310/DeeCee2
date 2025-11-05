@@ -91,7 +91,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
 
       {isLoading ? (
         <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#A88B6A]"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-brand-500"></div>
           <p className="mt-4 text-gray-600">Loading statistics...</p>
         </div>
       ) : (
@@ -109,7 +109,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
               title="Total Orders"
               value={stats.totalOrders.toLocaleString()}
               trend="+8%"
-              color="bg-[#A88B6A]"
+              color="bg-brand-500"
             />
             <StatCard
               icon={DollarSign}
@@ -168,8 +168,8 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
               </div>
               <div className="flex items-center justify-between py-3">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-[#F3E4CF] rounded-full flex items-center justify-center mr-3">
-                    <Calendar className="w-5 h-5 text-[#A88B6A]" />
+                  <div className="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center mr-3">
+                    <Calendar className="w-5 h-5 text-brand-500" />
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">New appointment booked</p>
@@ -192,7 +192,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <Shield className="w-8 h-8 text-[#A88B6A] mr-3" />
+              <Shield className="w-8 h-8 text-brand-500 mr-3" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">Admin Portal</h1>
                 <p className="text-xs text-gray-500">DEECEE HAIR</p>
@@ -225,7 +225,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                   onClick={() => setActiveTab('overview')}
                   className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'overview'
-                      ? 'bg-[#A88B6A] text-white'
+                      ? 'bg-brand-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -236,7 +236,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                   onClick={() => setActiveTab('products')}
                   className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'products'
-                      ? 'bg-[#A88B6A] text-white'
+                      ? 'bg-brand-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -247,7 +247,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                   onClick={() => setActiveTab('orders')}
                   className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'orders'
-                      ? 'bg-[#A88B6A] text-white'
+                      ? 'bg-brand-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -258,7 +258,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                   onClick={() => setActiveTab('users')}
                   className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'users'
-                      ? 'bg-[#A88B6A] text-white'
+                      ? 'bg-brand-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -269,7 +269,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                   onClick={() => setActiveTab('appointments')}
                   className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors ${
                     activeTab === 'appointments'
-                      ? 'bg-[#A88B6A] text-white'
+                      ? 'bg-brand-500 text-white'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -314,7 +314,7 @@ export default function AdminDashboardPage({ onLogout }: AdminDashboardPageProps
                 href="https://github.com/Deepak5310"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#A88B6A] hover:text-[#6B5744] font-medium transition flex items-center space-x-1"
+                className="text-brand-500 hover:text-brand-700 font-medium transition flex items-center space-x-1"
               >
                 <span>Deepak</span>
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">

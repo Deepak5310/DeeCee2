@@ -3,6 +3,30 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand Colors - Beige/Tan Palette */
+  --brand-50: #FAF6F1;
+  --brand-100: #F3E4CF;
+  --brand-200: #E8D4BC;
+  --brand-300: #D4B59E;
+  --brand-400: #C4A48B;
+  --brand-500: #A88B6A;
+  --brand-600: #8B7355;
+  --brand-700: #6B5744;
+  --brand-800: #4A3B2E;
+  --brand-900: #2E251D;
+
+  /* Text Colors */
+  --text-primary: #2C2C2C;
+  --text-secondary: #3D3D3D;
+  --text-tertiary: #4A4A4A;
+  --text-muted: #6B7280;
+
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
 }
 
 @theme inline {

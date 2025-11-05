@@ -101,12 +101,12 @@ export default function UserManagement() {
             placeholder="Search by name, email, or phone..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-#A88B6A"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
         </div>
         <button
           type="submit"
-          className="px-6 py-2.5 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors"
+          className="px-6 py-2.5 bg-brand-500 text-white rounded-lg hover:bg-brand-700 transition-colors"
         >
           Search
         </button>
@@ -115,7 +115,7 @@ export default function UserManagement() {
       {/* Users Table */}
       {loading ? (
         <div className="text-center py-12">
-          <div className="inline-block w-8 h-8 border-4 border-#A88B6A border-t-transparent rounded-full animate-spin"></div>
+          <div className="inline-block w-8 h-8 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-600 mt-4">Loading users...</p>
         </div>
       ) : users.length === 0 ? (
@@ -159,7 +159,7 @@ export default function UserManagement() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="w-10 h-10 rounded-full bg-#F3E4CF flex items-center justify-center">
-                            <span className="text-#A88B6A font-semibold">
+                            <span className="text-brand-500 font-semibold">
                               {user.displayName?.charAt(0).toUpperCase() || user.email.charAt(0).toUpperCase()}
                             </span>
                           </div>
@@ -233,7 +233,7 @@ export default function UserManagement() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
                           onClick={() => setSelectedUser(user)}
-                          className="text-#A88B6A hover:text-#4A3B2E flex items-center gap-1"
+                          className="text-brand-500 hover:text-brand-800 flex items-center gap-1"
                         >
                           <Eye className="w-4 h-4" />
                           View
@@ -267,7 +267,7 @@ export default function UserManagement() {
                       onClick={() => handlePageChange(page)}
                       className={`px-3 py-2 rounded-lg text-sm font-medium ${
                         page === currentPage
-                          ? 'bg-#A88B6A text-white'
+                          ? 'bg-brand-500 text-white'
                           : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
@@ -310,7 +310,7 @@ export default function UserManagement() {
               {/* User Info */}
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full bg-#F3E4CF flex items-center justify-center">
-                  <span className="text-2xl font-bold text-#A88B6A">
+                  <span className="text-2xl font-bold text-brand-500">
                     {selectedUser.displayName?.charAt(0).toUpperCase() || selectedUser.email.charAt(0).toUpperCase()}
                   </span>
                 </div>
@@ -388,7 +388,7 @@ export default function UserManagement() {
 
               {/* Actions */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
-                <button className="flex-1 px-4 py-2 bg-#A88B6A text-white rounded-lg hover:bg-#6B5744 transition-colors">
+                <button className="flex-1 px-4 py-2 bg-brand-500 text-white rounded-lg hover:bg-brand-700 transition-colors">
                   View Orders
                 </button>
                 <button

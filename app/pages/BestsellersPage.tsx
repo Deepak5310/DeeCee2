@@ -24,7 +24,7 @@ export default function BestsellersPage({
     <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <button
         onClick={onBackToHome}
-        className="mb-6 text-[#A88B6A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#A88B6A] rounded"
+        className="mb-6 text-brand-500 hover:underline focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
       >
         ← Back to Home
       </button>
@@ -56,7 +56,7 @@ export default function BestsellersPage({
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4 bg-[#A88B6A] text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 shadow-md">
+                <div className="absolute top-4 right-4 bg-brand-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 shadow-md">
                   <Star className="w-3 h-3 fill-current" /> Bestseller
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -99,13 +99,13 @@ export default function BestsellersPage({
       )}
 
       {/* Why Choose Our Bestsellers */}
-      <div className="mt-16 bg-gradient-to-br from-[#F3E4CF] to-pink-50 rounded-2xl p-8 sm:p-12">
+      <div className="mt-16 bg-gradient-to-br from-brand-100 to-pink-50 rounded-2xl p-8 sm:p-12">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
           Why Our Bestsellers Stand Out
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="text-center">
-            <div className="bg-[#A88B6A] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-brand-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
               <Star className="w-6 h-6 text-white fill-current" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2 text-lg">Customer Favorite</h3>
@@ -114,7 +114,7 @@ export default function BestsellersPage({
             </p>
           </div>
           <div className="text-center">
-            <div className="bg-[#A88B6A] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-brand-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -125,7 +125,7 @@ export default function BestsellersPage({
             </p>
           </div>
           <div className="text-center">
-            <div className="bg-[#A88B6A] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-brand-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>

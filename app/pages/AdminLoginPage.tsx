@@ -69,8 +69,8 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#D4B59E] rounded-full mb-4">
-              <Shield className="w-8 h-8 text-[#A88B6A]" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-300 rounded-full mb-4">
+              <Shield className="w-8 h-8 text-brand-500" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Portal</h1>
             <p className="text-gray-600">Sign in to access the admin dashboard</p>
@@ -97,7 +97,7 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
                 placeholder="admin@example.com"
                 className={`w-full px-4 py-3 border ${
                   errors.email ? 'border-red-300' : 'border-gray-300'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all`}
                 disabled={isSubmitting}
               />
               {errors.email && (
@@ -117,7 +117,7 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
                 placeholder="••••••••"
                 className={`w-full px-4 py-3 border ${
                   errors.password ? 'border-red-300' : 'border-gray-300'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all`}
                 disabled={isSubmitting}
               />
               {errors.password && (
@@ -128,7 +128,7 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }: AdminLo
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#A88B6A] text-white py-3 rounded-lg font-semibold hover:bg-[#6B5744] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="w-full bg-brand-500 text-white py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {isSubmitting ? (
                 <span>Signing in...</span>

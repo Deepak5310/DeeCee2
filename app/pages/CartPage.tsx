@@ -25,7 +25,7 @@ export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onC
       {cart.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-700 mb-6">Your cart is empty.</p>
-          <button onClick={onContinueShopping} className="bg-[#A88B6A] text-white px-6 py-3 rounded-2xl font-semibold hover:bg-[#6B5744] transition shadow-lg">
+          <button onClick={onContinueShopping} className="bg-brand-500 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-brand-700 transition shadow-lg">
             Continue Shopping
           </button>
         </div>
@@ -42,7 +42,7 @@ export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onC
                   {item.baseSize && <p className="text-gray-700 text-sm">Base Size: {item.baseSize}</p>}
                   {item.texture && <p className="text-gray-700 text-sm">Texture: {item.texture}</p>}
                   <p className="text-gray-700 text-sm">Size: {item.size}</p>
-                  <p className="text-[#A88B6A] font-semibold text-lg">{convertPrice(itemPrice)}</p>
+                  <p className="text-brand-500 font-semibold text-lg">{convertPrice(itemPrice)}</p>
                 </div>
                 <div className="flex items-center justify-between w-full sm:w-auto mt-6 sm:mt-0">
                   <div className="flex items-center space-x-3">
@@ -62,7 +62,7 @@ export default function CartPage({ cart, onUpdateQuantity, onRemoveFromCart, onC
             );
           })}
           <div className="text-right text-xl font-semibold text-gray-900">Total: {convertPrice(getTotalPrice())}</div>
-          <button onClick={onProceedToCheckout} className="w-full sm:w-auto bg-[#A88B6A] text-white px-8 py-3 rounded-2xl font-semibold hover:bg-[#6B5744] transition shadow-lg">
+          <button onClick={onProceedToCheckout} className="w-full sm:w-auto bg-brand-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-brand-700 transition shadow-lg">
             Proceed to Checkout
           </button>
         </div>

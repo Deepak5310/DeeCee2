@@ -138,7 +138,7 @@ export default function ProductPage({
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <button onClick={onBackToShop} className="mb-6 text-[#A88B6A] hover:underline focus:outline-none rounded">
+      <button onClick={onBackToShop} className="mb-6 text-brand-500 hover:underline focus:outline-none rounded">
         ← Back to Shop
       </button>
       <div className="flex flex-col md:flex-row gap-8 sm:gap-10">
@@ -169,7 +169,7 @@ export default function ProductPage({
                 onClick={() => setSelectedImageIndex(index)}
                 className={`rounded-xl overflow-hidden transition-all duration-300 aspect-video ${
                   selectedImageIndex === index
-                    ? 'ring-4 ring-[#A88B6A] shadow-xl transform scale-105'
+                    ? 'ring-4 ring-brand-500 shadow-xl transform scale-105'
                     : 'ring-2 ring-gray-200 hover:ring-[#D4B59E] shadow-md'
                 }`}
               >
@@ -187,7 +187,7 @@ export default function ProductPage({
         <div className="flex flex-col flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 truncate">{product.name}</h1>
           <div className="flex items-center gap-3 mb-8 flex-wrap">
-            <p className="text-[#A88B6A] text-3xl font-extrabold">{convertPrice(currentPrice)}</p>
+            <p className="text-brand-500 text-3xl font-extrabold">{convertPrice(currentPrice)}</p>
             <p className="text-gray-400 line-through text-xl">{convertPrice(currentPrice * getDiscountMultiplier())}</p>
             <span className="text-sm font-semibold bg-green-500 text-white px-3 py-1.5 rounded-lg">{DISCOUNT_PERCENTAGE}% OFF</span>
           </div>
@@ -216,9 +216,9 @@ export default function ProductPage({
                     disabled={!isAvailable}
                     className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${
                       selectedColor === color
-                        ? "bg-[#A88B6A] text-white border-[#A88B6A] shadow-lg"
+                        ? "bg-brand-500 text-white border-brand-500 shadow-lg"
                         : isAvailable
-                        ? "border-gray-300 text-gray-700 hover:bg-[#D4B59E]"
+                        ? "border-gray-300 text-gray-700 hover:bg-brand-300"
                         : "border-gray-200 text-gray-400 cursor-not-allowed opacity-60"
                     }`}
                   >
@@ -243,8 +243,8 @@ export default function ProductPage({
                     onClick={() => setSelectedBaseSize(baseSize)}
                     className={`px-6 py-3 border rounded-full text-sm font-semibold transition-all duration-300 ${
                       selectedBaseSize === baseSize
-                        ? "bg-[#A88B6A] text-white border-[#A88B6A] shadow-lg"
-                        : "border-gray-300 text-gray-700 hover:bg-[#D4B59E]"
+                        ? "bg-brand-500 text-white border-brand-500 shadow-lg"
+                        : "border-gray-300 text-gray-700 hover:bg-brand-300"
                     }`}
                   >
                     {baseSize}
@@ -267,8 +267,8 @@ export default function ProductPage({
                     onClick={() => setSelectedTexture(texture)}
                     className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${
                       selectedTexture === texture
-                        ? "bg-[#A88B6A] text-white border-[#A88B6A] shadow-lg"
-                        : "border-gray-300 text-gray-700 hover:bg-[#D4B59E]"
+                        ? "bg-brand-500 text-white border-brand-500 shadow-lg"
+                        : "border-gray-300 text-gray-700 hover:bg-brand-300"
                     }`}
                   >
                     {texture}
@@ -284,7 +284,7 @@ export default function ProductPage({
             </h3>
             <div className="flex flex-wrap gap-3">
               {product.sizes.map((size) => (
-                <button key={size} onClick={() => setSelectedSize(size)} className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${selectedSize === size ? "bg-[#A88B6A] text-white border-[#A88B6A] shadow-lg" : "border-gray-300 text-gray-700 hover:bg-[#D4B59E]"}`}>
+                <button key={size} onClick={() => setSelectedSize(size)} className={`px-4 py-2 border rounded-full text-sm font-semibold transition-all duration-300 ${selectedSize === size ? "bg-brand-500 text-white border-brand-500 shadow-lg" : "border-gray-300 text-gray-700 hover:bg-brand-300"}`}>
                   {size}
                 </button>
               ))}
@@ -294,7 +294,7 @@ export default function ProductPage({
           <div className="flex gap-3 flex-wrap">
             <button
               onClick={onAddToCart}
-              className="bg-[#A88B6A] text-white px-8 py-3 rounded-2xl font-semibold hover:bg-[#6B5744] transition shadow-lg flex-1 min-w-[200px]"
+              className="bg-brand-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-brand-700 transition shadow-lg flex-1 min-w-[200px]"
             >
               Add to Cart
             </button>
@@ -303,7 +303,7 @@ export default function ProductPage({
                 onClick={() => onToggleWishlist(product)}
                 className={`px-6 py-3 rounded-2xl font-semibold transition shadow-lg flex items-center gap-2 ${
                   isInWishlist
-                    ? 'bg-[#D4B59E] text-[#6B5744] hover:bg-[#D4B59E]'
+                    ? 'bg-brand-300 text-brand-700 hover:bg-brand-300'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
                 title={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}

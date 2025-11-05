@@ -60,11 +60,11 @@ export default function AboutUsPage(): React.ReactElement {
     <div className="w-full bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
       <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#D4B59E] to-[#F3E4CF] opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-300 to-brand-100 opacity-50"></div>
         <div className="relative w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="text-[#A88B6A]">DEECEE HAIR</span>
+              About <span className="text-brand-500">DEECEE HAIR</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Your trusted partner in premium hair extensions and solutions. We believe everyone deserves to feel beautiful and confident with luxurious, natural-looking hair.
@@ -97,7 +97,7 @@ export default function AboutUsPage(): React.ReactElement {
                 alt="DEECEE HAIR Story"
                 // className="rounded-2xl shadow-2xl w-full bg-white"
               />
-              <div className="absolute -bottom-6 -right-6 bg-[#A88B6A] text-white p-6 rounded-2xl shadow-xl">
+              <div className="absolute -bottom-6 -right-6 bg-brand-500 text-white p-6 rounded-2xl shadow-xl">
                 <div className="text-3xl font-bold">8+</div>
                 <div className="text-sm">Years of Excellence</div>
               </div>
@@ -110,18 +110,18 @@ export default function AboutUsPage(): React.ReactElement {
       <section className="py-16 sm:py-20 bg-white">
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-[#F3E4CF] to-white p-8 rounded-2xl border border-[#D4B59E]">
+            <div className="bg-gradient-to-br from-brand-100 to-white p-8 rounded-2xl border border-brand-300">
               <div className="flex items-center gap-4 mb-4">
-                <Target className="w-10 h-10 text-[#A88B6A]" />
+                <Target className="w-10 h-10 text-brand-500" />
                 <h3 className="text-2xl font-bold text-gray-900">Our Mission</h3>
               </div>
               <p className="text-gray-700 leading-relaxed">
                 To empower individuals with premium hair solutions that enhance their natural beauty and boost their confidence. We strive to make luxury hair extensions accessible to everyone while maintaining the highest standards of quality and service.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-[#F3E4CF] to-white p-8 rounded-2xl border border-[#D4B59E]">
+            <div className="bg-gradient-to-br from-brand-100 to-white p-8 rounded-2xl border border-brand-300">
               <div className="flex items-center gap-4 mb-4">
-                <Sparkles className="w-10 h-10 text-[#A88B6A]" />
+                <Sparkles className="w-10 h-10 text-brand-500" />
                 <h3 className="text-2xl font-bold text-gray-900">Our Vision</h3>
               </div>
               <p className="text-gray-700 leading-relaxed">
@@ -146,8 +146,8 @@ export default function AboutUsPage(): React.ReactElement {
               const Icon = value.icon;
               return (
                 <div key={index} className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="bg-[#D4B59E] w-14 h-14 rounded-xl flex items-center justify-center mb-4">
-                    <Icon className="w-7 h-7 text-[#A88B6A]" />
+                  <div className="bg-brand-300 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                    <Icon className="w-7 h-7 text-brand-500" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{value.title}</h3>
                   <p className="text-gray-600 text-sm">{value.description}</p>
@@ -179,7 +179,7 @@ export default function AboutUsPage(): React.ReactElement {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-[#A88B6A] font-medium mb-2">{member.role}</p>
+                <p className="text-brand-500 font-medium mb-2">{member.role}</p>
                 <p className="text-gray-600 text-sm">{member.description}</p>
               </div>
             ))}
@@ -197,19 +197,19 @@ export default function AboutUsPage(): React.ReactElement {
             </p>
           </div>
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#D4B59E]"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-brand-300"></div>
             <div className="space-y-8">
               {milestones.map((milestone, index) => (
                 <div key={index} className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                   <div className="flex-1">
                     <div className={`bg-white p-6 rounded-2xl shadow-lg ${index % 2 === 0 ? 'mr-8 text-right' : 'ml-8'}`}>
-                      <div className="text-[#A88B6A] font-bold text-lg mb-2">{milestone.year}</div>
+                      <div className="text-brand-500 font-bold text-lg mb-2">{milestone.year}</div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">{milestone.event}</h3>
                       <p className="text-gray-600 text-sm">{milestone.description}</p>
                     </div>
                   </div>
                   <div className="relative z-10">
-                    <div className="w-12 h-12 bg-[#A88B6A] rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                    <div className="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
                       {index + 1}
                     </div>
                   </div>
@@ -222,35 +222,35 @@ export default function AboutUsPage(): React.ReactElement {
       </section>
 
       {/* Awards Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-[#F3E4CF] to-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-brand-100 to-white">
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <Award className="w-16 h-16 text-[#A88B6A] mx-auto mb-4" />
+            <Award className="w-16 h-16 text-brand-500 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Recognition & Achievements</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">10,000+</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">10,000+</div>
               <div className="text-gray-700 font-medium">Happy Customers</div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">4.8/5</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">4.8/5</div>
               <div className="text-gray-700 font-medium">Average Rating</div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">500+</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">500+</div>
               <div className="text-gray-700 font-medium">Premium Products</div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">24/7</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">24/7</div>
               <div className="text-gray-700 font-medium">Customer Support</div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">100%</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">100%</div>
               <div className="text-gray-700 font-medium">Authentic Products</div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-[#A88B6A] mb-2">Pan India</div>
+              <div className="text-3xl font-bold text-brand-500 mb-2">Pan India</div>
               <div className="text-gray-700 font-medium">Delivery Network</div>
             </div>
           </div>
@@ -265,7 +265,7 @@ export default function AboutUsPage(): React.ReactElement {
               {/* Developer Info */}
               <div className="flex items-center gap-4">
                 <div className="relative group flex-shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-[#D4B59E]/40 rounded-full blur-md group-hover:blur-lg transition-all"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-brand-300/40 rounded-full blur-md group-hover:blur-lg transition-all"></div>
                   <img
                     src="/images/dev.png"
                     alt="Deepak - Full Stack Developer"
@@ -313,7 +313,7 @@ export default function AboutUsPage(): React.ReactElement {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-[#A88B6A]">
+      <section className="py-16 sm:py-20 bg-brand-500">
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Ready to Transform Your Look?
@@ -324,13 +324,13 @@ export default function AboutUsPage(): React.ReactElement {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => window.location.href = '/shop'}
-              className="bg-white text-[#A88B6A] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"
+              className="bg-white text-brand-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"
             >
               Shop Collection
             </button>
             <button
               onClick={() => window.location.href = '/contact'}
-              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#A88B6A] transition transform hover:scale-105"
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-brand-500 transition transform hover:scale-105"
             >
               Contact Us
             </button>

@@ -39,20 +39,20 @@ export default function ContactPage(): React.ReactElement {
         <div className="lg:col-span-1 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
           <h3 className="font-semibold text-gray-900 mb-6">Get in touch</h3>
           <div className="space-y-6 text-sm">
-            <a href="tel:+916376482804" className="flex items-center gap-4 text-gray-700 hover:text-[#A88B6A] transition">
-              <span className="p-3 rounded-full bg-[#F3E4CF] flex-shrink-0"><Phone className="w-5 h-5 text-[#A88B6A]" /></span>
+            <a href="tel:+916376482804" className="flex items-center gap-4 text-gray-700 hover:text-brand-500 transition">
+              <span className="p-3 rounded-full bg-brand-100 flex-shrink-0"><Phone className="w-5 h-5 text-brand-500" /></span>
               <span className="break-all">+91 63764 82804</span>
             </a>
-            <a href="mailto:sumiteximjjn@gmail.com" className="flex items-center gap-4 text-gray-700 hover:text-[#A88B6A] transition">
-              <span className="p-3 rounded-full bg-[#F3E4CF] flex-shrink-0"><Mail className="w-5 h-5 text-[#A88B6A]" /></span>
+            <a href="mailto:sumiteximjjn@gmail.com" className="flex items-center gap-4 text-gray-700 hover:text-brand-500 transition">
+              <span className="p-3 rounded-full bg-brand-100 flex-shrink-0"><Mail className="w-5 h-5 text-brand-500" /></span>
               <span className="break-all">sumiteximjjn@gmail.com</span>
             </a>
             <div className="flex items-start gap-4 text-gray-700">
-              <span className="p-3 rounded-full bg-[#F3E4CF] flex-shrink-0"><MapPin className="w-5 h-5 text-[#A88B6A]" /></span>
+              <span className="p-3 rounded-full bg-brand-100 flex-shrink-0"><MapPin className="w-5 h-5 text-brand-500" /></span>
               <div>Swastik Tower, Joshiyo Ka Gatta.<div className="text-gray-500">Jhunjhunu, Rajasthan</div></div>
             </div>
             <div className="flex items-center gap-4 text-gray-700">
-              <span className="p-3 rounded-full bg-[#F3E4CF] flex-shrink-0"><Clock className="w-5 h-5 text-[#A88B6A]" /></span>
+              <span className="p-3 rounded-full bg-brand-100 flex-shrink-0"><Clock className="w-5 h-5 text-brand-500" /></span>
               <span>Mon-Sat: 9:00 AM - 5:00 PM</span>
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function ContactPage(): React.ReactElement {
               <FormInput label="Phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="10-digit number" error={errors.phone} />
               <div className="w-full">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Topic</label>
-                <select value={topic} onChange={(e) => setTopic(e.target.value)} className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all">
+                <select value={topic} onChange={(e) => setTopic(e.target.value)} className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
                   <option>General Inquiry</option>
                   <option>Order Status</option>
                   <option>Returns & Refunds</option>
@@ -88,7 +88,7 @@ export default function ContactPage(): React.ReactElement {
             </div>
             <div className="w-full">
               <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-              <textarea rows={5} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#A88B6A] transition-all" />
+              <textarea rows={5} value={message} onChange={(e) => setMessage(e.target.value)} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" />
               {errors.message && <p className="text-red-500 text-xs mt-2 flex items-center gap-1"><X className="w-3 h-3" />{errors.message}</p>}
             </div>
             <label className="flex items-start gap-3 text-sm text-gray-700">
@@ -96,7 +96,7 @@ export default function ContactPage(): React.ReactElement {
               <span>I agree to be contacted by DEECEE HAIR regarding my inquiry.</span>
             </label>
             {errors.consent && <p className="text-red-500 text-xs">{errors.consent}</p>}
-            <button type="submit" className="w-full bg-[#A88B6A] text-white py-3 rounded-2xl font-semibold hover:bg-[#6B5744] transition shadow-lg" disabled={Object.keys(errors).length > 0 && !submitted}>
+            <button type="submit" className="w-full bg-brand-500 text-white py-3 rounded-2xl font-semibold hover:bg-brand-700 transition shadow-lg" disabled={Object.keys(errors).length > 0 && !submitted}>
               Send Message
             </button>
           </form>
