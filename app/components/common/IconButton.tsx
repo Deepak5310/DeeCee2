@@ -6,18 +6,22 @@ export const IconButton = ({
   icon: Icon,
   onClick,
   badge,
-  isScrolled = false
+  isScrolled = false,
+  isDarkSlide = false
 }: {
   icon: any;
   onClick?: () => void;
   badge?: number;
   isScrolled?: boolean;
+  isDarkSlide?: boolean;
 }) => (
   <button
     onClick={onClick}
     className={`p-2 transition-all duration-200 relative group rounded-lg active:scale-90 ${
       isScrolled
         ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50'
+        : isDarkSlide
+        ? 'text-gray-800 hover:text-gray-900 hover:bg-gray-100/20'
         : 'text-white hover:text-white/80 hover:bg-white/10'
     }`}
   >
