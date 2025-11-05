@@ -596,8 +596,8 @@ function DeeceeHairApp(): React.ReactElement {
   ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown]);
 
   const HomePage = useCallback(() => (
-    <div className="w-full">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="w-auto">
+      <section className="relative h-[50vh] sm:h-[80vh] flex items-center justify-center overflow-hidden">
         {heroSlides.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
