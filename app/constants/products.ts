@@ -306,11 +306,11 @@ export const products: Product[] = [
 ];
 
 export const heroSlides = [
-  { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero_banner1.svg", title: "Luxurious Hair", subtitle: "Extensions", description: "Transform your look with our premium collection" },
-  { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero_banner2.svg", title: "Natural Beauty", subtitle: "Redefined", description: "100% human hair for the perfect blend" },
-  // { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero3.jpg", title: "Premium Quality", subtitle: "Guaranteed", description: "Silky smooth textures that last" },
-  // { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero4.jpg", title: "Your Style", subtitle: "Elevated", description: "From straight to curly, we have it all" },
-  // { image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/hero5.jpg", title: "Confidence", subtitle: "Unleashed", description: "Feel beautiful every single day" },
+  { image: "/images/1.webp", title: "Luxurious Hair", subtitle: "Extensions", description: "Transform your look with our premium collection" },
+  { image: "/images/2.webp", title: "Natural Beauty", subtitle: "Redefined", description: "100% human hair for the perfect blend" },
+  { image: "/images/3.webp", title: "Premium Quality", subtitle: "Guaranteed", description: "Silky smooth textures that last" },
+  { image: "/images/4.webp", title: "Your Style", subtitle: "Elevated", description: "From straight to curly, we have it all" },
+  { image: "/images/5.webp", title: "Confidence", subtitle: "Unleashed", description: "Feel beautiful every single day" },
 ];
 
 export const reelsVideos = [
