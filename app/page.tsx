@@ -116,6 +116,7 @@ function DeeceeHairApp(): React.ReactElement {
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Currency data with exchange rates (1 USD = 86.50 INR)
   // All prices stored in USD, converted to local currency
@@ -139,6 +140,20 @@ function DeeceeHairApp(): React.ReactElement {
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 5000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Handle scroll event for header background
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Route mapping constants
@@ -436,7 +451,11 @@ function DeeceeHairApp(): React.ReactElement {
   }, [isAuthenticated, user]);
 
   const Header = useCallback(() => (
-    <header className="bg-white border-b border-gray-200 shadow-md backdrop-blur-sm bg-white/95">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled
+        ? 'bg-white border-b border-gray-200 shadow-md'
+        : 'bg-transparent backdrop-blur-md bg-white/20 border-b border-white/20'
+    }`}>
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -444,51 +463,79 @@ function DeeceeHairApp(): React.ReactElement {
               onClick={() => navigateTo("home")}
               className="flex items-center space-x-2 focus:outline-none rounded px-2 py-1 transition-all duration-200 hover:scale-105 active:scale-95"
             >
-              <span className="text-xl sm:text-2xl font-bold text-rose-600 select-none">DEECEE</span>
-              <span className="text-xl sm:text-2xl font-light text-gray-800 select-none">HAIR</span>
+              <span className={`text-xl sm:text-2xl font-bold select-none transition-colors duration-300 ${
+                isScrolled ? 'text-rose-600' : 'text-white drop-shadow-lg'
+              }`}>DEECEE</span>
+              <span className={`text-xl sm:text-2xl font-light select-none transition-colors duration-300 ${
+                isScrolled ? 'text-gray-800' : 'text-white drop-shadow-lg'
+              }`}>HAIR</span>
             </button>
             <nav className="hidden lg:flex space-x-6 ml-8">
               <button
                 onClick={() => navigateTo("bestsellers")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 Bestsellers
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("shop")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 Shop for Women
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("shop", "mans")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 Shop for Men
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("appointment")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 Book Appointment
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("about")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 About Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("contact")}
-                className="text-sm font-medium text-gray-700 hover:text-rose-600 transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95"
+                className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600' : 'text-white hover:text-white/80'
+                }`}
               >
                 Contact Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-rose-600 group-hover:w-full transition-all duration-300"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                  isScrolled ? 'bg-rose-600' : 'bg-white'
+                }`}></span>
               </button>
             </nav>
           </div>
@@ -497,7 +544,9 @@ function DeeceeHairApp(): React.ReactElement {
             <div className="relative">
               <button
                 onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-                className="flex items-center space-x-1 px-3 py-2 text-gray-700 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all duration-200 focus:outline-none group"
+                className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 focus:outline-none group ${
+                  isScrolled ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : 'text-white hover:text-white/80 hover:bg-white/10'
+                }`}
               >
                 <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 <span className="text-sm font-medium hidden sm:inline">{selectedCurrency}</span>
@@ -524,9 +573,10 @@ function DeeceeHairApp(): React.ReactElement {
             </div>
 
             <div className="hidden sm:flex items-center space-x-2">
-              <IconButton icon={Heart} />
+              <IconButton icon={Heart} isScrolled={isScrolled} />
               <IconButton
                 icon={User}
+                isScrolled={isScrolled}
                 onClick={() => {
                   if (isAuthenticated) {
                     navigateTo("profile");
@@ -536,11 +586,13 @@ function DeeceeHairApp(): React.ReactElement {
                 }}
               />
             </div>
-            <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} />
-            <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} />
+            <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} isScrolled={isScrolled} />
+            <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} isScrolled={isScrolled} />
             <button
               onClick={() => setMobileMenuOpen((v) => !v)}
-              className="lg:hidden p-2 text-gray-700 hover:text-rose-600 focus:outline-none rounded-lg hover:bg-rose-50 transition-all duration-200 active:scale-90"
+              className={`lg:hidden p-2 focus:outline-none rounded-lg transition-all duration-200 active:scale-90 ${
+                isScrolled ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : 'text-white hover:text-white/80 hover:bg-white/10'
+              }`}
             >
               {mobileMenuOpen ? <X className="w-6 h-6 transform rotate-0 transition-transform duration-200" /> : <Menu className="w-6 h-6 transform rotate-0 transition-transform duration-200" />}
             </button>
@@ -593,11 +645,11 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       )}
     </header>
-  ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown]);
+  ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown, isScrolled]);
 
   const HomePage = useCallback(() => (
     <div className="w-auto">
-      <section className="relative h-[50vh] sm:h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[80vh] flex items-center justify-center overflow-hidden -mt-16 pt-16">
         {heroSlides.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}

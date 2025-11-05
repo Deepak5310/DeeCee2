@@ -5,15 +5,21 @@ import React from "react";
 export const IconButton = ({
   icon: Icon,
   onClick,
-  badge
+  badge,
+  isScrolled = false
 }: {
   icon: any;
   onClick?: () => void;
   badge?: number;
+  isScrolled?: boolean;
 }) => (
   <button
     onClick={onClick}
-    className="p-2 text-gray-700 hover:text-rose-600 transition-all duration-200 relative group hover:bg-rose-50 rounded-lg active:scale-90"
+    className={`p-2 transition-all duration-200 relative group rounded-lg active:scale-90 ${
+      isScrolled
+        ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50'
+        : 'text-white hover:text-white/80 hover:bg-white/10'
+    }`}
   >
     <Icon className="w-5 h-5 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-200" />
     {badge !== undefined && badge > 0 && (
