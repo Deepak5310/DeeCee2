@@ -670,7 +670,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Bestsellers</h2>
@@ -719,7 +719,7 @@ function DeeceeHairApp(): React.ReactElement {
         {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div> */}
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">New Arrivals</h2>
@@ -750,7 +750,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 text-center">Featured Collections</h2>
           <p className="text-sm md:text-base text-gray-600 text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto px-4">Discover our premium hair extensions in various textures to match your style</p>
@@ -775,7 +775,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-100">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Mans Collection</h2>
@@ -811,7 +811,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-12 sm:py-20 bg-gray-100">
+      <section className="py-12 sm:py-20" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">Style Inspiration & Reels</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
