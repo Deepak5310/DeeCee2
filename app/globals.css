@@ -88,3 +88,13 @@ html {
 .animation-delay-600 {
   animation-delay: 0.6s;
 }
+
+/* Circular progress animation for transformation dots */
+@keyframes progress {
+  from {
+    stroke-dashoffset: 62.83;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

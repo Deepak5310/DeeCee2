@@ -117,6 +117,7 @@ function DeeceeHairApp(): React.ReactElement {
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [transformationSlide, setTransformationSlide] = useState(0);
 
   // Currency data with exchange rates (1 USD = 86.50 INR)
   // All prices stored in USD, converted to local currency
@@ -139,6 +140,12 @@ function DeeceeHairApp(): React.ReactElement {
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide for transformations
+  useEffect(() => {
+    const interval = setInterval(() => setTransformationSlide((prev) => (prev + 1) % 3), 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -746,6 +753,80 @@ function DeeceeHairApp(): React.ReactElement {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hair Transformations Slideshow */}
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Hair Transformations</h2>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">See the amazing transformations our customers have achieved</p>
+          </div>
+
+          <div className="relative">
+            <div className="overflow-hidden rounded-2xl shadow-2xl">
+              {/* Single image transformation view */}
+              <div className="relative aspect-[3/4] md:aspect-video bg-gray-100">
+                <img
+                  src={[
+                    "images/before-after-1.webp",
+                    "images/before-after-2.webp",
+                    "images/before-after-3.webp"
+                  ][transformationSlide]}
+                  alt="Hair Transformation"
+                  className="w-full h-full object-cover transition-opacity duration-1000"
+                />
+
+                {/* Navigation Dots with Circular Progress - Overlay on Image */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2.5 z-20">
+                  {[0, 1, 2].map((index) => (
+                    <button
+                      key={index}
+                      onClick={() => setTransformationSlide(index)}
+                      className="relative w-6 h-6 flex items-center justify-center group"
+                      aria-label={`Transformation ${index + 1}`}
+                    >
+                      {/* Background Circle */}
+                      <svg className="absolute inset-0 w-6 h-6 transform -rotate-90">
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="rgba(255, 255, 255, 0.3)"
+                          strokeWidth="1.5"
+                          fill="none"
+                        />
+                        {/* Animated Progress Circle - resets when transformationSlide changes */}
+                        {index === transformationSlide && (
+                          <circle
+                            key={`progress-${transformationSlide}`}
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="#ffffff"
+                            strokeWidth="1.5"
+                            fill="none"
+                            strokeDasharray="62.83"
+                            strokeDashoffset="62.83"
+                            className="animate-[progress_4s_linear_forwards]"
+                          />
+                        )}
+                      </svg>
+                      {/* Center Dot */}
+                      <div
+                        className={`w-1.5 h-1.5 rounded-full transition-all z-10 ${
+                          index === transformationSlide
+                            ? "bg-white scale-125"
+                            : "bg-white/50 group-hover:bg-white/70"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
