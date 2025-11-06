@@ -709,6 +709,16 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
+      {/* Featured Photo Section */}
+      <section className="h-[90vh] w-auto relative overflow-hidden">
+        <img
+          src="/images/featured-section.webp"
+          alt="Featured Collection"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+      </section>
+
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
