@@ -670,11 +670,11 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <div className="text-center">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Bestsellers</h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4">Our most loved products, trusted by thousands of customers</p>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">Our most loved products, trusted by thousands of customers</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-6 lg:gap-8">
             {products.filter(p => p.isBestseller).map((product) => (
@@ -719,11 +719,11 @@ function DeeceeHairApp(): React.ReactElement {
         {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div> */}
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <div className="text-center">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">New Arrivals</h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4">Discover our latest collection of premium hair extensions</p>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">Discover our latest collection of premium hair extensions</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-6 lg:gap-8">
             {products.filter(p => p.isNew).map((product) => (
@@ -750,10 +750,10 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 text-center">Featured Collections</h2>
-          <p className="text-sm md:text-base text-gray-600 text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-2xl mx-auto px-4">Discover our premium hair extensions in various textures to match your style</p>
+          <p className="text-sm md:text-base text-gray-600 text-center max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">Discover our premium hair extensions in various textures to match your style</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-6 lg:gap-8">
             {[
               { type: "Straight", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/straight-extensions.png" },
@@ -775,11 +775,11 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20" style={{backgroundColor: '#f4f4f4'}}>
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <div className="text-center">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Mans Collection</h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4">Premium hair solutions designed specifically for men</p>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">Premium hair solutions designed specifically for men</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-6 lg:gap-8">
             {products.filter(p => p.isMans).map((product) => (
@@ -811,7 +811,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <section className="py-12 sm:py-20" style={{backgroundColor: '#f4f4f4'}}>
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">Style Inspiration & Reels</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
