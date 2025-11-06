@@ -1020,191 +1020,120 @@ function DeeceeHairApp(): React.ReactElement {
 
       {/* Footer - Hidden for admin pages */}
       {!isAdminPage && (
-        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 sm:py-16 w-full relative overflow-hidden">
+        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-4 sm:py-6 w-full relative overflow-hidden">
         {/* Decorative background elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-600/5 rounded-full blur-3xl"></div>
 
         <div className="w-full px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {/* Brand Section */}
-            <div className="md:col-span-2">
-              <div className="flex items-center mb-4">
-                <span className="text-2xl sm:text-3xl font-bold text-rose-600 select-none">DEECEE</span>
-                <span className="text-2xl sm:text-3xl font-light text-white select-none ml-2">HAIR</span>
+            <div>
+              <div className="flex items-center mb-3">
+                <span className="text-xl sm:text-2xl font-bold text-rose-600 select-none">DEECEE</span>
+                <span className="text-xl sm:text-2xl font-light text-white select-none ml-2">HAIR</span>
               </div>
-              <p className="text-gray-300 text-sm sm:text-base mb-6 max-w-md leading-relaxed">
-                Premium quality hair extensions for the modern woman. Transform your look with our 100% authentic, silky smooth textures.
+              <p className="text-gray-300 text-xs sm:text-sm mb-4 leading-relaxed">
+                Premium quality hair extensions for the modern woman. Transform your look with our 100% authentic textures.
               </p>
-              <div className="mb-4">
-                <h5 className="text-sm font-semibold text-gray-400 mb-3">Follow Us</h5>
-                <div className="flex space-x-3">
-                  <a
-                    href="https://www.instagram.com/deeceehairofficial"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </a>
-                  <a
-                    href="https://www.facebook.com/hairdeecee"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@deeceehair"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-                    aria-label="YouTube"
-                  >
-                    <Youtube className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </a>
-                  <a
-                    href="mailto:info@deeceehairs.com"
-                    className="w-10 h-10 bg-gray-800 hover:bg-rose-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
-                    aria-label="Email"
-                  >
-                    <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </a>
-                </div>
+              <div className="flex space-x-2">
+                <a
+                  href="https://www.instagram.com/deeceehairofficial"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 bg-gray-800 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.facebook.com/hairdeecee"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@deeceehair"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-4 h-4" />
+                </a>
+                <a
+                  href="mailto:info@deeceehairs.com"
+                  className="w-8 h-8 bg-gray-800 hover:bg-rose-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  aria-label="Email"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold mb-6 text-base sm:text-lg text-white relative inline-block">
-                Quick Links
-                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-rose-600"></span>
-              </h4>
-              <ul className="space-y-3 text-sm sm:text-base text-gray-300">
+              <h4 className="font-bold mb-3 text-sm sm:text-base text-white">Quick Links</h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
                 <li>
-                  <button
-                    onClick={() => navigateTo("about")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    About Us
-                  </button>
+                  <button onClick={() => navigateTo("about")} className="hover:text-rose-500 transition-colors" type="button">About Us</button>
                 </li>
                 <li>
-                  <button
-                    onClick={() => navigateTo("shop")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Shop
-                  </button>
+                  <button onClick={() => navigateTo("shop")} className="hover:text-rose-500 transition-colors" type="button">Shop</button>
                 </li>
                 <li>
-                  <button
-                    onClick={() => navigateTo("bestsellers")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Bestsellers
-                  </button>
+                  <button onClick={() => navigateTo("bestsellers")} className="hover:text-rose-500 transition-colors" type="button">Bestsellers</button>
                 </li>
                 <li>
-                  <button
-                    onClick={() => navigateTo("contact")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Contact
-                  </button>
+                  <button onClick={() => navigateTo("contact")} className="hover:text-rose-500 transition-colors" type="button">Contact</button>
+                </li>
+                <li>
+                  <button onClick={() => navigateTo("appointment")} className="hover:text-rose-500 transition-colors" type="button">Book Appointment</button>
                 </li>
               </ul>
             </div>
 
             {/* Legal */}
             <div>
-              <h4 className="font-bold mb-6 text-base sm:text-lg text-white relative inline-block">
-                Legal
-                <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-rose-600"></span>
-              </h4>
-              <ul className="space-y-3 text-sm sm:text-base text-gray-300">
+              <h4 className="font-bold mb-3 text-sm sm:text-base text-white">Legal</h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
                 <li>
-                  <button
-                    onClick={() => navigateTo("terms")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Terms & Conditions
-                  </button>
+                  <button onClick={() => navigateTo("terms")} className="hover:text-rose-500 transition-colors" type="button">Terms & Conditions</button>
                 </li>
                 <li>
-                  <button
-                    onClick={() => navigateTo("privacy")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Privacy Policy
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => navigateTo("appointment")}
-                    className="hover:text-rose-500 hover:translate-x-1 transition-all duration-200 focus:outline-none inline-flex items-center group py-1 active:text-rose-600"
-                    type="button"
-                  >
-                    <span className="w-0 group-hover:w-2 h-0.5 bg-rose-600 mr-0 group-hover:mr-2 transition-all duration-200"></span>
-                    Book Appointment
-                  </button>
+                  <button onClick={() => navigateTo("privacy")} className="hover:text-rose-500 transition-colors" type="button">Privacy Policy</button>
                 </li>
               </ul>
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center space-x-2 text-xs text-gray-400">
+                  <Shield className="w-3 h-3 text-rose-600" />
+                  <span>Secure Payment</span>
+                </div>
+                <div className="flex items-center space-x-2 text-xs text-gray-400">
+                  <Truck className="w-3 h-3 text-rose-600" />
+                  <span>Free Shipping</span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-gray-700/50 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex flex-col items-center md:items-start space-y-2">
-                <p className="text-xs sm:text-sm text-gray-400 select-none">
-                  &copy; {new Date().getFullYear()} DEECEE HAIR. All rights reserved. Made with ❤️ for beautiful hair.
-                </p>
-                <div className="flex items-center space-x-2 text-xs text-gray-500 hover:text-rose-400 transition-colors group">
-                  <span className="opacity-70">Crafted by</span>
-                  <a
-                    href="https://github.com/Deepak5310"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-rose-500 hover:text-rose-400 flex items-center space-x-1 transition-all"
-                  >
-                    <span>Deepak</span>
-                    <svg
-                      className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-center space-x-6 text-xs sm:text-sm text-gray-400">
-                <div className="flex items-center space-x-2">
-                  <Shield className="w-4 h-4 text-rose-600" />
-                  <span>Secure Payment</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Truck className="w-4 h-4 text-rose-600" />
-                  <span>Free Shipping</span>
-                </div>
-              </div>
+          <div className="border-t border-gray-700/50 pt-4">
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+              <p className="text-xs text-gray-400 select-none">
+                &copy; {new Date().getFullYear()} DEECEE HAIR. All rights reserved.
+              </p>
+              <a
+                href="https://github.com/Deepak5310"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-500 hover:text-rose-400 transition-colors"
+              >
+                Crafted by <span className="text-rose-500">Deepak</span>
+              </a>
             </div>
           </div>
         </div>
