@@ -750,15 +750,9 @@ function DeeceeHairApp(): React.ReactElement {
       {/* Video Section */}
       <section>
         <div className="w-full">
-          <div className="relative w-full overflow-hidden">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto object-cover"
-            >
-              <source src="/videos/promo-video.mp4" type="video/mp4" />
+          <div className="relative w-full" style={{ aspectRatio: '4.13' }}>
+            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+              <source src="/videos/promo-video.webm" type="video/webm" />
               Your browser does not support the video tag.
             </video>
           </div>
