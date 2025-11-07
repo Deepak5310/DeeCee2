@@ -747,6 +747,24 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
+      {/* Video Section */}
+      <section>
+        <div className="w-full">
+          <div className="relative w-full overflow-hidden">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto object-cover"
+            >
+              <source src="/videos/promo-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
+
       <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center">
