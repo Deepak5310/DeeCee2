@@ -185,7 +185,7 @@ VideoReelCard.displayName = 'VideoReelCard';
 
 function DeeceeHairApp(): React.ReactElement {
   const { isAuthenticated, user } = useAuth();
-  
+
   // State management
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -493,13 +493,16 @@ function DeeceeHairApp(): React.ReactElement {
     loadWishlist();
   }, [isAuthenticated, user]);
 
-  // Determine if current slide needs dark text (slides 0, 2 are dark; 1, 3, 4 are light)
-  const isDarkSlide = !isScrolled && (currentSlide === 0 || currentSlide === 2);
-  const isLightSlide = !isScrolled && (currentSlide === 1 || currentSlide === 3 || currentSlide === 4);
+  // Determine if current slide needs dark text (only on home page)
+  const isDarkSlide = currentPage === 'home' && !isScrolled && (currentSlide === 0 || currentSlide === 2);
+  const isLightSlide = currentPage === 'home' && !isScrolled && (currentSlide === 1 || currentSlide === 3 || currentSlide === 4);
+
+  // For non-home pages, always use scrolled/solid styling
+  const shouldUseSolidHeader = currentPage !== 'home' || isScrolled;
 
   const Header = useCallback(() => (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled
+      isScrolled || currentPage !== 'home'
         ? 'bg-white border-b border-gray-200 shadow-md'
         : 'bg-transparent'
     }`}>
@@ -512,74 +515,74 @@ function DeeceeHairApp(): React.ReactElement {
             >
               <span className="text-xl sm:text-2xl font-bold select-none text-rose-600 drop-shadow-sm">DEECEE</span>
               <span className={`text-xl sm:text-2xl font-light select-none transition-colors duration-300 ${
-                isScrolled ? 'text-gray-800' : isDarkSlide ? 'text-gray-800 drop-shadow-sm' : 'text-white drop-shadow-lg'
+                shouldUseSolidHeader ? 'text-gray-800' : isDarkSlide ? 'text-gray-800 drop-shadow-sm' : 'text-white drop-shadow-lg'
               }`}>HAIR</span>
             </button>
             <nav className="hidden lg:flex space-x-6 ml-8">
               <button
                 onClick={() => navigateTo("bestsellers")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 Bestsellers
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("shop")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 Shop for Women
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("shop", "mans")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 Shop for Men
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("appointment")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 Book Appointment
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("about")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 About Us
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
               <button
                 onClick={() => navigateTo("contact")}
                 className={`text-sm font-medium transition-all duration-200 focus:outline-none rounded px-3 py-2 relative group hover:scale-105 active:scale-95 ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600' : isDarkSlide ? 'text-gray-800 hover:text-gray-900' : 'text-white hover:text-white/80'
                 }`}
               >
                 Contact Us
                 <span className={`absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
-                  isScrolled ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
+                  shouldUseSolidHeader ? 'bg-rose-600' : isDarkSlide ? 'bg-gray-800' : 'bg-white'
                 }`}></span>
               </button>
             </nav>
@@ -590,7 +593,7 @@ function DeeceeHairApp(): React.ReactElement {
               <button
                 onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 focus:outline-none group ${
-                  isScrolled ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : isDarkSlide ? 'text-gray-800 hover:text-gray-900 hover:bg-gray-100/20' : 'text-white hover:text-white/80 hover:bg-white/10'
+                  shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : isDarkSlide ? 'text-gray-800 hover:text-gray-900 hover:bg-gray-100/20' : 'text-white hover:text-white/80 hover:bg-white/10'
                 }`}
               >
                 <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
@@ -618,10 +621,10 @@ function DeeceeHairApp(): React.ReactElement {
             </div>
 
             <div className="hidden sm:flex items-center space-x-2">
-              <IconButton icon={Heart} isScrolled={isScrolled} isDarkSlide={isDarkSlide} />
+              <IconButton icon={Heart} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
               <IconButton
                 icon={User}
-                isScrolled={isScrolled}
+                isScrolled={shouldUseSolidHeader}
                 isDarkSlide={isDarkSlide}
                 onClick={() => {
                   if (isAuthenticated) {
@@ -632,12 +635,12 @@ function DeeceeHairApp(): React.ReactElement {
                 }}
               />
             </div>
-            <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} isScrolled={isScrolled} isDarkSlide={isDarkSlide} />
-            <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} isScrolled={isScrolled} isDarkSlide={isDarkSlide} />
+            <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
+            <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
             <button
               onClick={() => setMobileMenuOpen((v) => !v)}
               className={`lg:hidden p-2 focus:outline-none rounded-lg transition-all duration-200 active:scale-90 ${
-                isScrolled ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : isDarkSlide ? 'text-gray-800 hover:text-gray-900 hover:bg-gray-100/20' : 'text-white hover:text-white/80 hover:bg-white/10'
+                shouldUseSolidHeader ? 'text-gray-700 hover:text-rose-600 hover:bg-rose-50' : isDarkSlide ? 'text-gray-800 hover:text-gray-900 hover:bg-gray-100/20' : 'text-white hover:text-white/80 hover:bg-white/10'
               }`}
             >
               {mobileMenuOpen ? <X className="w-6 h-6 transform rotate-0 transition-transform duration-200" /> : <Menu className="w-6 h-6 transform rotate-0 transition-transform duration-200" />}
@@ -691,7 +694,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       )}
     </header>
-  ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown, isScrolled, currentSlide, isDarkSlide]);
+  ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown, isScrolled, currentSlide, isDarkSlide, currentPage, shouldUseSolidHeader]);
 
   const HomePage = useCallback(() => (
     <div className="w-auto">
