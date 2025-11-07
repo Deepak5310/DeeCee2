@@ -30,7 +30,8 @@ import { products, heroSlides, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMult
 const TRANSFORMATION_IMAGES = [
   "images/before-after-1.webp",
   "images/before-after-2.webp",
-  "images/before-after-3.webp"
+  "images/before-after-3.webp",
+  "images/before-after-4.webp"
 ] as const;
 
 const FEATURED_COLLECTIONS = [
