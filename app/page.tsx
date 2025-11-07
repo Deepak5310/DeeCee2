@@ -36,6 +36,13 @@ const TRANSFORMATION_IMAGES = [
   "images/before-after-6.webp"
 ] as const;
 
+const LANDSCAPE_BANNER_IMAGES = [
+  { image: "images/home-1.webp", name: "Hair Extensions" },
+  { image: "images/home-2.webp", name: "Wigs" },
+  { image: "images/home-3.webp", name: "Hair Toppers" },
+  { image: "images/home-4.webp", name: "Men's Hair Patches" }
+] as const;
+
 const FEATURED_COLLECTIONS = [
   { type: "Straight", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/straight-extensions.png" },
   { type: "Wavy", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/wavy-extensions.png" },
@@ -716,6 +723,27 @@ function DeeceeHairApp(): React.ReactElement {
           {heroSlides.map((_, index) => (
             <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentSlide ? "bg-white w-6 sm:w-8" : "bg-white/50 hover:bg-white/70"}`} aria-label={`Slide ${index + 1}`} />
           ))}
+        </div>
+      </section>
+
+      {/* Landscape Banner Section */}
+      <section className="py-2 sm:py-3 md:py-4 lg:py-6">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center gap-20 sm:gap-22 md:gap-26 flex-wrap">
+            {LANDSCAPE_BANNER_IMAGES.map((item, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square w-24 sm:w-32 md:w-40">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-2 text-xs sm:text-sm md:text-base font-semibold text-gray-800 text-center">{item.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
