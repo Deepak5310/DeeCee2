@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
-// Router functionality handled with native History API
-import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Calendar, Pause, Play, VolumeX, Volume2, Sparkles, Instagram, Facebook, Youtube, Mail, Globe } from "lucide-react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { Heart, User, Search, ShoppingCart, Menu, X, Star, Truck, Shield, ChevronLeft, ChevronRight, Pause, Play, VolumeX, Volume2, Sparkles, Instagram, Facebook, Youtube, Mail, Globe } from "lucide-react";
 import ShopPage from './pages/ShopPage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
@@ -27,18 +26,106 @@ import { IconButton } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
 import { products, heroSlides, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
 
-const VideoReelCard = ({ video }: { video: ReelVideo }) => {
+// Constants
+const TRANSFORMATION_IMAGES = [
+  "images/before-after-1.webp",
+  "images/before-after-2.webp",
+  "images/before-after-3.webp"
+] as const;
+
+const FEATURED_COLLECTIONS = [
+  { type: "Straight", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/straight-extensions.png" },
+  { type: "Wavy", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/wavy-extensions.png" },
+  { type: "Curly", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/curly-extensions.png" },
+] as const;
+
+const TESTIMONIALS = [
+  { name: "Priya S.", review: "Amazing quality! The hair extensions blend perfectly with my natural hair." },
+  { name: "Anjali M.", review: "Best purchase ever! The texture is so soft and natural looking." },
+  { name: "Neha K.", review: "Excellent service and the hair quality is outstanding. Highly recommend!" },
+] as const;
+
+const CURRENCIES = {
+  USD: { symbol: "$", rate: 1, name: "USA (USD)" },
+  INR: { symbol: "₹", rate: 86.50, name: "India (INR)" },
+  EUR: { symbol: "€", rate: 0.92, name: "Europe (EUR)" },
+  GBP: { symbol: "£", rate: 0.79, name: "UK (GBP)" },
+  AED: { symbol: "د.إ", rate: 3.67, name: "UAE (AED)" },
+  AUD: { symbol: "A$", rate: 1.52, name: "Australia (AUD)" },
+  CAD: { symbol: "C$", rate: 1.38, name: "Canada (CAD)" },
+  SGD: { symbol: "S$", rate: 1.34, name: "Singapore (SGD)" },
+} as const;
+
+const ROUTE_TO_PAGE: Record<string, Page> = {
+  '/': 'home',
+  '/shop': 'shop',
+  '/cart': 'cart',
+  '/checkout': 'checkout',
+  '/contact': 'contact',
+  '/appointment': 'appointment',
+  '/product': 'product',
+  '/terms': 'terms',
+  '/privacy': 'privacy',
+  '/about': 'about',
+  '/profile': 'profile',
+  '/bestsellers': 'bestsellers',
+  '/admin': 'admin-login',
+  '/admin/login': 'admin-login',
+  '/admin/dashboard': 'admin-dashboard'
+};
+
+const PAGE_TO_ROUTE: Record<Page, string> = {
+  home: '/',
+  shop: '/shop',
+  cart: '/cart',
+  checkout: '/checkout',
+  contact: '/contact',
+  appointment: '/appointment',
+  product: '/product',
+  terms: '/terms',
+  privacy: '/privacy',
+  about: '/about',
+  profile: '/profile',
+  bestsellers: '/bestsellers',
+  'admin-login': '/admin/login',
+  'admin-dashboard': '/admin/dashboard'
+};
+
+// Circular progress navigation component
+const CircularProgressDot = React.memo(({ index, isActive, onClick }: { index: number; isActive: boolean; onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    className="relative w-6 h-6 flex items-center justify-center group"
+    aria-label={`Transformation ${index + 1}`}
+  >
+    <svg className="absolute inset-0 w-6 h-6 -rotate-90">
+      <circle cx="12" cy="12" r="10" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="1.5" fill="none" />
+      {isActive && (
+        <circle
+          key={`progress-${index}`}
+          cx="12" cy="12" r="10"
+          stroke="#ffffff"
+          strokeWidth="1.5"
+          fill="none"
+          strokeDasharray="62.83"
+          strokeDashoffset="62.83"
+          className="animate-[progress_4s_linear_forwards]"
+        />
+      )}
+    </svg>
+    <div className={`w-1.5 h-1.5 rounded-full transition-all z-10 ${isActive ? "bg-white scale-125" : "bg-white/50 group-hover:bg-white/70"}`} />
+  </button>
+));
+CircularProgressDot.displayName = 'CircularProgressDot';
+
+const VideoReelCard = React.memo(({ video }: { video: ReelVideo }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
   const togglePlay = useCallback(() => {
     if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
+      isPlaying ? videoRef.current.pause() : videoRef.current.play();
       setIsPlaying(!isPlaying);
     }
   }, [isPlaying]);
@@ -51,9 +138,10 @@ const VideoReelCard = ({ video }: { video: ReelVideo }) => {
   }, [isMuted]);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play();
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {});
       setIsPlaying(true);
       setIsMuted(true);
     }
@@ -92,10 +180,13 @@ const VideoReelCard = ({ video }: { video: ReelVideo }) => {
       </div>
     </div>
   );
-};
+});
+VideoReelCard.displayName = 'VideoReelCard';
 
 function DeeceeHairApp(): React.ReactElement {
   const { isAuthenticated, user } = useAuth();
+  
+  // State management
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedColor, setSelectedColor] = useState("");
@@ -107,97 +198,42 @@ function DeeceeHairApp(): React.ReactElement {
   const [searchOpen, setSearchOpen] = useState(false);
   const [filterCategory, setFilterCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [transformationSlide, setTransformationSlide] = useState(0);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState<keyof typeof CURRENCIES>("USD");
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [wishlistProductIds, setWishlistProductIds] = useState<number[]>([]);
   const [profileDefaultTab, setProfileDefaultTab] = useState<"profile" | "orders" | "addresses" | "wishlist" | "security">("profile");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [transformationSlide, setTransformationSlide] = useState(0);
 
-  // Currency data with exchange rates (1 USD = 86.50 INR)
-  // All prices stored in USD, converted to local currency
-  const currencies = {
-    USD: { symbol: "$", rate: 1, name: "USA (USD)" },
-    INR: { symbol: "₹", rate: 86.50, name: "India (INR)" },
-    EUR: { symbol: "€", rate: 0.92, name: "Europe (EUR)" },
-    GBP: { symbol: "£", rate: 0.79, name: "UK (GBP)" },
-    AED: { symbol: "د.إ", rate: 3.67, name: "UAE (AED)" },
-    AUD: { symbol: "A$", rate: 1.52, name: "Australia (AUD)" },
-    CAD: { symbol: "C$", rate: 1.38, name: "Canada (CAD)" },
-    SGD: { symbol: "S$", rate: 1.34, name: "Singapore (SGD)" },
-  };
-
-  // Function to convert price from USD to selected currency
+  // Memoized currency conversion function
   const convertPrice = useCallback((priceInUSD: number): string => {
-    const converted = priceInUSD * currencies[selectedCurrency as keyof typeof currencies].rate;
-    return `${currencies[selectedCurrency as keyof typeof currencies].symbol}${Math.round(converted).toLocaleString()}`;
+    const { symbol, rate } = CURRENCIES[selectedCurrency];
+    const converted = priceInUSD * rate;
+    return `${symbol}${Math.round(converted).toLocaleString()}`;
   }, [selectedCurrency]);
 
+  // Auto-slide effects
   useEffect(() => {
     const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-slide for transformations
   useEffect(() => {
-    const interval = setInterval(() => setTransformationSlide((prev) => (prev + 1) % 3), 4000);
+    const interval = setInterval(() => setTransformationSlide((prev) => (prev + 1) % TRANSFORMATION_IMAGES.length), 4000);
     return () => clearInterval(interval);
   }, []);
 
   // Handle scroll event for header background
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Route mapping constants
-  const ROUTE_TO_PAGE: Record<string, Page> = {
-    '/': 'home',
-    '/shop': 'shop',
-    '/cart': 'cart',
-    '/checkout': 'checkout',
-    '/contact': 'contact',
-    '/appointment': 'appointment',
-    '/product': 'product',
-    '/terms': 'terms',
-    '/privacy': 'privacy',
-    '/about': 'about',
-    '/profile': 'profile',
-    '/bestsellers': 'bestsellers',
-    '/admin': 'admin-login',
-    '/admin/login': 'admin-login',
-    '/admin/dashboard': 'admin-dashboard'
-  };
-
-  const PAGE_TO_ROUTE: Record<Page, string> = {
-    home: '/',
-    shop: '/shop',
-    cart: '/cart',
-    checkout: '/checkout',
-    contact: '/contact',
-    appointment: '/appointment',
-    product: '/product',
-    terms: '/terms',
-    privacy: '/privacy',
-    about: '/about',
-    profile: '/profile',
-    bestsellers: '/bestsellers',
-    'admin-login': '/admin/login',
-    'admin-dashboard': '/admin/dashboard'
-  };
 
   // Sync current page with URL pathname on mount
   useEffect(() => {
@@ -563,11 +599,11 @@ function DeeceeHairApp(): React.ReactElement {
 
               {showCurrencyDropdown && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 py-2 animate-slideDown">
-                  {Object.entries(currencies).map(([code, data]) => (
+                  {Object.entries(CURRENCIES).map(([code, data]) => (
                     <button
                       key={code}
                       onClick={() => {
-                        setSelectedCurrency(code);
+                        setSelectedCurrency(code as keyof typeof CURRENCIES);
                         setShowCurrencyDropdown(false);
                       }}
                       className={`w-full text-left px-4 py-2 text-sm hover:bg-rose-50 hover:text-rose-600 transition-colors ${
@@ -760,69 +796,30 @@ function DeeceeHairApp(): React.ReactElement {
       {/* Hair Transformations Slideshow */}
       <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center mb-2 sm:mb-3 md:mb-4 lg:mb-6">
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Hair Transformations</h2>
-            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">See the amazing transformations our customers have achieved</p>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4">See the amazing transformations our customers have achieved</p>
           </div>
 
           <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden rounded-2xl shadow-2xl">
-              {/* Single image transformation view */}
               <div className="relative aspect-[3/4] md:aspect-video bg-gray-100">
                 <img
-                  src={[
-                    "images/before-after-1.webp",
-                    "images/before-after-2.webp",
-                    "images/before-after-3.webp"
-                  ][transformationSlide]}
-                  alt="Hair Transformation"
+                  src={TRANSFORMATION_IMAGES[transformationSlide]}
+                  alt={`Hair Transformation ${transformationSlide + 1}`}
                   className="w-full h-full object-cover transition-opacity duration-1000"
+                  loading="lazy"
                 />
 
-                {/* Navigation Dots with Circular Progress - Overlay on Image */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2.5 z-20">
-                  {[0, 1, 2].map((index) => (
-                    <button
+                {/* Navigation Dots Overlay */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2.5 z-20">
+                  {TRANSFORMATION_IMAGES.map((_, index) => (
+                    <CircularProgressDot
                       key={index}
+                      index={index}
+                      isActive={index === transformationSlide}
                       onClick={() => setTransformationSlide(index)}
-                      className="relative w-6 h-6 flex items-center justify-center group"
-                      aria-label={`Transformation ${index + 1}`}
-                    >
-                      {/* Background Circle */}
-                      <svg className="absolute inset-0 w-6 h-6 transform -rotate-90">
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="rgba(255, 255, 255, 0.3)"
-                          strokeWidth="1.5"
-                          fill="none"
-                        />
-                        {/* Animated Progress Circle - resets when transformationSlide changes */}
-                        {index === transformationSlide && (
-                          <circle
-                            key={`progress-${transformationSlide}`}
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="#ffffff"
-                            strokeWidth="1.5"
-                            fill="none"
-                            strokeDasharray="62.83"
-                            strokeDashoffset="62.83"
-                            className="animate-[progress_4s_linear_forwards]"
-                          />
-                        )}
-                      </svg>
-                      {/* Center Dot */}
-                      <div
-                        className={`w-1.5 h-1.5 rounded-full transition-all z-10 ${
-                          index === transformationSlide
-                            ? "bg-white scale-125"
-                            : "bg-white/50 group-hover:bg-white/70"
-                        }`}
-                      />
-                    </button>
+                    />
                   ))}
                 </div>
               </div>
@@ -836,14 +833,10 @@ function DeeceeHairApp(): React.ReactElement {
           <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 text-center">Featured Collections</h2>
           <p className="text-sm md:text-base text-gray-600 text-center max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">Discover our premium hair extensions in various textures to match your style</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-6 lg:gap-8">
-            {[
-              { type: "Straight", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/straight-extensions.png" },
-              { type: "Wavy", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/wavy-extensions.png" },
-              { type: "Curly", image: "https://raw.githubusercontent.com/prabhav0001/deecee-src/refs/heads/main/curly-extensions.png" },
-            ].map((item) => (
-              <div key={item.type} className="group cursor-pointer" onClick={() => { setFilterCategory(item.type.toLowerCase()); setCurrentPage("shop"); }}>
+            {FEATURED_COLLECTIONS.map((item) => (
+              <div key={item.type} className="group cursor-pointer" onClick={() => { setFilterCategory(item.type.toLowerCase()); navigateTo("shop"); }}>
                 <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video">
-                  <img src={item.image} alt={item.type} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                  <img src={item.image} alt={`${item.type} Extensions`} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6">
                     <h3 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-1.5 md:mb-2">{item.type} Extensions</h3>
@@ -907,13 +900,13 @@ function DeeceeHairApp(): React.ReactElement {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8 sm:mb-12 text-center">What Our Customers Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              { name: "Priya S.", review: "Amazing quality! The hair extensions blend perfectly with my natural hair." },
-              { name: "Anjali M.", review: "Best purchase ever! The texture is so soft and natural looking." },
-              { name: "Neha K.", review: "Excellent service and the hair quality is outstanding. Highly recommend!" },
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-white p-4 sm:p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="flex mb-4">{Array.from({ length: 5 }).map((_, i) => (<Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />))}</div>
+            {TESTIMONIALS.map((testimonial) => (
+              <div key={testimonial.name} className="bg-white p-4 sm:p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div className="flex mb-4">
+                  {Array(5).fill(0).map((_, i) => (
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
                 <p className="text-gray-700 mb-4 italic text-sm sm:text-base">\"{testimonial.review}\"</p>
                 <p className="font-semibold text-gray-900 text-sm sm:text-base">- {testimonial.name}</p>
               </div>
