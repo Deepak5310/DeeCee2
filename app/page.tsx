@@ -732,7 +732,7 @@ function DeeceeHairApp(): React.ReactElement {
           <div className="flex justify-center gap-20 sm:gap-22 md:gap-26 flex-wrap">
             {LANDSCAPE_BANNER_IMAGES.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square w-24 sm:w-32 md:w-40">
+                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square w-32 sm:w-40 md:w-52 lg:w-60">
                   <img
                     src={item.image}
                     alt={item.name}
