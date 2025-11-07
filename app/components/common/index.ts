@@ -5,3 +5,4 @@ export { IconButton } from './IconButton';
 export { FeatureCard } from './FeatureCard';
 export { PromoSlider } from './PromoSlider';
 export { default as AddressForm } from './AddressForm';
+export { default as PromoVideo } from './PromoVideo';
