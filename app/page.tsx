@@ -756,7 +756,7 @@ function DeeceeHairApp(): React.ReactElement {
               loop
               muted
               playsInline
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover scale-[1.01]"
             >
               <source src="/videos/promo-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
