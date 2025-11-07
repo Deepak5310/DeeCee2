@@ -765,7 +765,7 @@ function DeeceeHairApp(): React.ReactElement {
             <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-4 mb-2 sm:mb-3 md:mb-4 lg:mb-6">See the amazing transformations our customers have achieved</p>
           </div>
 
-          <div className="relative">
+          <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden rounded-2xl shadow-2xl">
               {/* Single image transformation view */}
               <div className="relative aspect-[3/4] md:aspect-video bg-gray-100">
