@@ -229,7 +229,7 @@ function DeeceeHairApp(): React.ReactElement {
 
   // Auto-slide effects
   useEffect(() => {
-    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 5000);
+    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length), 9000);
     return () => clearInterval(interval);
   }, []);
 
