@@ -789,7 +789,7 @@ function DeeceeHairApp(): React.ReactElement {
       {/* Featured Photo Section */}
       <section className="h-[80vh] w-auto relative overflow-hidden">
         <img
-          src="/images/featured-section.webp"
+          src="/images/6.webp"
           alt="Featured Collection"
           className="w-full h-full object-cover"
         />
