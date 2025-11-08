@@ -706,6 +706,31 @@ function DeeceeHairApp(): React.ReactElement {
     </header>
   ), [cart.length, mobileMenuOpen, navigateTo, searchOpen, isAuthenticated, selectedCurrency, showCurrencyDropdown, isScrolled, currentSlide, isDarkSlide, currentPage, shouldUseSolidHeader]);
 
+  // Memoized Video Section - never re-renders, prevents white flash
+  const PromoVideoSection = useMemo(() => (
+    <section className="bg-black">
+      <div className="w-full bg-black">
+        <div className="relative w-full bg-black" style={{ aspectRatio: '4.13' }}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover block"
+            style={{
+              backgroundColor: '#000',
+              willChange: 'auto'
+            }}
+          >
+            <source src="/videos/promo-video.webm" type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+  ), []); // Empty dependencies - video never re-renders
+
   const HomePage = useCallback(() => (
     <div className="w-auto">
       <section className="relative h-[50vh] sm:h-[75vh] flex items-center justify-center overflow-hidden -mt-16 pt-16">
@@ -748,16 +773,7 @@ function DeeceeHairApp(): React.ReactElement {
       </section>
 
       {/* Video Section */}
-      <section>
-        <div className="w-full">
-          <div className="relative w-full" style={{ aspectRatio: '4.13' }}>
-            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-              <source src="/videos/promo-video.webm" type="video/webm" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </section>
+      {PromoVideoSection}
 
       <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
