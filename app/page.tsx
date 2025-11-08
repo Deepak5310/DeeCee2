@@ -22,7 +22,7 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
 import { Product, CartItem, Appointment, Page, ReelVideo } from './types';
-import { IconButton, PromoVideo } from './components/common';
+import { IconButton } from './components/common';
 import DevConsoleMessage from './components/common/DevConsoleMessage';
 import { products, heroSlides, reelsVideos, DISCOUNT_PERCENTAGE, getDiscountMultiplier } from './constants/products';
 
@@ -747,7 +747,17 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
 
-      <PromoVideo />
+      {/* Video Section */}
+      <section>
+        <div className="w-full">
+          <div className="relative w-full" style={{ aspectRatio: '4.13' }}>
+            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+              <source src="/videos/promo-video.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </section>
 
       <section className="py-2 sm:py-3 md:py-4 lg:py-6" style={{backgroundColor: '#f4f4f4'}}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
@@ -951,7 +961,7 @@ function DeeceeHairApp(): React.ReactElement {
         </div>
       </section>
     </div>
-  ), [navigateTo, convertPrice, handleProductClick]);
+  ), [currentSlide, navigateTo, convertPrice]);
 
   // Check if current page is admin page
   const isAdminPage = currentPage === 'admin-login' || currentPage === 'admin-dashboard';
