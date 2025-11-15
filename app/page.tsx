@@ -598,8 +598,8 @@ function DeeceeHairApp(): React.ReactElement {
             </nav>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Currency Selector */}
-            <div className="relative">
+            {/* Currency Selector - Hidden on mobile */}
+            <div className="relative hidden lg:block">
               <button
                 onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 focus:outline-none group ${
@@ -607,7 +607,7 @@ function DeeceeHairApp(): React.ReactElement {
                 }`}
               >
                 <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                <span className="text-sm font-medium hidden sm:inline">{selectedCurrency}</span>
+                <span className="text-sm font-medium">{selectedCurrency}</span>
               </button>
 
               {showCurrencyDropdown && (
@@ -645,8 +645,11 @@ function DeeceeHairApp(): React.ReactElement {
                 }}
               />
             </div>
-            <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
-            <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
+            {/* Search and Cart - Hidden on mobile */}
+            <div className="hidden lg:flex items-center space-x-2">
+              <IconButton icon={Search} onClick={() => setSearchOpen((v) => !v)} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
+              <IconButton icon={ShoppingCart} onClick={() => navigateTo("cart")} badge={cart.length} isScrolled={shouldUseSolidHeader} isDarkSlide={isDarkSlide} />
+            </div>
             <button
               onClick={() => setMobileMenuOpen((v) => !v)}
               className={`lg:hidden p-2 focus:outline-none rounded-lg transition-all duration-200 active:scale-90 ${
@@ -666,6 +669,47 @@ function DeeceeHairApp(): React.ReactElement {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 py-4 px-4 animate-slideDown">
           <nav className="flex flex-col space-y-3">
+            {/* Search Bar */}
+            <div className="mb-2">
+              <input type="text" placeholder="Search for products..." className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 transition-all" />
+            </div>
+
+            {/* Cart Button */}
+            <button onClick={() => { navigateTo("cart"); setMobileMenuOpen(false); }} className="text-sm font-medium text-gray-700 hover:text-rose-600 hover:bg-rose-50 transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-3 active:scale-95 transform flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <ShoppingCart className="w-5 h-5" />
+                Cart
+              </span>
+              {cart.length > 0 && (
+                <span className="bg-rose-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
+            </button>
+
+            {/* Currency Selector */}
+            <div className="border-t border-gray-200 pt-3 mt-2">
+              <div className="text-xs font-semibold text-gray-500 uppercase px-4 mb-2">Select Currency</div>
+              <div className="grid grid-cols-2 gap-2">
+                {Object.entries(CURRENCIES).map(([code, data]) => (
+                  <button
+                    key={code}
+                    onClick={() => {
+                      setSelectedCurrency(code as keyof typeof CURRENCIES);
+                    }}
+                    className={`text-sm font-medium transition-all duration-200 text-left focus:outline-none rounded-lg px-4 py-2 active:scale-95 transform ${
+                      selectedCurrency === code ? 'bg-rose-600 text-white' : 'text-gray-700 hover:text-rose-600 hover:bg-rose-50'
+                    }`}
+                  >
+                    <span className="font-medium">{data.symbol}</span> {code}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-gray-200 pt-3 mt-2"></div>
+
             <button onClick={() => {
               if (isAuthenticated) {
                 navigateTo("profile");
@@ -728,15 +772,15 @@ function DeeceeHairApp(): React.ReactElement {
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
         <div className="absolute inset-0 bg-gradient-to-br from-rose-600/40 via-transparent to-rose-600/40" />
-        <button onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)} className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30" aria-label="Previous slide">
+        <button onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)} className="hidden lg:flex absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30" aria-label="Previous slide">
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)} className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30" aria-label="Next slide">
+        <button onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)} className="hidden lg:flex absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30" aria-label="Next slide">
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+        <div className="absolute bottom-1 sm:bottom-2 md:bottom-3 lg:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-30">
           {heroSlides.map((_, index) => (
-            <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentSlide ? "bg-white w-6 sm:w-8" : "bg-white/50 hover:bg-white/70"}`} aria-label={`Go to slide ${index + 1}`} />
+            <button key={index} onClick={() => setCurrentSlide(index)} className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${index === currentSlide ? "bg-white w-4 sm:w-6" : "bg-white/50 hover:bg-white/70"}`} aria-label={`Go to slide ${index + 1}`} />
           ))}
         </div>
       </section>
