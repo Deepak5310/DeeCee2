@@ -904,7 +904,7 @@ function DeeceeHairApp(): React.ReactElement {
 
           <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden rounded-2xl shadow-2xl">
-              <div className="relative aspect-[3/4] md:aspect-video bg-gray-100">
+              <div className="relative aspect-[16/9] bg-gray-100">
                 <img
                   src={TRANSFORMATION_IMAGES[transformationSlide]}
                   alt={`Hair Transformation ${transformationSlide + 1}`}
