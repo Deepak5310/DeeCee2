@@ -521,7 +521,9 @@ function DeeceeHairApp(): React.ReactElement {
           <div className="flex items-center">
             <button
               onClick={() => navigateTo("home")}
-              className="flex items-center space-x-2 focus:outline-none rounded px-2 py-1 transition-all duration-200 hover:scale-105 active:scale-95"
+              className={`flex items-center space-x-2 focus:outline-none rounded px-2 py-1 transition-all duration-200 hover:scale-105 active:scale-95 ${
+                shouldUseSolidHeader ? '' : 'hidden lg:flex'
+              }`}
             >
               <span className="text-xl sm:text-2xl font-bold select-none text-rose-600 drop-shadow-sm">DEECEE</span>
               <span className={`text-xl sm:text-2xl font-light select-none transition-colors duration-300 ${
