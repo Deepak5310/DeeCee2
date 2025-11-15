@@ -723,7 +723,7 @@ function DeeceeHairApp(): React.ReactElement {
   // Hero Slider Section - to only re-render when currentSlide changes
   const HomePageTop = useCallback(() => (
     <>
-      <section className="relative h-[50vh] sm:h-[75vh] flex items-center justify-center overflow-hidden -mt-16 pt-16">
+      <section className="relative h-[20vh] sm:h-[32vh] md:h-[40vh] lg:h-[80vh] flex items-center justify-center overflow-hidden -mt-16 pt-16">
         {heroSlides.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"}`} style={{ backgroundImage: `url('${slide.image}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         ))}
@@ -734,7 +734,7 @@ function DeeceeHairApp(): React.ReactElement {
         <button onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)} className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full hover:bg-white/30 transition z-30" aria-label="Next slide">
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
           {heroSlides.map((_, index) => (
             <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${index === currentSlide ? "bg-white w-6 sm:w-8" : "bg-white/50 hover:bg-white/70"}`} aria-label={`Go to slide ${index + 1}`} />
           ))}
@@ -742,12 +742,12 @@ function DeeceeHairApp(): React.ReactElement {
       </section>
 
       {/* Landscape Banner Section */}
-      <section className="py-2 sm:py-3 md:py-4 lg:py-6">
+      <section className="py-4 sm:py-6 md:py-8 lg:py-10">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center gap-20 sm:gap-22 md:gap-26 flex-wrap">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
             {LANDSCAPE_BANNER_IMAGES.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square w-32 sm:w-40 md:w-52 lg:w-60">
+                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square w-full">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -808,7 +808,7 @@ function DeeceeHairApp(): React.ReactElement {
       </section>
 
       {/* Featured Photo Section */}
-      <section className="h-[80vh] w-auto relative overflow-hidden">
+      <section className="h-[20vh] sm:h-[28vh] md:h-[32vh] lg:h-[80vh] w-auto relative overflow-hidden">
         <img
           src="/images/6.webp"
           alt="Featured Collection"
