@@ -1297,18 +1297,10 @@ function DeeceeHairApp(): React.ReactElement {
 
           {/* Bottom Bar */}
           <div className="border-t border-gray-700/50 pt-4">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0">
               <p className="text-xs text-gray-400 select-none">
                 &copy; {new Date().getFullYear()} DEECEE HAIR. All rights reserved.
               </p>
-              <a
-                href="https://github.com/Deepak5310"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-gray-500 hover:text-rose-400 transition-colors"
-              >
-                Crafted by <span className="text-rose-500">Deepak</span>
-              </a>
             </div>
           </div>
         </div>

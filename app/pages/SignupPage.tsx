@@ -178,17 +178,6 @@ export default function SignupPage({ onClose, onSwitchToLogin, onSignupSuccess }
             <p className="text-xs text-gray-500 text-center">
               🔒 Secure signup with email verification via Firebase
             </p>
-            <a
-              href="https://github.com/Deepak5310"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-gray-400 hover:text-rose-600 transition flex items-center space-x-1"
-            >
-              <span>Built by Deepak</span>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>
