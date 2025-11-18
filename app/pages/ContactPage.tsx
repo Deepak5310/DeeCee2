@@ -56,6 +56,24 @@ export default function ContactPage(): React.ReactElement {
               <span>Mon-Sat: 9:00 AM - 5:00 PM</span>
             </div>
           </div>
+
+          {/* Map View */}
+          <div className="mt-8">
+            <h4 className="font-semibold text-gray-900 mb-4">Find Us</h4>
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.8!2d75.4!3d28.13!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDA3JzQ4LjAiTiA3NcKwMjQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="DEECEE HAIR Location"
+              />
+            </div>
+          </div>
+
           <div className="mt-8">
             <div className="bg-gray-100 rounded-2xl p-6 text-sm text-gray-700">
               <p className="font-semibold mb-2">Response time</p>
