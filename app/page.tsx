@@ -905,12 +905,12 @@ function DeeceeHairApp(): React.ReactElement {
           <div className="relative max-w-4xl mx-auto">
             <div className="overflow-hidden rounded-2xl shadow-2xl">
               <div className="relative aspect-[16/9] bg-gray-100">
-                <img
-                  src={TRANSFORMATION_IMAGES[transformationSlide]}
-                  alt={`Hair Transformation ${transformationSlide + 1}`}
-                  className="w-full h-full object-cover transition-opacity duration-1000"
-                  loading="lazy"
-                />
+                {TRANSFORMATION_IMAGES.map((image, index) => (
+                  <img key={index} src={image} alt={`Hair Transformation ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === transformationSlide ? 'opacity-100 z-10' : 'opacity-0 z-0' }`}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                ))}
 
                 {/* Navigation Dots Overlay */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2.5 z-20">
