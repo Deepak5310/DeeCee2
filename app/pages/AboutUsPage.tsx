@@ -2,6 +2,12 @@
 
 import React from "react";
 import { Award, Users, Heart, Globe, Sparkles, Target, ShieldCheck, Zap } from "lucide-react";
+import { Caveat } from "next/font/google";
+
+const caveat = Caveat({
+  weight: "700",
+  subsets: ["latin"]
+});
 
 export default function AboutUsPage(): React.ReactElement {
   const teamMembers = [
@@ -257,55 +263,57 @@ export default function AboutUsPage(): React.ReactElement {
         </div>
       </section>
 
-      {/* Developer Credit - Compact */}
-      <section className="py-12 bg-gradient-to-br from-gray-50 to-white border-t border-gray-100">
-        <div className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-rose-600 to-rose-700 rounded-2xl shadow-xl p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              {/* Developer Info */}
-              <div className="flex items-center gap-4">
-                <div className="relative group flex-shrink-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-rose-200/40 rounded-full blur-md group-hover:blur-lg transition-all"></div>
-                  <img
-                    src="/images/dev.png"
-                    alt="Deepak - Full Stack Developer"
-                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-3 border-white/40 shadow-xl group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="text-white text-center sm:text-left">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-1">Deepak Jangir</h3>
-                  <p className="text-rose-100 text-sm mb-2">Full Stack Developer</p>
-                  <p className="text-rose-200 text-xs hidden sm:block">
-                    Built with Next.js, React & Firebase
-                  </p>
-                </div>
+      {/* Developer Credit - Redesigned */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="w-full px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Meet the Developer</h2>
+            <div className="w-16 h-1 bg-rose-500 mx-auto mt-2 rounded-full"></div>
+          </div>
+
+          <div className="group relative bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(0,0,0,0.1)] overflow-hidden">
+            {/* Decorative background gradient on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-50/80 via-orange-50/50 to-amber-50/50 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-r from-rose-400 to-orange-400 rounded-full blur opacity-40 md:opacity-20 md:group-hover:opacity-40 transition duration-500 scale-100 md:group-hover:scale-110"></div>
+                <img
+                  src="/images/dev.jpeg"
+                  alt="Deepak Jangir"
+                  className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-md transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
 
-              {/* Social Links */}
-              <div className="flex gap-3">
-                <a
-                  href="https://github.com/Deepak5310"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full transition group"
-                  aria-label="GitHub Profile"
-                >
-                  <svg className="w-5 h-5 text-white group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" clipRule="evenodd" />
-                  </svg>
-                </a>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className={`text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-1 tracking-wide transition-transform duration-300 group-hover:scale-[1.02] ${caveat.className}`}>Deepak Jangir</h3>
+                <p className="text-lg bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent font-bold mb-4">Full Stack Developer</p>
 
-                <a
-                  href="https://www.linkedin.com/in/deepak-dev5310"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-3 rounded-full transition group"
-                  aria-label="LinkedIn Profile"
-                >
-                  <svg className="w-5 h-5 text-white group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
+                <p className="text-gray-600 font-medium mb-6 leading-relaxed group-hover:text-gray-900 transition-colors">
+                  Passionate about building beautiful, high-performance web applications.
+                  Crafted this platform using Next.js 15, React, and Firebase.
+                </p>
+
+                <div className="flex items-center justify-center md:justify-start gap-4">
+                  <a
+                    href="https://github.com/Deepak5310"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 text-gray-900 border border-gray-200 font-semibold transition-all duration-300 hover:bg-gray-900 hover:text-white hover:border-transparent hover:shadow-xl hover:-translate-y-1"
+                  >
+                    <svg className="w-5 h-5 transition-transform group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" clipRule="evenodd" /></svg>
+                    <span>GitHub</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/deepak-dev5310"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn flex items-center gap-3 px-6 py-3 rounded-full bg-blue-50 text-[#0077b5] border border-blue-100 font-semibold transition-all duration-300 hover:bg-[#0077b5] hover:text-white hover:border-transparent hover:shadow-xl hover:-translate-y-1"
+                  >
+                    <svg className="w-5 h-5 transition-transform group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.063 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
