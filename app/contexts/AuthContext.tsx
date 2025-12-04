@@ -89,7 +89,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         // Store in localStorage for persistence
         if (typeof window !== 'undefined') {
-          localStorage.setItem('deecee_user', JSON.stringify(appUser));
+          // Remove sensitive phone field before storing
+          const { phone, ...userSafe } = appUser;
+          localStorage.setItem('deecee_user', JSON.stringify(userSafe));
         }
       } else {
         setUser(null);
