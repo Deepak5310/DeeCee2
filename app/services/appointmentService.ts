@@ -72,9 +72,7 @@ export const saveAppointment = async (appointment: Appointment): Promise<{ succe
     return { success: true, data, message: "Appointment saved successfully" };
   } catch (error) {
     console.error("❌ Appointment save failed:", error);
-    // For now, save to localStorage as fallback
-    saveToLocalStorage(appointment);
-    return { success: true, data: appointment, message: "Appointment saved locally" };
+    return { success: false, message: "Failed to save appointment. Please try again." };
   }
 };
 
@@ -99,8 +97,7 @@ export const fetchAppointments = async (): Promise<Appointment[]> => {
     return data.appointments || [];
   } catch (error) {
     console.error("❌ Failed to fetch appointments:", error);
-    // Fallback to localStorage
-    return getFromLocalStorage();
+    return [];
   }
 };
 
@@ -255,33 +252,7 @@ Thank you for choosing DEECEE HAIR!
   `;
 };
 
-/**
- * Save to localStorage as fallback
- */
-const saveToLocalStorage = (appointment: Appointment): void => {
-  try {
-    const existing = localStorage.getItem("deecee_appointments");
-    const appointments: Appointment[] = existing ? JSON.parse(existing) : [];
-    appointments.push(appointment);
-    localStorage.setItem("deecee_appointments", JSON.stringify(appointments));
-    console.log("✅ Appointment saved to localStorage");
-  } catch (error) {
-    console.error("❌ localStorage save failed:", error);
-  }
-};
 
-/**
- * Get from localStorage
- */
-const getFromLocalStorage = (): Appointment[] => {
-  try {
-    const stored = localStorage.getItem("deecee_appointments");
-    return stored ? JSON.parse(stored) : [];
-  } catch (error) {
-    console.error("❌ localStorage read failed:", error);
-    return [];
-  }
-};
 
 /**
  * Add appointment to Google Calendar (optional)
