@@ -26,9 +26,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(body.to)) {
+    // Validate email format using a simple, ReDoS-safe check
+    const isValidEmail = (email: string): boolean => {
+      if (typeof email !== 'string' || email.length > 254) return false;
+      const atIndex = email.indexOf('@');
+      if (atIndex < 1 || atIndex !== email.lastIndexOf('@')) return false;
+      const localPart = email.slice(0, atIndex);
+      const domainPart = email.slice(atIndex + 1);
+      if (localPart.length > 64 || domainPart.length < 3) return false;
+      if (domainPart.indexOf('.') === -1) return false;
+      return true;
+    };
+
+    if (!isValidEmail(body.to)) {
       return NextResponse.json(
         {
           success: false,
