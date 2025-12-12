@@ -6,7 +6,16 @@ const nextConfig: NextConfig = {
 
   // Optimize images
   images: {
-    domains: ['images.unsplash.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 
