@@ -1,11 +1,11 @@
 # DEECEE HAIR - Premium Hair Extensions E-Commerce
 
-A modern, full-featured e-commerce web application for premium hair extensions built with Next.js 15, React 19, and Tailwind CSS 4.
+A modern, full-featured e-commerce web application for premium hair extensions built with Next.js 16, React 19, and Tailwind CSS 4.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-16.0.10-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.2.3-blue?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38bdf8?style=flat-square&logo=tailwind-css)
 
 ## 🌟 Features
 
@@ -142,6 +142,10 @@ npm run build  # Build for production with Turbopack
 npm start      # Start production server
 ```
 
+### Remote Images
+
+Remote images are allowed via `images.remotePatterns` in `next.config.ts` (currently `images.unsplash.com` and `raw.githubusercontent.com`). Add any new hosts there to avoid runtime errors.
+
 ## 🏗️ Architecture
 
 ### Navigation System
@@ -277,18 +281,23 @@ const errors = useFormValidation({ name, email, phone });
 ## 📦 Dependencies
 
 ### Core
-- **Next.js** 15.5.4 - React framework with App Router
-- **React** 19.1.0 - UI library
-- **React DOM** 19.1.0 - React rendering
-- **Firebase** (latest) - Authentication & backend services
+- **Next.js** 16.0.10 - React framework with App Router
+- **React** 19.2.3 - UI library
+- **React DOM** 19.2.3 - React rendering
+- **Firebase** 12.6.0 - Authentication & backend services
 
 ### UI
-- **Tailwind CSS** 4 - Utility-first CSS framework
-- **Lucide React** 0.544.0 - Beautiful icon library
+- **Tailwind CSS** 4.1.18 - Utility-first CSS framework
+- **Lucide React** 0.560.0 - Beautiful icon library
 
 ### Development
-- **TypeScript** 5 - Type safety
-- **@tailwindcss/postcss** 4 - Tailwind PostCSS plugin
+- **TypeScript** 5.9.3 - Type safety
+- **@tailwindcss/postcss** 4.1.18 - Tailwind PostCSS plugin
+
+## 🔒 Security
+
+- Review the vulnerability reporting process in [`SECURITY.md`](SECURITY.md)
+- Keep environment secrets in `.env.local` (never commit)
 
 ## 📚 Documentation
 
